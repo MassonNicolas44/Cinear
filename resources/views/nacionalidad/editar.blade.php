@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Modificar Nacionalidad') }}</div>
+                <div class="card-header">{{ __('Modificando la Nacionalidad: ') }} "{{ $nacionaliadd->descripcion }}" </div>
 
                 <div class="container-avatar">
                     @if (session('message'))
@@ -24,7 +24,7 @@
 
 
                         <div class="row mb-4">
-                            <label for="descripcion" class="col-md-3 col-form-label text-md-end">{{ __('Descripcion') }}</label>
+                            <label for="descripcion" class="col-md-3 col-form-label text-md-end">{{ __('Nuevo nombre') }}</label>
 
                             <div class="col-md-7">
                                 <input id="descripcion" type="text" class="form-control @error('descripcion') is-invalid @enderror" name="descripcion" value="{{ $nacionalidad->descripcion }}" required autocomplete="descripcion" autofocus>

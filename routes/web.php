@@ -90,3 +90,19 @@ Route::get('/restriccion/eliminar/{id}', [App\Http\Controllers\RestriccionContro
 
 //Lista
 Route::get('/restriccion/lista', [App\Http\Controllers\RestriccionController::class, 'lista'])->name('restriccion.lista');
+
+//**  Actor  
+
+//Alta
+Route::get('/actor/registrar', [App\Http\Controllers\ActorController::class, 'registrar'])->name('actor.registrar');
+Route::post('/actor/guardarRegistro', [App\Http\Controllers\ActorController::class, 'guardarRegistro'])->name('actor.guardarRegistro');
+
+//Editar
+Route::get('/actor/editar/{id}', [App\Http\Controllers\ActorController::class, 'editar'])->name('actor.editar');
+Route::post('/actor/guardarModificacion', [App\Http\Controllers\ActorController::class, 'guardarModificacion'])->name('actor.guardarModificacion');
+
+//Eliminar
+Route::get('/actor/eliminar/{id}', [App\Http\Controllers\ActorController::class, 'eliminar'])->name('actor.eliminar');
+
+//Lista
+Route::get('/actor/lista', [App\Http\Controllers\ActorController::class, 'lista'])->name('actor.lista');

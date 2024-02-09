@@ -20,6 +20,6 @@ class Actor extends Model
         //Relacion de muchos a uno
         public function nacionalidad()
         {
-            return $this->belongsTo('App\Models\Nacionalidad', 'id');
+            return $this->belongsTo('App\Models\Nacionalidad', 'id_Nacionalidad_Act');
         }
 }

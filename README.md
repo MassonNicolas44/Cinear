@@ -6,3 +6,6 @@ Registro de Actividad:
 -Se creo la vista de Tipo,Idioma,Nacionalidad y Restriccion de edad
 -Se testeo el alta, baja y modificacion de las vistas mencionadas en el item de arriba
 
+8/2/24 - Se agrego la pestaña de actores al proyecto.
+-Se creo la vista de Actor (Agregar, modificar, lista)
+-Se testeo el alta, baja y modificacion de las vistas mencionadas en el item de arriba
