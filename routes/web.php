@@ -106,3 +106,35 @@ Route::get('/actor/eliminar/{id}', [App\Http\Controllers\ActorController::class,
 
 //Lista
 Route::get('/actor/lista', [App\Http\Controllers\ActorController::class, 'lista'])->name('actor.lista');
+
+//**  Categoria  
+
+//Alta
+Route::get('/categoria/registrar', [App\Http\Controllers\CategoriaController::class, 'registrar'])->name('categoria.registrar');
+Route::post('/categoria/guardarRegistro', [App\Http\Controllers\CategoriaController::class, 'guardarRegistro'])->name('categoria.guardarRegistro');
+
+//Editar
+Route::get('/categoria/editar/{id}', [App\Http\Controllers\CategoriaController::class, 'editar'])->name('categoria.editar');
+Route::post('/categoria/guardarModificacion', [App\Http\Controllers\CategoriaController::class, 'guardarModificacion'])->name('categoria.guardarModificacion');
+
+//Eliminar
+Route::get('/categoria/eliminar/{id}', [App\Http\Controllers\CategoriaController::class, 'eliminar'])->name('categoria.eliminar');
+
+//Lista
+Route::get('/categoria/lista', [App\Http\Controllers\CategoriaController::class, 'lista'])->name('categoria.lista');
+
+//**  Pelicula  
+
+//Alta
+Route::get('/pelicula/registrar', [App\Http\Controllers\PeliculaController::class, 'registrar'])->name('pelicula.registrar');
+Route::post('/pelicula/guardarRegistro', [App\Http\Controllers\PeliculaController::class, 'guardarRegistro'])->name('pelicula.guardarRegistro');
+
+//Editar
+Route::get('/pelicula/editar/{id}', [App\Http\Controllers\PeliculaController::class, 'editar'])->name('pelicula.editar');
+Route::post('/pelicula/guardarModificacion', [App\Http\Controllers\PeliculaController::class, 'guardarModificacion'])->name('pelicula.guardarModificacion');
+
+//Eliminar
+Route::get('/pelicula/eliminar/{id}', [App\Http\Controllers\PeliculaController::class, 'eliminar'])->name('pelicula.eliminar');
+
+//Lista
+Route::get('/pelicula/lista', [App\Http\Controllers\PeliculaController::class, 'lista'])->name('pelicula.lista');

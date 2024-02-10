@@ -23,27 +23,36 @@ class Pelicula extends Model
             return $this->HasMany('App\Models\Reparto');
         }
 
+
+
+        //Relacion de muchos a uno
+        public function categoria()
+        {
+            return $this->belongsTo('App\Models\Categoria', 'id_Categoria');
+        }
+
         //Relacion de muchos a uno
         public function nacionalidad()
         {
-            return $this->belongsTo('App\Models\Nacionalidad', 'id');
+            return $this->belongsTo('App\Models\Nacionalidad', 'id_Nacionalidad_Pel');
         }
 
-        //Relacion de uno a muchos
-        public function categoria()
-        {
-            return $this->HasMany('App\Models\Categoria');
-        }
-
-        //Relacion de uno a muchos
+        //Relacion de muchos a uno
         public function idioma()
         {
-            return $this->HasMany('App\Models\Idioma');
+            return $this->belongsTo('App\Models\Idioma', 'id_Idioma');
         }
 
-        //Relacion de uno a muchos
+        //Relacion de muchos a uno
         public function tipo()
         {
-            return $this->HasMany('App\Models\Tipo');
+            return $this->belongsTo('App\Models\Tipo', 'id_Tipo');
         }
+
+        //Relacion de muchos a uno
+        public function restriccion()
+        {
+            return $this->belongsTo('App\Models\Restriccion', 'id_Restriccion');
+        }
+
 }

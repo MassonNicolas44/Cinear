@@ -9,3 +9,12 @@ Registro de Actividad:
 8/2/24 - Se agrego la pestaña de actores al proyecto.
 -Se creo la vista de Actor (Agregar, modificar, lista)
 -Se testeo el alta, baja y modificacion de las vistas mencionadas en el item de arriba
+
+9/2/24 - Se agrego la pestaña de categorias y peliculas al proyecto.
+-Se creo la vista de Categoria y Pelicula (Agregar, modificar, lista)
+-Se testeo el alta, baja y modificacion de las vistas mencionadas en el item de arriba
+
+
+
+
+agregar habilitar y no las peliculas
