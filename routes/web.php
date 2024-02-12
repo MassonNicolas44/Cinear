@@ -136,5 +136,8 @@ Route::post('/pelicula/guardarModificacion', [App\Http\Controllers\PeliculaContr
 //Eliminar
 Route::get('/pelicula/eliminar/{id}', [App\Http\Controllers\PeliculaController::class, 'eliminar'])->name('pelicula.eliminar');
 
+//Estado
+Route::get('/pelicula/estado/{id}/{estado}', [App\Http\Controllers\PeliculaController::class, 'estado'])->name('pelicula.estado');
+
 //Lista
 Route::get('/pelicula/lista', [App\Http\Controllers\PeliculaController::class, 'lista'])->name('pelicula.lista');

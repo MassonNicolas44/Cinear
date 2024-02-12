@@ -14,7 +14,6 @@ Registro de Actividad:
 -Se creo la vista de Categoria y Pelicula (Agregar, modificar, lista)
 -Se testeo el alta, baja y modificacion de las vistas mencionadas en el item de arriba
 
-
-
-
-agregar habilitar y no las peliculas
+12/2/24 - Se agrego la subida de imagen de pelicula al proyecto.
+-Se añadio la vista de la iamgen al editar una pelicula
+-Se añadio "habilitar" y "inhabilitar" las peliculas en la vista de Lista de Peliculas

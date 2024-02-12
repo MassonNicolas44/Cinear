@@ -25,7 +25,7 @@ class RestriccionController extends Controller
 
         //Validacion de datos antes de cargar
        $validate = $this->validate($request, [
-        'descripcion' => ['required', 'min:1' ,'string','unique:tipo'],
+        'descripcion' => ['required', 'min:1' ,'string','unique:restriccion'],
         ] );
 
         //Se obtienen los datos

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\facades\Storage;
+use Illuminate\Support\facades\File;
+
 
 use App\Models\Pelicula;
 use App\Models\Categoria;
@@ -50,6 +53,7 @@ class PeliculaController extends Controller
         'tipo' => ['required', 'min:1' ,'string'],
         'restriccion' => ['required', 'min:1' ,'string'],
         'precio' => ['required', 'min:1' ,'int'],
+        'imagen' => 'dimensions:min_width=800,min_height=800',
         ] );
 
         //Se obtienen los datos
@@ -62,7 +66,8 @@ class PeliculaController extends Controller
         $tipo = $request->input('tipo');   
         $restriccion = $request->input('restriccion');   
         $precio = $request->input('precio'); 
-        
+        $imagen = $request->file('imagen'); 
+
         //Cargar valores
         $pelicula = new Pelicula();
 
@@ -75,6 +80,16 @@ class PeliculaController extends Controller
         $pelicula->id_Tipo=$tipo;
         $pelicula->id_Restriccion=$restriccion;
         $pelicula->precio=$precio;
+        $pelicula->image_path=$imagen;
+        $pelicula->estado="Habilitada";
+
+        if($imagen){
+            $imagen_nombre=time().$imagen->getClientOriginalName();
+            Storage::disk('imagenes')->put($imagen_nombre,File::get($imagen));
+            $pelicula->image_path=$imagen_nombre;
+        }else{
+            $pelicula->image_path="noImagen.png";
+        }
 
         $pelicula->save();
 
@@ -114,7 +129,6 @@ class PeliculaController extends Controller
     public function guardarModificacion(Request $request)
     {
 
-
         //Validacion de datos antes de cargar
         $validate = $this->validate($request, [
             'nombre' => ['required', 'min:1' ,'string'],
@@ -126,6 +140,7 @@ class PeliculaController extends Controller
             'tipo' => ['required', 'min:1' ,'string'],
             'restriccion' => ['required', 'min:1' ,'string'],
             'precio' => ['required', 'min:1' ,'int'],
+            'imagen' => 'dimensions:min_width=800,min_height=800',
             ] );
     
             //Se obtienen los datos
@@ -138,6 +153,7 @@ class PeliculaController extends Controller
             $tipo = $request->input('tipo');   
             $restriccion = $request->input('restriccion');   
             $precio = $request->input('precio'); 
+            $imagen = $request->file('imagen');
             
             $id = $request->input('idPelicula'); 
 
@@ -153,7 +169,16 @@ class PeliculaController extends Controller
             $pelicula->id_Tipo=$tipo;
             $pelicula->id_Restriccion=$restriccion;
             $pelicula->precio=$precio;
-    
+
+            //Si la imagen cargada es igual a la imagen que esta en el sistema, no se realiza ningun cambio
+            if($imagen){
+                if($pelicula->image_path!=$imagen->getClientOriginalName()){
+                    $imagen_nombre=time().$imagen->getClientOriginalName();
+                    Storage::disk('imagenes')->put($imagen_nombre,File::get($imagen));
+                    $pelicula->image_path=$imagen_nombre;
+                }
+            }
+
             $pelicula->update();
     
             //Redireccion de la pagina a la lista de Clientes
@@ -161,12 +186,37 @@ class PeliculaController extends Controller
 
     }
 
+    public function estado($id,$estado){
+
+        $pelicula=Pelicula::find($id);
+
+        if($estado=="Habilitar"){
+            $pelicula->estado="Habilitada";
+        }
+
+        if($estado=="Inhabilitar"){
+            $pelicula->estado="Inhabilitada";
+        }
+
+        $pelicula->update();
+
+        //Redireccion de la pagina a la lista de Clientes
+        return redirect()->route('pelicula.lista')->with(['message' => 'La pelicula '.$pelicula->nombre.' fue '.$pelicula->estado.' correctamente']);
+
+
+    }
+
     public function eliminar($id)
     {
 
-        $nombre=Pelicula::find($id)->nombre;        
+        $nombre=Pelicula::find($id)->nombre; 
+        $imagen= Pelicula::find($id)->image_path;      
 
         Pelicula::find($id)->delete();
+
+        if($imagen!="noImagen.png"){
+            Storage::disk('imagenes')->delete($imagen);
+        }
 
         //Redireccion de la pagina a la lista de Clientes
         return redirect()->route('pelicula.lista')->with(['message' => 'Se ha eliminado la pelicula '.$nombre.' correctamente']);

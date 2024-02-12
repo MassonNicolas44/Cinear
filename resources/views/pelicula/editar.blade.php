@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('pelicula.guardarModificacion') }}">
+                    <form method="POST" enctype="multipart/form-data" action="{{ route('pelicula.guardarModificacion') }}">
                         @csrf
 
 
@@ -207,7 +207,26 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>      
+                        </div>   
+                        
+                        <div class="row mb-4">
+                            <label for="imagen" class="col-md-3 col-form-label text-md-end">{{ __('Imagen') }}</label>
+
+                            <div class="col-md-7">
+                                <input id="imagen" type="file" class="form-control @error('imagen') is-invalid @enderror" name="imagen" value="{{ $pelicula->image_path }}" autocomplete="imagen" autofocus>
+
+                                </br>
+                                <img src="{{ asset('../storage/app/imagenes/' . $pelicula->image_path) }}" width="60%" >
+
+                                <div class="clearfix"></div>
+
+                                @error('imagen')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>  
 
 
                         <div class="row mb-2">
