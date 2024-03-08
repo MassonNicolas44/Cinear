@@ -14,13 +14,13 @@ class Reparto extends Model
         //Relacion de muchos a uno
         public function pelicula()
         {
-            return $this->belongsTo('App\Models\Pelicula', 'id');
+            return $this->belongsTo('App\Models\Pelicula', 'id_Pelicula');
         }
 
         //Relacion de muchos a uno
         public function actor()
         {
-            return $this->belongsTo('App\Models\Actor', 'id');
+            return $this->belongsTo('App\Models\Actor', 'id_Actor');
         }
 
 

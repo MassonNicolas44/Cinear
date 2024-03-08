@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div class="card">
 
                 <div class="card-header">{{ __('Listado de Peliculas') }}</div>
@@ -52,6 +52,8 @@
                                             <td>
                                                 <div class="list">
                                                     <a href="{{ route('pelicula.editar',['id'=>$pelicula->id]) }}" ="sucess" class="btn btn-warning btn-sm"> Editar</a>
+
+                                                    <a href="{{ route('reparto.registrar',['id'=>$pelicula->id]) }}" ="sucess" class="btn btn-success btn-sm"> Reparto </a>
 
                                                     <?php if($pelicula->estado=="Habilitada"){    ?>
                                                         <a href="{{ route('pelicula.estado',['id'=>$pelicula->id,'estado'=>"Inhabilitar"]) }}" ="sucess" class="btn btn-success btn-sm"> Inhabilitar</a>

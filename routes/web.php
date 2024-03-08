@@ -141,3 +141,33 @@ Route::get('/pelicula/estado/{id}/{estado}', [App\Http\Controllers\PeliculaContr
 
 //Lista
 Route::get('/pelicula/lista', [App\Http\Controllers\PeliculaController::class, 'lista'])->name('pelicula.lista');
+
+//**  Reparto  
+
+//Alta
+Route::get('/reparto/registrar/{id}', [App\Http\Controllers\RepartoController::class, 'registrar'])->name('reparto.registrar');
+Route::post('/reparto/guardarRegistro', [App\Http\Controllers\RepartoController::class, 'guardarRegistro'])->name('reparto.guardarRegistro');
+
+//Eliminar
+Route::get('/reparto/eliminar/{id}/{idPelicula}', [App\Http\Controllers\RepartoController::class, 'eliminar'])->name('reparto.eliminar');
+
+//**  Sala  
+
+//Alta
+Route::get('/sala/registrar', [App\Http\Controllers\SalaController::class, 'registrar'])->name('sala.registrar');
+Route::post('/sala/guardarRegistro', [App\Http\Controllers\SalaController::class, 'guardarRegistro'])->name('sala.guardarRegistro');
+
+//Editar
+Route::get('/sala/editar/{id}', [App\Http\Controllers\SalaController::class, 'editar'])->name('sala.editar');
+Route::post('/sala/guardarModificacion', [App\Http\Controllers\SalaController::class, 'guardarModificacion'])->name('sala.guardarModificacion');
+
+//Eliminar
+Route::get('/sala/eliminar/{id}', [App\Http\Controllers\SalaController::class, 'eliminar'])->name('sala.eliminar');
+
+//Estado
+Route::get('/sala/estado/{id}/{estado}', [App\Http\Controllers\SalaController::class, 'estado'])->name('sala.estado');
+
+//Lista
+Route::get('/sala/lista', [App\Http\Controllers\SalaController::class, 'lista'])->name('sala.lista');
+
+
