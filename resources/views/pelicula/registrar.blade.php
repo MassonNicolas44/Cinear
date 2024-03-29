@@ -7,13 +7,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Ingresar Nueva Pelicula') }}</div>
 
-                <div class="container-avatar">
-                    @if (session('message'))
-                        <div class="alert alert-success">
-                            {{ session('message') }}
-                        </div>
-                    @endif
-                </div>
+                @include('include.message')
 
                 <div class="card-body">
                     <form method="POST" enctype="multipart/form-data" action="{{ route('pelicula.guardarRegistro') }}">
@@ -163,6 +157,20 @@
                                 @enderror
                             </div>
                         </div>  
+
+                        <div class="row mb-4">
+                            <label for="duracion" class="col-md-3 col-form-label text-md-end">{{ __('Duracion (Min)') }}</label>
+
+                            <div class="col-md-7">
+                                <input id="duracion" type="number" class="form-control @error('duracion') is-invalid @enderror" name="duracion" value="{{ old('duracion') }}" required autocomplete="duracion" autofocus>
+
+                                @error('duracion')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>    
 
                         <div class="row mb-4">
                             <label for="precio" class="col-md-3 col-form-label text-md-end">{{ __('Precio ($)') }}</label>

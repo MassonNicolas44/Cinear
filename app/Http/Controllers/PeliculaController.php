@@ -52,6 +52,7 @@ class PeliculaController extends Controller
         'idioma' => ['required', 'min:1' ,'string'],
         'tipo' => ['required', 'min:1' ,'string'],
         'restriccion' => ['required', 'min:1' ,'string'],
+        'duracion' => ['required', 'min:1' ,'int'],
         'precio' => ['required', 'min:1' ,'int'],
         'imagen' => 'dimensions:min_width=800,min_height=800',
         ] );
@@ -65,6 +66,7 @@ class PeliculaController extends Controller
         $idioma = $request->input('idioma');   
         $tipo = $request->input('tipo');   
         $restriccion = $request->input('restriccion');   
+        $duracion = $request->input('duracion'); 
         $precio = $request->input('precio'); 
         $imagen = $request->file('imagen'); 
 
@@ -80,6 +82,7 @@ class PeliculaController extends Controller
         $pelicula->id_Tipo=$tipo;
         $pelicula->id_Restriccion=$restriccion;
         $pelicula->precio=$precio;
+        $pelicula->duracion=$duracion;
         $pelicula->image_path=$imagen;
         $pelicula->estado="Habilitada";
 
@@ -139,6 +142,7 @@ class PeliculaController extends Controller
             'idioma' => ['required', 'min:1' ,'string'],
             'tipo' => ['required', 'min:1' ,'string'],
             'restriccion' => ['required', 'min:1' ,'string'],
+            'duracion' => ['required', 'min:1' ,'int'],
             'precio' => ['required', 'min:1' ,'int'],
             'imagen' => 'dimensions:min_width=800,min_height=800',
             ] );
@@ -151,7 +155,8 @@ class PeliculaController extends Controller
             $nacionalidad = $request->input('nacionalidad');   
             $idioma = $request->input('idioma');   
             $tipo = $request->input('tipo');   
-            $restriccion = $request->input('restriccion');   
+            $restriccion = $request->input('restriccion');  
+            $duracion = $request->input('duracion');  
             $precio = $request->input('precio'); 
             $imagen = $request->file('imagen');
             
@@ -168,6 +173,7 @@ class PeliculaController extends Controller
             $pelicula->id_Idioma=$idioma;
             $pelicula->id_Tipo=$tipo;
             $pelicula->id_Restriccion=$restriccion;
+            $pelicula->duracion=$duracion;
             $pelicula->precio=$precio;
 
             //Si la imagen cargada es igual a la imagen que esta en el sistema, no se realiza ningun cambio

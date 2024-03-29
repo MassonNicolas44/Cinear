@@ -11,9 +11,10 @@ class Reserva extends Model
 
     protected $table = 'reserva';
 
-        //Relacion de uno a muchos
-        public function sala()
+        //Relacion de muchos a uno
+        public function funcion()
         {
-            return $this->HasMany('App\Models\Sala');
+            return $this->belongsTo('App\Models\Funcion', 'id_Funcion');
         }
+
 }

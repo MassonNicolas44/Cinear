@@ -21,3 +21,21 @@ Registro de Actividad:
 7/3/24 - Se agrego la pestaña de reparto en la tabla de pelicula.
 -Se añadio la vista de asignar y desasignar actores a una pelicula en particular
 -Se empezo con la parte de asignar una pelicula a una sala
+
+12/3/24
+-Se agrego la pestañada de Sala
+-Se añadio la vista de crear/editar/lista de salas
+
+13/3/24
+-Se agrego la pestaña de Funcion (la cual se encarga de relacion una pelicula con una sala en una fecha y horario)
+-Se añadio la vista de la lista de salas asignadas a cada pelicula
+
+21/3/24
+-Se agrego un listado de las peliculas junto con las salas, fechas y horario de cada una
+
+24/3/24
+-Se agrego la edicion individual de horario de una funcion (Pelicula)
+-Se agrego la extencion de la fecha fin de la pelicula
+
+29/3/24
+-Se agregaron 2 botones, 1 para la edicion de horario por dia en particual y otro para la edicion de toda la funcion (horario y fechas)

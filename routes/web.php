@@ -145,7 +145,7 @@ Route::get('/pelicula/lista', [App\Http\Controllers\PeliculaController::class, '
 //**  Reparto  
 
 //Alta
-Route::get('/reparto/registrar/{id}', [App\Http\Controllers\RepartoController::class, 'registrar'])->name('reparto.registrar');
+Route::get('/reparto/asignar/{id}', [App\Http\Controllers\RepartoController::class, 'asignar'])->name('reparto.asignar');
 Route::post('/reparto/guardarRegistro', [App\Http\Controllers\RepartoController::class, 'guardarRegistro'])->name('reparto.guardarRegistro');
 
 //Eliminar
@@ -167,7 +167,26 @@ Route::get('/sala/eliminar/{id}', [App\Http\Controllers\SalaController::class, '
 //Estado
 Route::get('/sala/estado/{id}/{estado}', [App\Http\Controllers\SalaController::class, 'estado'])->name('sala.estado');
 
-//Lista
-Route::get('/sala/lista', [App\Http\Controllers\SalaController::class, 'lista'])->name('sala.lista');
+//**  Sala Peliculas  
+
+//Alta
+Route::get('/funcion/asignar', [App\Http\Controllers\FuncionController::class, 'asignar'])->name('funcion.asignar');
+Route::post('/funcion/guardarAsignacion', [App\Http\Controllers\FuncionController::class, 'guardarAsignacion'])->name('funcion.guardarAsignacion');
+
+//EditarIndividual
+Route::get('/funcion/editarIndividual/{id}', [App\Http\Controllers\FuncionController::class, 'editarIndividual'])->name('funcion.editarIndividual');
+Route::post('/funcion/guardarModificacionIndividual', [App\Http\Controllers\FuncionController::class, 'guardarModificacionIndividual'])->name('funcion.guardarModificacionIndividual');
+
+//EditarTotal
+Route::get('/funcion/editarTotal/{id}', [App\Http\Controllers\FuncionController::class, 'editarTotal'])->name('funcion.editarTotal');
+Route::post('/funcion/guardarModificacionTotal', [App\Http\Controllers\FuncionController::class, 'guardarModificacionTotal'])->name('funcion.guardarModificacionTotal');
+
+//Eliminar
+Route::get('/funcion/eliminar/{id}', [App\Http\Controllers\FuncionController::class, 'eliminar'])->name('funcion.eliminar');
+
+//Estado
+Route::get('/funcion/estado/{id}/{estado}', [App\Http\Controllers\FuncionController::class, 'estado'])->name('funcion.estado');
+
+
 
 

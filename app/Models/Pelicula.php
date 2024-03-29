@@ -12,9 +12,9 @@ class Pelicula extends Model
     protected $table = 'pelicula';
 
         //Relacion de uno a muchos
-        public function sala()
+        public function funcion()
         {
-            return $this->HasMany('App\Models\Sala');
+            return $this->HasMany('App\Models\Funcion');
         }
 
         //Relacion de uno a muchos

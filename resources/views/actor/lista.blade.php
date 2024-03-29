@@ -8,14 +8,7 @@
 
                 <div class="card-header">{{ __('Listado de Actores') }}</div>
 
-                <div class="container-avatar">
-                    @if (session('message'))
-                        <div class="alert alert-success">
-                            {{ session('message') }}
-                        </div>
-        
-                    @endif
-                </div>
+                @include('include.message')
 
                 <div class="card-body">
 

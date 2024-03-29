@@ -8,20 +8,14 @@
 
                 <div class="card-header">{{ __('Listado de Peliculas') }}</div>
 
-                <div class="container-avatar">
-                    @if (session('message'))
-                        <div class="alert alert-success">
-                            {{ session('message') }}
-                        </div>
-                    @endif
-                </div>
+                @include('include.message')
 
                 <div class="card-body">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="text-align:center;">
                                 <thead>
                                     <th>Id</th>
                                     <th>Nombre</th>
-                                    <th>Año</th>
+                                    <th>Duracion</th>
                                     <th>Descripcion</th>
                                     <th>Categoria</th>
                                     <th>Nacionalidad</th>
@@ -38,8 +32,8 @@
                                     @foreach($peliculas as $pelicula)
                                         <tr>
                                             <td>{{$pelicula->id}}</td>
-                                            <td>{{$pelicula->nombre}}</td>
-                                            <td>{{$pelicula->año}}</td>
+                                            <td>{{$pelicula->nombre}} [{{$pelicula->año}}] </td>
+                                            <td>{{$pelicula->duracion}} Min</td>
                                             <td>{{$pelicula->descripcion}}</td>
                                             <td>{{$pelicula->categoria->descripcion}}</td>
                                             <td> [{{$pelicula->nacionalidad->sigla}}] {{$pelicula->nacionalidad->descripcion}}</td>
@@ -53,7 +47,7 @@
                                                 <div class="list">
                                                     <a href="{{ route('pelicula.editar',['id'=>$pelicula->id]) }}" ="sucess" class="btn btn-warning btn-sm"> Editar</a>
 
-                                                    <a href="{{ route('reparto.registrar',['id'=>$pelicula->id]) }}" ="sucess" class="btn btn-success btn-sm"> Reparto </a>
+                                                    <a href="{{ route('reparto.asignar',['id'=>$pelicula->id]) }}" ="sucess" class="btn btn-success btn-sm"> Reparto </a>
 
                                                     <?php if($pelicula->estado=="Habilitada"){    ?>
                                                         <a href="{{ route('pelicula.estado',['id'=>$pelicula->id,'estado'=>"Inhabilitar"]) }}" ="sucess" class="btn btn-success btn-sm"> Inhabilitar</a>

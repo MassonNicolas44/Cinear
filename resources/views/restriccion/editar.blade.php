@@ -7,13 +7,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Modificar la Restriccion de edad: ') }}  "{{ $restriccion->descripcion }}" </div>
 
-                <div class="container-avatar">
-                    @if (session('message'))
-                        <div class="alert alert-success">
-                            {{ session('message') }}
-                        </div>
-                    @endif
-                </div>
+                @include('include.message')
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('restriccion.guardarModificacion') }}">

@@ -11,15 +11,9 @@ class Sala extends Model
 
     protected $table = 'sala';
 
-        //Relacion de muchos a uno
-        public function pelicula()
+        //Relacion de uno a muchos
+        public function funcion()
         {
-            return $this->belongsTo('App\Models\Pelicula', 'id');
-        }
-
-                    //Relacion de muchos a uno
-        public function reserva()
-        {
-            return $this->belongsTo('App\Models\Reserva', 'id_Reserva');
+            return $this->HasMany('App\Models\Funcion');
         }
 }
