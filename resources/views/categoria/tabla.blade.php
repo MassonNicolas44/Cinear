@@ -1,12 +1,9 @@
-@extends('layouts.app')
-
-@section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
 
-                <div class="card-header">{{ __('Listado de Restriccion de edad') }}</div>
+                <div class="card-header">{{ __('Listado de Categorias') }}</div>
 
                 @include('include.message')
 
@@ -16,19 +13,19 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="text-align:center;">
                                 <thead>
                                     <th>Id</th>
-                                    <th>Restriccion de edad</th>
+                                    <th>Categoria</th>
                                     <th>Accion</th>
                                 </thead>
 
                                 <tbody>
-                                    @foreach($restricciones as $restriccion)
+                                    @foreach($categorias as $categoria)
                                         <tr>
-                                            <td>{{$restriccion->id}}</td>
-                                            <td>{{$restriccion->descripcion}}</td>
+                                            <td>{{$categoria->id}}</td>
+                                            <td>{{$categoria->descripcion}}</td>
                                             <td>
                                                 <div class="list">
-                                                    <a href="{{ route('restriccion.editar',['id'=>$restriccion->id]) }}" ="sucess" class="btn btn-warning btn-sm"> Editar</a>
-                                                    <a href="{{ route('restriccion.eliminar',['id'=>$restriccion->id]) }}"="sucess" class="btn  btn-danger btn-sm">Eliminar</a>
+                                                    <a href="{{ route('categoria.editar',['id'=>$categoria->id]) }}" ="sucess" class="btn btn-warning btn-sm"> Editar</a>
+                                                    <a href="{{ route('categoria.eliminar',['id'=>$categoria->id]) }}"="sucess" class="btn  btn-danger btn-sm">Eliminar</a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -40,4 +37,3 @@
         </div>
     </div>
 </div>
-@endsection

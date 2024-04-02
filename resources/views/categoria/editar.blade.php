@@ -44,4 +44,11 @@
         </div>
     </div>
 </div>
+
+<br>
+<br>
+<br>
+
+@include('categoria.tabla')
+
 @endsection

@@ -23,12 +23,16 @@ class RepartoController extends Controller
     public function asignar($id)
     {
 
+        //Trae la pelicula a asignar los actores desde la Base de Datos
         $pelicula=Pelicula::find($id);
 
+        //Trae la lista de actores desde la Base de Datos
         $actores=Actor::all();
 
+        //Trae los actores que estan ya asignadas a la pelicula en cuestion
         $actoresPelicula = Reparto::where('id_Pelicula', $id)->get();
 
+        //Retorna a la vista los actores a asignar, los actores ya asignados y la pelicula en cuestion
         return view('reparto.asignar',compact('actores','pelicula','actoresPelicula'));
     }
 
@@ -41,16 +45,20 @@ class RepartoController extends Controller
         ] );
 
         //Se obtienen los datos
-        $idActor = $request->input('actor');   
+        $idActor = $request->input('actor');  
+        $idPelicula = $request->input('idPelicula');   
+        
+        
+        //Se buscan los datos del actor a asignar
         $datosActor=Actor::find($idActor);
         
-        $idPelicula = $request->input('idPelicula');   
+        //Se buscan los datos de la pelicula a la cual se le van a asignar los actores
         $pelicula=Pelicula::find($idPelicula);
 
-        //Busca en la tabla de "reparto" si existe un valor con el idActor y idPelicula a agregar
+        //Se busca si el actor a asignar ya pertenece al reparto de la pelicula en cuestion
         $existeActorPelicula = Reparto::where('id_Actor', $idActor)->where('id_Pelicula',$idPelicula)->get();
 
-        //Verifica si existe el actor ya en la pelicula, lo agrega. Caso contrario mostrara un mensaje
+        //Verifica si existe el actor en el reparto de la pelicula
         if (count($existeActorPelicula)){
             
             //Actor ya pertenece a esta pelicula
@@ -66,7 +74,7 @@ class RepartoController extends Controller
 
             $reparto->save();
 
-            //Redireccion de la pagina a la lista de Actores
+            //Redireccion al registro de reparto
             return redirect()->route('reparto.asignar',['id'=>$idPelicula])->with(['message' => 'El actor '.$datosActor->nombre.' '.$datosActor->apellido.' fue asignado a la pelicula '.$pelicula->nombre.'']);
         
         }
@@ -78,7 +86,7 @@ class RepartoController extends Controller
        
         Reparto::find($id)->delete();
 
-        //Redireccion de la pagina a la lista de Actores
+        //Redireccion al registro de reparto
         return redirect()->route('reparto.asignar',['id'=>$idPelicula])->with(['message' => 'Se ha eliminado al actor de la pelicula correctamente']);
 
     }

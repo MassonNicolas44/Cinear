@@ -17,6 +17,8 @@ class NacionalidadController extends Controller
 
     public function registrar()
     {
+
+        //Retorna la vista de la nacionalidad a registrar
         return view('nacionalidad.registrar');
     }
 
@@ -41,16 +43,17 @@ class NacionalidadController extends Controller
 
         $nacionalidad->save();
 
-        //Redireccion de la pagina a la lista de Clientes
+        //Redireccion al listado de nacionalidades
         return redirect()->route('nacionalidad.lista')->with(['message' => 'Nacionalidad "'.$descripcion.'" agregada correctamente']);
     }
 
     public function lista()
     {
 
+        //Trae la lista de nacionalidades registradas
         $nacionalidades=Nacionalidad::orderby('descripcion','asc')->get();
 
-        //Redireccion de la pagina a la lista de Clientes
+        //Retorna la vista de las nacionalidades registradas en la abse de datos
         return view('nacionalidad.lista',['nacionalidades'=>$nacionalidades]);
 
     }
@@ -59,8 +62,10 @@ class NacionalidadController extends Controller
     public function editar($id)
     {
 
+        //Se obtienen los datos de la nacionalidad a editar
         $nacionalidad=Nacionalidad::find($id);
 
+        //Retorna la vista con los datos de la nacionalidad a editar
         return view('nacionalidad.editar',compact('nacionalidad'));
     }
 
@@ -78,6 +83,7 @@ class NacionalidadController extends Controller
         $descripcion = $request->input('descripcion');   
         $sigla = $request->input('sigla');
  
+        //Se buscan los datos de la nacionalidad a editar
         $nacionalidad=Nacionalidad::find($id);
 
         //Cargar valores
@@ -86,18 +92,19 @@ class NacionalidadController extends Controller
 
         $nacionalidad->update();
 
-        //Redireccion de la pagina a la lista de Clientes
+        //Redireccion al listado de nacionalidades
         return redirect()->route('nacionalidad.lista')->with(['message' => 'Nacionalidad "'.$descripcion.'" modificada correctamente']);
     }
 
     public function eliminar($id)
     {
 
+        //Se guarda el nombre de la nacionalidad para ser mostrado luego al eliminar
         $nombre=Nacionalidad::find($id)->descripcion;
 
         Nacionalidad::find($id)->delete();
 
-        //Redireccion de la pagina a la lista de Clientes
+        //Redireccion al listado de nacionalidades
         return redirect()->route('nacionalidad.lista')->with(['message' => 'Se ha eliminado la nacionalidad "'.$nombre.'" correctamente']);
 
     }

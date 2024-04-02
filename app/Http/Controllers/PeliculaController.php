@@ -26,12 +26,14 @@ class PeliculaController extends Controller
     public function registrar()
     {
 
+        //Trae la lista de categorias, nacionalidades, idiomas, tipos y restricciones desde la Base de Datos
         $categorias=Categoria::orderby('descripcion','asc')->get();
         $nacionalidades=Nacionalidad::orderby('descripcion','asc')->get();
         $idiomas=Idioma::orderby('descripcion','asc')->get();
         $tipos=Tipo::orderby('descripcion','asc')->get();
         $restricciones=Restriccion::orderby('descripcion','asc')->get();
 
+        //Retorna a la vista, los datos obtenidos anteriormente para ser utilizados en la creacion de pelicula
         return view('pelicula.registrar',['categorias'=>$categorias,
                                     'nacionalidades'=>$nacionalidades,
                                     'idiomas'=>$idiomas,
@@ -86,6 +88,7 @@ class PeliculaController extends Controller
         $pelicula->image_path=$imagen;
         $pelicula->estado="Habilitada";
 
+        //Se verifica si hay una imagen a cargar para la pelicula
         if($imagen){
             $imagen_nombre=time().$imagen->getClientOriginalName();
             Storage::disk('imagenes')->put($imagen_nombre,File::get($imagen));
@@ -96,16 +99,17 @@ class PeliculaController extends Controller
 
         $pelicula->save();
 
-        //Redireccion de la pagina a la lista de Clientes
+        //Redireccion al listado de peliculas
         return redirect()->route('pelicula.lista')->with(['message' => 'La pelicula '.$nombre.' fue agregada correctamente']);
     }
 
     public function lista()
     {
 
+        //Trae la lista de peliculas registradas
         $peliculas=Pelicula::orderby('nombre','asc')->get();
 
-        //Redireccion de la pagina a la lista de Clientes
+        //Retorna a la vista las peliculas registradas
         return view('pelicula.lista',['peliculas'=>$peliculas]);
 
     }
@@ -114,13 +118,17 @@ class PeliculaController extends Controller
     public function editar($id)
     {
 
+        //Se obtienen los datos de la pelicula a editar
         $pelicula=Pelicula::find($id);
+
+        //Trae la lista de categorias, nacionalidades, idiomas, tipos y restricciones desde la Base de Datos
         $categorias=Categoria::orderby('descripcion','asc')->get();
         $nacionalidades=Nacionalidad::orderby('descripcion','asc')->get();
         $idiomas=Idioma::orderby('descripcion','asc')->get();
         $tipos=Tipo::orderby('descripcion','asc')->get();
         $restricciones=Restriccion::orderby('descripcion','asc')->get();
 
+        //Retorna a la vista, los datos obtenidos anteriormente para ser utilizados en la edicion de la pelicula
         return view('pelicula.editar',['pelicula'=>$pelicula,
                                     'categorias'=>$categorias,
                                     'nacionalidades'=>$nacionalidades,
@@ -162,9 +170,10 @@ class PeliculaController extends Controller
             
             $id = $request->input('idPelicula'); 
 
-            //Cargar valores
+            //Se buscan los datos de la pelicula a editar
             $pelicula = Pelicula::find($id);
-    
+
+            //Cargar valores
             $pelicula->nombre=$nombre;
             $pelicula->año=$año;
             $pelicula->descripcion=$descripcion;
@@ -187,26 +196,29 @@ class PeliculaController extends Controller
 
             $pelicula->update();
     
-            //Redireccion de la pagina a la lista de Clientes
+            //Redireccion al listado de peliculas
             return redirect()->route('pelicula.lista')->with(['message' => 'La pelicula '.$nombre.' fue modificada correctamente']);
 
     }
 
     public function estado($id,$estado){
 
+        //Se buscan los datos de la pelicula a editar el estado
         $pelicula=Pelicula::find($id);
 
+        //Se comprueba si el estado es "Habilitar" se actualiza el estado a "Habilitada"
         if($estado=="Habilitar"){
             $pelicula->estado="Habilitada";
         }
 
+        //Se comprueba si el estado es "Inhabilitar" se actualiza el estado a "Inhabilitada"
         if($estado=="Inhabilitar"){
             $pelicula->estado="Inhabilitada";
         }
 
         $pelicula->update();
 
-        //Redireccion de la pagina a la lista de Clientes
+        //Redireccion al listado de peliculas
         return redirect()->route('pelicula.lista')->with(['message' => 'La pelicula '.$pelicula->nombre.' fue '.$pelicula->estado.' correctamente']);
 
 
@@ -215,16 +227,18 @@ class PeliculaController extends Controller
     public function eliminar($id)
     {
 
+        //Se guarda el nombre de la pelicula para ser mostrado luego al eliminar
         $nombre=Pelicula::find($id)->nombre; 
         $imagen= Pelicula::find($id)->image_path;      
 
         Pelicula::find($id)->delete();
 
+        //Si la imagen es distinta a "noImage.png" entonces la borra, caso contrario borra la pelicula
         if($imagen!="noImagen.png"){
             Storage::disk('imagenes')->delete($imagen);
         }
 
-        //Redireccion de la pagina a la lista de Clientes
+        //Redireccion al listado de peliculas
         return redirect()->route('pelicula.lista')->with(['message' => 'Se ha eliminado la pelicula '.$nombre.' correctamente']);
 
     }

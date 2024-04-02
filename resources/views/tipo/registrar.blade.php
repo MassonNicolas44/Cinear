@@ -40,4 +40,11 @@
         </div>
     </div>
 </div>
+
+<br>
+<br>
+<br>
+
+@include('tipo.tabla')
+
 @endsection

@@ -39,3 +39,8 @@ Registro de Actividad:
 
 29/3/24
 -Se agregaron 2 botones, 1 para la edicion de horario por dia en particual y otro para la edicion de toda la funcion (horario y fechas)
+
+1/4/24
+-Se agrego la Habilitacion y Inhabilitacion de funciones (por dia)
+-Se simplifico el menu desplegable de tener Registro y Edicion y estar todo junto en una sola solapa. Para "Categoria","Sala","Restriccion","Tipo"
+-Se agrego y edito documentacion de los Controller

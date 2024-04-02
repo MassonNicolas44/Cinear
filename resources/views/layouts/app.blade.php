@@ -65,18 +65,13 @@
                                 
                         </li>
 
-                        <li class="nav-item dropdown">
+             
 
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Categoria
-                             </a>
-                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="nav-link" href="{{ route('categoria.registrar') }}">Agregar</a>
-                                <a class="nav-link" href="{{ route('categoria.lista') }}">Lista</a>
-                            </div>
+
+                                <a class="nav-link" href="{{ route('categoria.registrar') }}">Categoria</a>
+
                                 
-                        </li>
-
+                     
                         <li class="nav-item dropdown">
 
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -89,19 +84,8 @@
                                 
                         </li>
 
-                        <li class="nav-item dropdown">
-
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Restriccion
-                             </a>
-                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="nav-link" href="{{ route('restriccion.registrar') }}">Agregar</a>
-                                <a class="nav-link" href="{{ route('restriccion.lista') }}">Lista</a>
-                            </div>
-                                
-                        </li>
-
-
+                            <a class="nav-link" href="{{ route('restriccion.registrar') }}">Restriccion</a>
+ 
                         <li class="nav-item dropdown">
 
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -114,17 +98,7 @@
                                 
                         </li>
 
-                        <li class="nav-item dropdown">
-
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Tipo
-                             </a>
-                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="nav-link" href="{{ route('tipo.registrar') }}">Agregar</a>
-                                <a class="nav-link" href="{{ route('tipo.lista') }}">Lista</a>
-                            </div>
-                                
-                        </li>
+                            <a class="nav-link" href="{{ route('tipo.registrar') }}">Tipo</a>
 
                         <li class="nav-item dropdown">
 
@@ -138,19 +112,8 @@
                                 
                         </li>
 
-                        <li class="nav-item dropdown">
-
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            Salas
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="nav-link" href="{{ route('sala.registrar') }}">Agregar</a>
-                            <a class="nav-link" href="{{ route('funcion.asignar') }}">Funciones</a>
-                        </div>
-                            
-                        </li>
-
-
+                            <a class="nav-link" href="{{ route('sala.registrar') }}">Sala</a>
+                            <a class="nav-link" href="{{ route('funcion.asignar') }}">Funcion</a>
 
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

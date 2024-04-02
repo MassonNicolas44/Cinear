@@ -36,11 +36,12 @@ class FuncionController extends Controller
         $rangoHorario = new DatePeriod($fechaInicioIntervalo, new DateInterval('PT15M'), $fechaFinIntervalo);
 
 
-
+        //Trae la lista de salas, peliculas y funciones desde la Base de Datos
         $salas=Sala::orderby('nombre','asc')->get();
         $peliculas=Pelicula::orderby('nombre','asc')->get();
         $funciones=Funcion::orderby('fecha','asc')->get();
 
+        //Retorna a la vista, los datos obtenidos anteriormente para ser mostrados en la parte inferior
         return view('funcion.asignar',['salas'=>$salas,'peliculas'=>$peliculas,'funciones'=>$funciones,'rangoHorario'=>$rangoHorario]);
     }
     
@@ -88,6 +89,7 @@ class FuncionController extends Controller
         }
 
 
+        //Formateo de la fecha inicial y final
         $fechaInicio = new DateTime($fechaInicio);
         $fechaFin = new DateTime($fechaFin);
         
@@ -101,9 +103,10 @@ class FuncionController extends Controller
             $funcion->id_Pelicula=$id_Pelicula;
             $funcion->fechaInicio=$fechaInicio;
             $funcion->fechaFin=$fechaFin;
+            $funcion->estado="Habilitada";
 
 
-            //Comprobacion de que el horario esta sin asignar-Lunes a Viernes
+            //Comprobacion de que el horario esta sin asignar (Lunes a Viernes)
             if($lvhorario1=="sinAsignar"){
                 $funcion->lvhorario1=null;
             }else{
@@ -130,7 +133,7 @@ class FuncionController extends Controller
 
 
 
-            //Comprobacion de que el horario esta sin asignar-Sabado y Domingo
+            //Comprobacion de que el horario esta sin asignar (Sabado y Domingo)
             if($sdhorario1=="sinAsignar"){
                 $funcion->sdhorario1=null;
             }else{
@@ -159,10 +162,11 @@ class FuncionController extends Controller
             $funcion->save();
         }
 
+        //Trae la sala y pelicula de la funcion a registrar para ser mostrados por mensaje
         $sala=Sala::find($id_Sala);
         $pelicula=Pelicula::find($id_Pelicula);
 
-        //Redireccion de la pagina
+        //Redireccion al registro de funcion
         return redirect()->route('funcion.asignar')->with(['message' => 'La pelicula "'.$pelicula->nombre.'" fue asignada a la sala "'.$sala->nombre.'" ']);
     }
 
@@ -182,14 +186,13 @@ class FuncionController extends Controller
         //Array con el horario dividido cada 15 minutos
         $rangoHorario = new DatePeriod($fechaInicioIntervalo, new DateInterval('PT15M'), $fechaFinIntervalo);
 
-
-
+        //Trae la lista de salas, peliculas, funciones y funcion (a editar individualmente) desde la Base de Datos
         $salas=Sala::orderby('nombre','asc')->get();
         $peliculas=Pelicula::orderby('nombre','asc')->get();
         $funciones=Funcion::orderby('fecha','asc')->get();
         $funcion=Funcion::orderby('fecha','asc')->find($id);
 
-
+        //Retorna a la vista, los datos obtenidos anteriormente para ser mostrados en la parte inferior
         return view('funcion.editarIndividual',['salas'=>$salas,'peliculas'=>$peliculas,'funciones'=>$funciones,'rangoHorario'=>$rangoHorario,'funcion'=>$funcion]);
     }
     
@@ -220,6 +223,7 @@ class FuncionController extends Controller
         $sdhorario3 = $request->input('sdhorario3');
         $sdhorario4 = $request->input('sdhorario4');
 
+        //Se buscan los datos de la funcion a editar
         $funcion = Funcion::find($id_Funcion);
   
         //Comprobacion de que el horario esta sin asignar-Lunes a Viernes
@@ -275,11 +279,11 @@ class FuncionController extends Controller
 
         $funcion->update();
 
-
+        //Trae la sala y pelicula de la funcion a registrar para ser mostrados por mensaje
         $sala=Sala::find($id_Sala);
         $pelicula=Pelicula::find($id_Pelicula);
 
-        //Redireccion de la pagina
+        //Redireccion al registro de funcion
         return redirect()->route('funcion.asignar')->with(['message' => 'La pelicula "'.$pelicula->nombre.'" y la sala "'.$sala->nombre.'" fue editada correctamente ']);
     }
 
@@ -299,14 +303,13 @@ class FuncionController extends Controller
         //Array con el horario dividido cada 15 minutos
         $rangoHorario = new DatePeriod($fechaInicioIntervalo, new DateInterval('PT15M'), $fechaFinIntervalo);
 
-
-
+        //Trae la lista de salas, peliculas, funciones y funcion (a editar total) desde la Base de Datos
         $salas=Sala::orderby('nombre','asc')->get();
         $peliculas=Pelicula::orderby('nombre','asc')->get();
         $funciones=Funcion::orderby('fecha','asc')->get();
         $funcion=Funcion::orderby('fecha','asc')->find($id);
 
-
+       //Retorna a la vista, los datos obtenidos anteriormente para ser mostrados en la parte inferior
         return view('funcion.editarTotal',['salas'=>$salas,'peliculas'=>$peliculas,'funciones'=>$funciones,'rangoHorario'=>$rangoHorario,'funcion'=>$funcion]);
     }
     
@@ -354,12 +357,13 @@ class FuncionController extends Controller
             return redirect()->route('funcion.asignar')->with(['message' => 'La fecha final debe ser MAYOR a la fecha de inicio']);
         }
 
-        $funciones = Funcion::
-                                where('id_Sala', $id_Sala)
+        //Se obtiene las funciones existente que coincidan con la sala y la pelicula a registrar
+        $funciones = Funcion:: where('id_Sala', $id_Sala)
                                 ->where('id_Pelicula', $id_Pelicula)
                                 ->get();      
                                 
                                 
+        //Formateo de fecha inicial y final
         $aa = new DateTime($fechaInicio);
         $bb = new DateTime($fechaFin);
 
@@ -387,7 +391,7 @@ class FuncionController extends Controller
                 $funcion->id_Sala=$id_Sala;
                 $funcion->id_Pelicula=$id_Pelicula;
 
-                //Comprobacion de que el horario esta sin asignar-Lunes a Viernes
+                //Comprobacion de que el horario esta sin asignar (Lunes a Viernes)
                 if($lvhorario1=="sinAsignar"){
                     $funcion->lvhorario1=null;
                 }else{
@@ -412,7 +416,7 @@ class FuncionController extends Controller
                     $funcion->lvhorario4=$lvhorario4;
                 }
 
-                //Comprobacion de que el horario esta sin asignar-Sabado y Domingo
+                //Comprobacion de que el horario esta sin asignar (Sabado y Domingo)
 
                 if($sdhorario1=="sinAsignar"){
                     $funcion->sdhorario1=null;
@@ -460,19 +464,43 @@ class FuncionController extends Controller
             $bb = new DateTime($fechaFin);
         } 
 
+        //Trae la sala y pelicula de la funcion a registrar para ser mostrados por mensaje
         $sala=Sala::find($id_Sala);
         $pelicula=Pelicula::find($id_Pelicula);
 
-        //Redireccion de la pagina
+        //Redireccion al registro de funcion
         return redirect()->route('funcion.asignar')->with(['message' => 'La pelicula "'.$pelicula->nombre.'" y la sala "'.$sala->nombre.'" fue editada correctamente ']);
     }
+
+    public function estado($id,$estado){
+
+        //Se buscan los datos de la funcion a editar el estado
+        $funcion=Funcion::find($id);
+
+        //Se comprueba si el estado es "Habilitar" se actualiza el estado a "Habilitada"
+        if($estado=="Habilitar"){
+            $funcion->estado="Habilitada";
+        }
+
+        //Se comprueba si el estado es "Inhabilitar" se actualiza el estado a "Inhabilitada"
+        if($estado=="Inhabilitar"){
+            $funcion->estado="Inhabilitada";
+        }
+
+        $funcion->update();
+
+        //Redireccion al registro de funcion
+        return redirect()->route('funcion.asignar')->with(['message' => 'La funcion del dia '.$funcion->fecha.' fue '.$funcion->estado.' correctamente']);
+
+    }
+
 
     public function eliminar($id)
     {
 
         Funcion::find($id)->delete();
 
-        //Redireccion de la pagina a la lista de Sala
+        //Redireccion al registro de funcion
         return redirect()->route('funcion.asignar')->with(['message' => 'Se ha eliminado correctamente']);
 
     }

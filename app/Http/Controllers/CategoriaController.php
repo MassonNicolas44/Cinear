@@ -17,7 +17,12 @@ class CategoriaController extends Controller
 
     public function registrar()
     {
-        return view('categoria.registrar');
+
+        //Trae la lista de Categoria desde la Base de Datos
+        $categorias=Categoria::orderby('descripcion','asc')->get();
+
+        //Retorna a la vista, las categorias registradas para ser mostradas en la parte inferior
+        return view('categoria.registrar',['categorias'=>$categorias]);
     }
 
     public function guardarRegistro(Request $request)
@@ -38,27 +43,22 @@ class CategoriaController extends Controller
 
         $categoria->save();
 
-        //Redireccion de la pagina a la lista de Clientes
-        return redirect()->route('categoria.lista')->with(['message' => 'Categoria "'.$descripcion.'" agregado correctamente']);
-    }
-
-    public function lista()
-    {
-
-        $categorias=Categoria::orderby('descripcion','asc')->get();
-
-        //Redireccion de la pagina a la lista de Clientes
-        return view('categoria.lista',['categorias'=>$categorias]);
-
+        //Redireccion al registro de categoria
+        return redirect()->route('categoria.registrar')->with(['message' => 'Categoria "'.$descripcion.'" agregado correctamente']);
     }
 
 
     public function editar($id)
     {
 
+        //Trae la lista de Categoria desde la Base de Datos
+        $categorias=Categoria::orderby('descripcion','asc')->get();
+
+        //Trae la Categoria a editar desde la Base de Datos
         $categoria=Categoria::find($id);
 
-        return view('categoria.editar',compact('categoria'));
+        //Retorna a la vista las categorias existente en la base de datos y la categoria a editar en particular
+        return view('categoria.editar',['categorias'=>$categorias,'categoria'=>$categoria]);
     }
 
     public function guardarModificacion(Request $request)
@@ -73,6 +73,7 @@ class CategoriaController extends Controller
         $id = $request->input('idCategoria');   
         $descripcion = $request->input('descripcion');   
  
+        //Se buscan los datos de la categoria a editar
         $categoria=Categoria::find($id);
 
         //Cargar valores
@@ -80,19 +81,20 @@ class CategoriaController extends Controller
 
         $categoria->update();
 
-        //Redireccion de la pagina a la lista de Clientes
-        return redirect()->route('categoria.lista')->with(['message' => 'Categoria "'.$descripcion.'" modificado correctamente']);
+        //Redireccion al registro de categoria
+        return redirect()->route('categoria.registrar')->with(['message' => 'Categoria "'.$descripcion.'" modificado correctamente']);
     }
 
     public function eliminar($id)
     {
 
+        //Se guarda el nombre de la categoria para ser mostrado luego al eliminar
         $nombre=Categoria::find($id)->descripcion;
 
         Categoria::find($id)->delete();
 
-        //Redireccion de la pagina a la lista de Clientes
-        return redirect()->route('categoria.lista')->with(['message' => 'Se ha eliminado la categoria "'.$nombre.'" correctamente']);
+        //Redireccion al registro de categoria
+        return redirect()->route('categoria.registrar')->with(['message' => 'Se ha eliminado la categoria "'.$nombre.'" correctamente']);
 
     }
 

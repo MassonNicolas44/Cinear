@@ -17,7 +17,14 @@ class RestriccionController extends Controller
 
     public function registrar()
     {
-        return view('restriccion.registrar');
+
+        //Trae la lista de restricciones para ser mostradas en la parte inferior
+        $restricciones=Restriccion::orderby('descripcion','asc')->get();
+
+        //Retorna la vista de la restriccion a registrar
+        return view('restriccion.registrar',['restricciones'=>$restricciones]);
+
+
     }
 
     public function guardarRegistro(Request $request)
@@ -38,27 +45,22 @@ class RestriccionController extends Controller
 
         $restriccion->save();
 
-        //Redireccion de la pagina a la lista de Clientes
-        return redirect()->route('restriccion.lista')->with(['message' => 'Restriccion de edad "'.$descripcion.'" agregada correctamente']);
+        //Redireccion al registro de restriccion
+        return redirect()->route('restriccion.registrar')->with(['message' => 'Restriccion de edad "'.$descripcion.'" agregada correctamente']);
     }
-
-    public function lista()
-    {
-
-        $restricciones=Restriccion::orderby('descripcion','asc')->get();
-
-        //Redireccion de la pagina a la lista de Clientes
-        return view('restriccion.lista',['restricciones'=>$restricciones]);
-
-    }
-
 
     public function editar($id)
     {
 
+        //Trae la lista de restriccion desde la Base de Datos
+        $restricciones=Restriccion::orderby('descripcion','asc')->get();
+
+        //Trae la restriccion a editar desde la Base de Datos
         $restriccion=Restriccion::find($id);
 
-        return view('restriccion.editar',compact('restriccion'));
+        //Retorna a la vista las restricciones existente en la base de datos y la restriccion a editar en particular
+        return view('restriccion.editar',['restricciones'=>$restricciones,'restriccion'=>$restriccion]);
+
     }
 
     public function guardarModificacion(Request $request)
@@ -73,6 +75,7 @@ class RestriccionController extends Controller
         $id = $request->input('idRestriccion');   
         $descripcion = $request->input('descripcion');   
  
+        //Se buscan los datos de la restriccion a editar
         $restriccion=Restriccion::find($id);
 
         //Cargar valores
@@ -80,19 +83,20 @@ class RestriccionController extends Controller
 
         $restriccion->update();
 
-        //Redireccion de la pagina a la lista de Clientes
-        return redirect()->route('restriccion.lista')->with(['message' => 'Restriccion de edad "'.$descripcion.'" modificada correctamente']);
+        //Redireccion al registro de restriccion
+        return redirect()->route('restriccion.registrar')->with(['message' => 'Restriccion de edad "'.$descripcion.'" modificada correctamente']);
     }
 
     public function eliminar($id)
     {
 
+        //Se guarda el nombre de la restriccion para ser mostrado luego al eliminar
         $nombre=Restriccion::find($id)->descripcion;
 
         Restriccion::find($id)->delete();
 
-        //Redireccion de la pagina a la lista de Clientes
-        return redirect()->route('restriccion.lista')->with(['message' => 'Se ha eliminado la restriccion de edad "'.$nombre.'" correctamente']);
+        //Redireccion al registro de restriccion
+        return redirect()->route('restriccion.registrar')->with(['message' => 'Se ha eliminado la restriccion de edad "'.$nombre.'" correctamente']);
 
     }
 

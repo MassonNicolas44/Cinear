@@ -44,4 +44,12 @@
         </div>
     </div>
 </div>
+
+<br>
+<br>
+<br>
+
+@include('restriccion.tabla')
+
 @endsection
+

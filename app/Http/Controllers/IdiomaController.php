@@ -17,6 +17,8 @@ class IdiomaController extends Controller
 
     public function registrar()
     {
+
+        //Retorna vista del idioma a registrar
         return view('idioma.registrar');
     }
 
@@ -38,16 +40,17 @@ class IdiomaController extends Controller
 
         $idioma->save();
 
-        //Redireccion de la pagina a la lista de Clientes
+        //Redireccion al listado de idioma
         return redirect()->route('idioma.lista')->with(['message' => 'Idioma "'.$descripcion.'" agregado correctamente']);
     }
 
     public function lista()
     {
 
+        //Trae la lista de idiomas registrados
         $idiomas=Idioma::orderby('descripcion','asc')->get();
 
-        //Redireccion de la pagina a la lista de Clientes
+        //Retorna a la vista los idiomas registrados en la base de datos
         return view('idioma.lista',['idiomas'=>$idiomas]);
 
     }
@@ -56,8 +59,10 @@ class IdiomaController extends Controller
     public function editar($id)
     {
 
+        //Retoma los datos del idioma a editar
         $idioma=Idioma::find($id);
 
+        //Retorna a la vista los datos del idioma a editar
         return view('idioma.editar',compact('idioma'));
     }
 
@@ -73,6 +78,7 @@ class IdiomaController extends Controller
         $id = $request->input('idIdioma');   
         $descripcion = $request->input('descripcion');   
  
+        //Se obtienen los datos del idioma a editar
         $idioma=Idioma::find($id);
 
         //Cargar valores
@@ -80,18 +86,19 @@ class IdiomaController extends Controller
 
         $idioma->update();
 
-        //Redireccion de la pagina a la lista de Clientes
+        //Redireccion a la lista de los idiomas
         return redirect()->route('idioma.lista')->with(['message' => 'Idioma "'.$descripcion.'" modificado correctamente']);
     }
 
     public function eliminar($id)
     {
 
+        //Se guarda el nombre del idioma para ser mostrado luego al eliminar
         $nombre=Idioma::find($id)->descripcion;
 
         Idioma::find($id)->delete();
 
-        //Redireccion de la pagina a la lista de Clientes
+        //Redireccion a la lista de los idiomas
         return redirect()->route('idioma.lista')->with(['message' => 'Se ha eliminado el idioma "'.$nombre.'" correctamente']);
 
     }

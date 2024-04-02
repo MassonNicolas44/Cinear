@@ -56,8 +56,6 @@ Route::post('/tipo/guardarModificacion', [App\Http\Controllers\TipoController::c
 //Eliminar
 Route::get('/tipo/eliminar/{id}', [App\Http\Controllers\TipoController::class, 'eliminar'])->name('tipo.eliminar');
 
-//Lista
-Route::get('/tipo/lista', [App\Http\Controllers\TipoController::class, 'lista'])->name('tipo.lista');
 
 //**  Idioma  
 
@@ -88,8 +86,6 @@ Route::post('/restriccion/guardarModificacion', [App\Http\Controllers\Restriccio
 //Eliminar
 Route::get('/restriccion/eliminar/{id}', [App\Http\Controllers\RestriccionController::class, 'eliminar'])->name('restriccion.eliminar');
 
-//Lista
-Route::get('/restriccion/lista', [App\Http\Controllers\RestriccionController::class, 'lista'])->name('restriccion.lista');
 
 //**  Actor  
 
@@ -120,8 +116,6 @@ Route::post('/categoria/guardarModificacion', [App\Http\Controllers\CategoriaCon
 //Eliminar
 Route::get('/categoria/eliminar/{id}', [App\Http\Controllers\CategoriaController::class, 'eliminar'])->name('categoria.eliminar');
 
-//Lista
-Route::get('/categoria/lista', [App\Http\Controllers\CategoriaController::class, 'lista'])->name('categoria.lista');
 
 //**  Pelicula  
 
@@ -167,7 +161,7 @@ Route::get('/sala/eliminar/{id}', [App\Http\Controllers\SalaController::class, '
 //Estado
 Route::get('/sala/estado/{id}/{estado}', [App\Http\Controllers\SalaController::class, 'estado'])->name('sala.estado');
 
-//**  Sala Peliculas  
+//**  Funcion
 
 //Alta
 Route::get('/funcion/asignar', [App\Http\Controllers\FuncionController::class, 'asignar'])->name('funcion.asignar');
