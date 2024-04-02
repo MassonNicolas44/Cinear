@@ -44,3 +44,7 @@ Registro de Actividad:
 -Se agrego la Habilitacion y Inhabilitacion de funciones (por dia)
 -Se simplifico el menu desplegable de tener Registro y Edicion y estar todo junto en una sola solapa. Para "Categoria","Sala","Restriccion","Tipo"
 -Se agrego y edito documentacion de los Controller
+
+2/4/24
+-Se agrego una nueva tabla en la vista de funciones, donde indica la sala y la pelicula
+-Se dividio en la vista Funcion en(Asignar, Listado Simple , Listado Completo)

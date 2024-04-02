@@ -65,12 +65,7 @@
                                 
                         </li>
 
-             
-
-
-                                <a class="nav-link" href="{{ route('categoria.registrar') }}">Categoria</a>
-
-                                
+                            <a class="nav-link" href="{{ route('categoria.registrar') }}">Categoria</a>
                      
                         <li class="nav-item dropdown">
 
@@ -113,7 +108,23 @@
                         </li>
 
                             <a class="nav-link" href="{{ route('sala.registrar') }}">Sala</a>
-                            <a class="nav-link" href="{{ route('funcion.asignar') }}">Funcion</a>
+
+
+
+                            <li class="nav-item dropdown">
+
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Funcion
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="nav-link" href="{{ route('funcion.registrar') }}">Agregar</a>
+                                    <a class="nav-link" href="{{ route('funcion.lista') }}">Lista</a>
+                                </div>
+                                
+                            </li>
+
+
+                            <a class="nav-link" href="{{ route('reserva.registrar') }}">Reserva</a>
 
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

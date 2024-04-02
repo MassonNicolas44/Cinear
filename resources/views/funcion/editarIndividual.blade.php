@@ -467,8 +467,4 @@
     </div>
 </div>
 
-<br>
-
-@include('funcion.tabla')
-
 @endsection

@@ -164,8 +164,8 @@ Route::get('/sala/estado/{id}/{estado}', [App\Http\Controllers\SalaController::c
 //**  Funcion
 
 //Alta
-Route::get('/funcion/asignar', [App\Http\Controllers\FuncionController::class, 'asignar'])->name('funcion.asignar');
-Route::post('/funcion/guardarAsignacion', [App\Http\Controllers\FuncionController::class, 'guardarAsignacion'])->name('funcion.guardarAsignacion');
+Route::get('/funcion/registrar', [App\Http\Controllers\FuncionController::class, 'registrar'])->name('funcion.registrar');
+Route::post('/funcion/guardarRegistro', [App\Http\Controllers\FuncionController::class, 'guardarRegistro'])->name('funcion.guardarRegistro');
 
 //EditarIndividual
 Route::get('/funcion/editarIndividual/{id}', [App\Http\Controllers\FuncionController::class, 'editarIndividual'])->name('funcion.editarIndividual');
@@ -181,6 +181,32 @@ Route::get('/funcion/eliminar/{id}', [App\Http\Controllers\FuncionController::cl
 //Estado
 Route::get('/funcion/estado/{id}/{estado}', [App\Http\Controllers\FuncionController::class, 'estado'])->name('funcion.estado');
 
+//Lista
+Route::get('/funcion/lista', [App\Http\Controllers\FuncionController::class, 'lista'])->name('funcion.lista');
 
 
+
+
+
+
+
+
+
+
+
+//**  Reserva  
+
+//Alta
+Route::get('/reserva/registrar', [App\Http\Controllers\ReservaController::class, 'registrar'])->name('reserva.registrar');
+Route::post('/reserva/guardarRegistro', [App\Http\Controllers\ReservaController::class, 'guardarRegistro'])->name('reserva.guardarRegistro');
+
+//Editar
+Route::get('/reserva/editar/{id}', [App\Http\Controllers\ReservaController::class, 'editar'])->name('reserva.editar');
+Route::post('/reserva/guardarModificacion', [App\Http\Controllers\ReservaController::class, 'guardarModificacion'])->name('reserva.guardarModificacion');
+
+//Eliminar
+Route::get('/reserva/eliminar/{id}', [App\Http\Controllers\ReservaController::class, 'eliminar'])->name('reserva.eliminar');
+
+//Estado
+Route::get('/reserva/estado/{id}/{estado}', [App\Http\Controllers\ReservaController::class, 'estado'])->name('reserva.estado');
 

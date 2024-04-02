@@ -20,7 +20,7 @@ class FuncionController extends Controller
         $this->middleware('auth');
     }
 
-    public function asignar()
+    public function registrar()
     {
 
         //Metodo para que se pueda seleccionar la hora cada 15 minutos
@@ -41,8 +41,9 @@ class FuncionController extends Controller
         $peliculas=Pelicula::orderby('nombre','asc')->get();
         $funciones=Funcion::orderby('fecha','asc')->get();
 
+
         //Retorna a la vista, los datos obtenidos anteriormente para ser mostrados en la parte inferior
-        return view('funcion.asignar',['salas'=>$salas,'peliculas'=>$peliculas,'funciones'=>$funciones,'rangoHorario'=>$rangoHorario]);
+        return view('funcion.registrar',['salas'=>$salas,'peliculas'=>$peliculas,'funciones'=>$funciones,'rangoHorario'=>$rangoHorario]);
     }
     
     public function guardarAsignacion(Request $request)
@@ -166,8 +167,8 @@ class FuncionController extends Controller
         $sala=Sala::find($id_Sala);
         $pelicula=Pelicula::find($id_Pelicula);
 
-        //Redireccion al registro de funcion
-        return redirect()->route('funcion.asignar')->with(['message' => 'La pelicula "'.$pelicula->nombre.'" fue asignada a la sala "'.$sala->nombre.'" ']);
+        //Redireccion al listado de funcion
+        return redirect()->route('funcion.lista')->with(['message' => 'La pelicula "'.$pelicula->nombre.'" fue asignada a la sala "'.$sala->nombre.'" ']);
     }
 
 
@@ -283,8 +284,8 @@ class FuncionController extends Controller
         $sala=Sala::find($id_Sala);
         $pelicula=Pelicula::find($id_Pelicula);
 
-        //Redireccion al registro de funcion
-        return redirect()->route('funcion.asignar')->with(['message' => 'La pelicula "'.$pelicula->nombre.'" y la sala "'.$sala->nombre.'" fue editada correctamente ']);
+        //Redireccion al listado de funcion
+        return redirect()->route('funcion.lista')->with(['message' => 'La pelicula "'.$pelicula->nombre.'" y la sala "'.$sala->nombre.'" fue editada correctamente ']);
     }
 
 
@@ -354,7 +355,7 @@ class FuncionController extends Controller
         //Comprobacion de que la fecha de inicio es anterior a la fecha final
         if ($fechaInicio>$fechaFin){
             //Redireccion de la pagina
-            return redirect()->route('funcion.asignar')->with(['message' => 'La fecha final debe ser MAYOR a la fecha de inicio']);
+            return redirect()->route('funcion.editarTotal')->with(['message' => 'La fecha final debe ser MAYOR a la fecha de inicio']);
         }
 
         //Se obtiene las funciones existente que coincidan con la sala y la pelicula a registrar
@@ -468,8 +469,8 @@ class FuncionController extends Controller
         $sala=Sala::find($id_Sala);
         $pelicula=Pelicula::find($id_Pelicula);
 
-        //Redireccion al registro de funcion
-        return redirect()->route('funcion.asignar')->with(['message' => 'La pelicula "'.$pelicula->nombre.'" y la sala "'.$sala->nombre.'" fue editada correctamente ']);
+        //Redireccion al listado de funcion
+        return redirect()->route('funcion.lista')->with(['message' => 'La pelicula "'.$pelicula->nombre.'" y la sala "'.$sala->nombre.'" fue editada correctamente ']);
     }
 
     public function estado($id,$estado){
@@ -489,8 +490,21 @@ class FuncionController extends Controller
 
         $funcion->update();
 
-        //Redireccion al registro de funcion
-        return redirect()->route('funcion.asignar')->with(['message' => 'La funcion del dia '.$funcion->fecha.' fue '.$funcion->estado.' correctamente']);
+        //Redireccion al listado de funcion
+        return redirect()->route('funcion.lista')->with(['message' => 'La funcion del dia '.$funcion->fecha.' fue '.$funcion->estado.' correctamente']);
+
+    }
+
+    public function lista()
+    {
+
+        $funciones=Funcion::orderby('fecha','asc')->get();
+
+        //Trae la lista de pelicualas y sala (sin repetir valores) para ser mostrados en la tabla simple
+        $datos = Funcion::select('id_Sala','id_Pelicula')->distinct('id_Sala')->orderBy('id_Sala','asc')->get();
+
+        //Retorna a la vista las peliculas registradas
+        return view('funcion.lista',['funciones'=>$funciones,'datos'=>$datos]);
 
     }
 
@@ -500,8 +514,8 @@ class FuncionController extends Controller
 
         Funcion::find($id)->delete();
 
-        //Redireccion al registro de funcion
-        return redirect()->route('funcion.asignar')->with(['message' => 'Se ha eliminado correctamente']);
+        //Redireccion al listado de funcion
+        return redirect()->route('funcion.lista')->with(['message' => 'Se ha eliminado correctamente']);
 
     }
 

@@ -6,6 +6,8 @@
 
                 <div class="card-header">{{ __('Listado de Funciones') }}</div>
 
+                @include('include.message')
+
                 <div class="card-body">
 
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="text-align:center;">

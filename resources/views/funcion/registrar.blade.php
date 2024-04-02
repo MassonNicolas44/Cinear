@@ -5,12 +5,12 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Asignar sala') }} </div>
+                <div class="card-header">{{ __('Registrar Funcion') }} </div>
 
                 @include('include.message')
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('funcion.guardarAsignacion') }}">
+                    <form method="POST" action="{{ route('funcion.guardarRegistro') }}">
                         @csrf
 
                         <div class="row mb-4">
@@ -264,9 +264,5 @@
         </div>
     </div>
 </div>
-
-<br>
-
-@include('funcion.tabla')
 
 @endsection
