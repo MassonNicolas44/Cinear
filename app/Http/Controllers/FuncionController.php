@@ -46,7 +46,7 @@ class FuncionController extends Controller
         return view('funcion.registrar',['salas'=>$salas,'peliculas'=>$peliculas,'funciones'=>$funciones,'rangoHorario'=>$rangoHorario]);
     }
     
-    public function guardarAsignacion(Request $request)
+    public function guardarRegistro(Request $request)
     {
 
         //Validacion de datos antes de cargar
@@ -89,6 +89,9 @@ class FuncionController extends Controller
             return redirect()->route('funcion.asignar')->with(['message' => 'La fecha final debe ser MAYOR a la fecha de inicio']);
         }
 
+        $fechaInicioBD = $fechaInicio;
+        $fechaFinBD = $fechaFin;
+        
 
         //Formateo de la fecha inicial y final
         $fechaInicio = new DateTime($fechaInicio);
@@ -102,8 +105,8 @@ class FuncionController extends Controller
 
             $funcion->id_Sala=$id_Sala;
             $funcion->id_Pelicula=$id_Pelicula;
-            $funcion->fechaInicio=$fechaInicio;
-            $funcion->fechaFin=$fechaFin;
+            $funcion->fechaInicio=$fechaInicioBD;
+            $funcion->fechaFin=$fechaFinBD;
             $funcion->estado="Habilitada";
 
 
@@ -339,6 +342,7 @@ class FuncionController extends Controller
         $id_Pelicula = $request->input('id_Pelicula');   
         $fechaInicio = $request->input('fechaInicio');
         $fechaFin = $request->input('fechaFin');
+        
 
         //Lunes a Viernes
         $lvhorario1 = $request->input('lvhorario1');
@@ -385,6 +389,7 @@ class FuncionController extends Controller
                     $funcion = new Funcion();
                     $funcion->fechaInicio=$fechaInicio;
                     $funcion->fechaFin=$fechaFin;
+                    $funcion->estado="Habilitada";
                 }else{
                     $funcion=Funcion::find($funcion2->id);
                 }
@@ -475,20 +480,54 @@ class FuncionController extends Controller
 
     public function estado($id,$estado){
 
-        //Se buscan los datos de la funcion a editar el estado
-        $funcion=Funcion::find($id);
+        //Se comprueba si el estado a actualizar el una fecha o un rango de fechas
+        if($estado=="HabilitarRango" || $estado=="InhabilitarRango"){
+    
+                //Se buscan los datos de la funcion a editar el estado
+                $funcion=Funcion::find($id);
 
-        //Se comprueba si el estado es "Habilitar" se actualiza el estado a "Habilitada"
-        if($estado=="Habilitar"){
-            $funcion->estado="Habilitada";
+                //Se obtiene las funciones existente que coincidan con la sala y la pelicula a actualizar estado
+                $funciones = Funcion:: where('id_Sala', $funcion->id_Sala)
+                ->where('id_Pelicula', $funcion->id_Pelicula)
+                ->where('fechaInicio', $funcion->fechaInicio)
+                ->where('fechaFin', $funcion->fechaFin)
+                ->get();      
+
+                //Recorre el array de id con esta pelicula y sala a editar
+                foreach($funciones as $funcion2){
+
+                    $funcion=Funcion::find($funcion2->id);
+
+                    //Se comprueba si el estado es "HabilitarRango" se actualiza el estado a "Habilitada"
+                    if($estado=="HabilitarRango"){
+                        $funcion->estado="Habilitada";
+                    }
+
+                    //Se comprueba si el estado es "InhabilitarRango" se actualiza el estado a "Inhabilitada"
+                    if($estado=="InhabilitarRango"){
+                        $funcion->estado="Inhabilitada";
+                    }
+                    $funcion->update();
+                     
+                } 
+
+        }else{
+
+            //Se buscan los datos de la funcion a editar el estado
+            $funcion=Funcion::find($id);
+
+            //Se comprueba si el estado es "Habilitar" se actualiza el estado a "Habilitada"
+            if($estado=="Habilitar"){
+                $funcion->estado="Habilitada";
+            }
+
+            //Se comprueba si el estado es "Inhabilitar" se actualiza el estado a "Inhabilitada"
+            if($estado=="Inhabilitar"){
+                $funcion->estado="Inhabilitada";
+            }
+
+            $funcion->update();
         }
-
-        //Se comprueba si el estado es "Inhabilitar" se actualiza el estado a "Inhabilitada"
-        if($estado=="Inhabilitar"){
-            $funcion->estado="Inhabilitada";
-        }
-
-        $funcion->update();
 
         //Redireccion al listado de funcion
         return redirect()->route('funcion.lista')->with(['message' => 'La funcion del dia '.$funcion->fecha.' fue '.$funcion->estado.' correctamente']);
@@ -501,7 +540,7 @@ class FuncionController extends Controller
         $funciones=Funcion::orderby('fecha','asc')->get();
 
         //Trae la lista de pelicualas y sala (sin repetir valores) para ser mostrados en la tabla simple
-        $datos = Funcion::select('id_Sala','id_Pelicula')->distinct('id_Sala')->orderBy('id_Sala','asc')->get();
+        $datos=Funcion::select('*')->groupBy('id_Pelicula' , 'id_Sala', 'fechaInicio', 'fechaFin')->get();
 
         //Retorna a la vista las peliculas registradas
         return view('funcion.lista',['funciones'=>$funciones,'datos'=>$datos]);

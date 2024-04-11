@@ -197,8 +197,30 @@ Route::get('/funcion/lista', [App\Http\Controllers\FuncionController::class, 'li
 //**  Reserva  
 
 //Alta
-Route::get('/reserva/registrar', [App\Http\Controllers\ReservaController::class, 'registrar'])->name('reserva.registrar');
+Route::post('/reserva/registrar', [App\Http\Controllers\ReservaController::class, 'registrar'])->name('reserva.registrar');
+
+
+
+
+
+
+
 Route::post('/reserva/guardarRegistro', [App\Http\Controllers\ReservaController::class, 'guardarRegistro'])->name('reserva.guardarRegistro');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //Editar
 Route::get('/reserva/editar/{id}', [App\Http\Controllers\ReservaController::class, 'editar'])->name('reserva.editar');

@@ -38,7 +38,7 @@ Registro de Actividad:
 -Se agrego la extencion de la fecha fin de la pelicula
 
 29/3/24
--Se agregaron 2 botones, 1 para la edicion de horario por dia en particual y otro para la edicion de toda la funcion (horario y fechas)
+-Se agregaron 2 botones y sus funciones respectivas, 1 para la edicion de horario por dia en particual y otro para la edicion de toda la funcion (horario y fechas)
 
 1/4/24
 -Se agrego la Habilitacion y Inhabilitacion de funciones (por dia)
@@ -48,3 +48,16 @@ Registro de Actividad:
 2/4/24
 -Se agrego una nueva tabla en la vista de funciones, donde indica la sala y la pelicula
 -Se dividio en la vista Funcion en(Asignar, Listado Simple , Listado Completo)
+
+4/4/24
+-Se agrego en el inicio un listado de las peliculas (con fechas inicial y fecha final de cada una) para poder seleccionar y poder avanzar a la reserva de la misma
+
+5/4/24
+-Se agrego un boton para poder Habilitar y Inhabilitar peliculas teniendo en cuenta el rango de fechas en las cuales fueron cargadas (en la parte de funciones)
+
+9/4/24
+-Se agrego la seleccion de pelicula y fecha para poder realizar la reserva de una pelicula
+-Se agrego la visualizacion de los datos de reserva de una pelicula (pelicula, fecha, horarios)
+
+10/4/24
+-Se agrego una tabla en la visualizacion de reserva, en la cual se visualiza las reserva de ese dia para esa pelicula y sala en particular
