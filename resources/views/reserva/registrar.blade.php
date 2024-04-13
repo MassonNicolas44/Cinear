@@ -9,6 +9,12 @@
 
                 @include('include.message')
 
+                @if(!empty($message))
+                    <div class="alert alert-success">
+                        {{$message}}
+                    </div>
+                @endif
+
                 <div class="card-body">
                     <form method="POST" action="{{ route('reserva.guardarRegistro') }}">
                         @csrf
@@ -22,6 +28,9 @@
                                 <th>Boleto/s</th>
                                 <th>Accion</th>
                             </thead>
+
+                            <input type="hidden" name="errorPelicula" value="{{$pelicula->nombre}}"/>
+                            <input type="hidden" name="errorFecha" value="{{$fecha}}"/>
 
                             <tbody>
                                 @foreach($funciones as $funcion)

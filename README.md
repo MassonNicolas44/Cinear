@@ -61,3 +61,6 @@ Registro de Actividad:
 
 10/4/24
 -Se agrego una tabla en la visualizacion de reserva, en la cual se visualiza las reserva de ese dia para esa pelicula y sala en particular
+
+12/4/24
+-Se añadio la vista de reserva de boleto (incluyendo comprobacion de boletos disponibles)

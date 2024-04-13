@@ -19,15 +19,15 @@
 
                                     <?php
                                         //Formateo de fecha para visualizacion mas amigable
-                                        $fechaFuncion=date('d-m-Y',strtotime($reserva->funcion->fecha));
-                                        $fechaReserva=date('d-m-Y',strtotime($reserva->fecha));
+                                        $fechaFuncion=date('d-m-Y',strtotime($reserva->fecha_funcion));
+                                        $fechaReserva=date('d-m-Y',strtotime($reserva->fecha_reserva));
                                     ?>
 
                                     <tr>
                                         <td>{{$reserva->funcion->sala->nombre}}</td>
                                         <td>{{$reserva->funcion->pelicula->nombre}}</td>
                                         <td>{{$fechaFuncion}}</td>
-                                        <td>{{$reserva->hora}}</td>
+                                        <td>{{$reserva->hora_funcion}}</td>
                                         <td>{{$fechaReserva}}</td>
                                         <td>{{$reserva->cantidad_boleto}}</td>
                                     </tr>
