@@ -200,6 +200,11 @@ Route::get('/funcion/lista', [App\Http\Controllers\FuncionController::class, 'li
 Route::post('/reserva/registrar', [App\Http\Controllers\ReservaController::class, 'registrar'])->name('reserva.registrar');
 Route::post('/reserva/guardarRegistro', [App\Http\Controllers\ReservaController::class, 'guardarRegistro'])->name('reserva.guardarRegistro');
 
+//Finalizacion Reserva
+Route::get('/reserva/reservaCompleta/{idReserva}', [App\Http\Controllers\ReservaController::class, 'reservaCompleta'])->name('reserva.reservaCompleta');
+
+//Lista
+Route::get('/reserva/lista', [App\Http\Controllers\ReservaController::class, 'lista'])->name('reserva.lista');
 
 
 
@@ -212,15 +217,6 @@ Route::post('/reserva/guardarRegistro', [App\Http\Controllers\ReservaController:
 
 
 
-
-
-
-//Editar
-Route::get('/reserva/editar/{id}', [App\Http\Controllers\ReservaController::class, 'editar'])->name('reserva.editar');
-Route::post('/reserva/guardarModificacion', [App\Http\Controllers\ReservaController::class, 'guardarModificacion'])->name('reserva.guardarModificacion');
-
-//Eliminar
-Route::get('/reserva/eliminar/{id}', [App\Http\Controllers\ReservaController::class, 'eliminar'])->name('reserva.eliminar');
 
 //Estado
 Route::get('/reserva/estado/{id}/{estado}', [App\Http\Controllers\ReservaController::class, 'estado'])->name('reserva.estado');

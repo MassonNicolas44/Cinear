@@ -10,10 +10,11 @@ use App\Models\Funcion;
 use App\Models\Pelicula;
 use App\Models\Reserva;
 
+use Hash;
+
 class ReservaController extends Controller
 {
     //
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -88,7 +89,11 @@ class ReservaController extends Controller
         $fecha=date('d-m-Y',strtotime($fecha));
 
         //Trae la lista de reservas para la pelicula, sala y fecha seleccionada
-        $datosReserva=Reserva::select('*')->where('id_Funcion',$idFuncion)->orderBy('hora_funcion','asc')->get();
+        $datosReserva=Reserva::select('*')
+                                ->where('id_Funcion',$idFuncion)
+                                ->where('estado',"Habilitada")
+                                ->orderBy('hora_funcion','asc')
+                                ->get();
         
         //Retorna a la vista, las funciones habilitadas para esa fecha en particular
         return view('reserva.registrar',['funciones'=>$funciones,'pelicula'=>$pelicula,'fecha'=>$fecha,'horarios'=>$horarios,'datosReserva'=>$datosReserva]);
@@ -118,6 +123,7 @@ class ReservaController extends Controller
         //Total de boletos reservados para la fecha y hora en particular
         $totalBoletoReservados=Reserva::where("fecha_funcion",$datosFuncion->fecha)
                                       ->where("hora_funcion",$horario)
+                                      ->where('estado',"Habilitada")
                                       ->sum("cantidad_boleto");
 
         //Boletos disponibles para la sala
@@ -128,47 +134,22 @@ class ReservaController extends Controller
 
         $cantBoletoDisponible=$cantBoletoSala-$totalBoletoReservados-$cantBoletoReservado;
 
-
         //Si se pueden reservar la cantidad de boletos ingresados, procede a generar la compra
         if($cantBoletoDisponible>=0){
 
             //Cargar valores
             $reserva = new Reserva();
 
-            $fechaHoy = date('Y-m-d');
-
             $reserva->id_Funcion=$idFuncion;
-            $reserva->fecha_reserva=$fechaHoy;
             $reserva->fecha_funcion=$datosFuncion->fecha;
             $reserva->hora_funcion=$horario;
             $reserva->cantidad_boleto=$cantidadBoleto;
+            $reserva->estado="Habilitada";
     
-            //$reserva->save();
+            $reserva->save();
 
-            //Trae la lista de pelicualas y sala (sin repetir valores) para ser mostrados en cartelera
-            $datos=Funcion::select('*')->where('estado',"Habilitada")->groupBy('id_Pelicula' , 'id_Sala', 'fechaInicio', 'fechaFin')->orderBy('id_Sala','asc')->get();
-
-
-
-
-
-
-
-
--CREAR UNA VIEW NUEVA DONDE MUESTRA LOS DATOS DE LA Reserva
--AL FINAL PONER UN BOTON QUE VALLA AL HOME
-
-
-
-
-
-
-
-
-
-
-            //Redireccion al inicio
-            return redirect()->route('home',['datos'=>$datos])->with(['message' => 'Boletos registrados correctamente \n  '."\n".', disminuya los boletos o seleccione otra funcion']);
+            //Redireccion a la finalizacion de la reserva
+            return redirect()->route('reserva.reservaCompleta',['idReserva'=>$reserva->id]);
 
         }else{
 
@@ -239,13 +220,63 @@ class ReservaController extends Controller
             $errorFecha=date('d-m-Y',strtotime($errorFecha));
 
             //Trae la lista de reservas para la pelicula, sala y fecha seleccionada
-            $datosReserva=Reserva::select('*')->where('id_Funcion',$idFuncion)->orderBy('hora_funcion','asc')->get();
+            $datosReserva=Reserva::select('*')
+                                    ->where('id_Funcion',$idFuncion)
+                                    ->where('estado',"Habilitada")
+                                    ->orderBy('hora_funcion','asc')
+                                    ->get();
 
             $message="Boletos insuficientes, disminuya la cantidad de boletos o seleccione otra fecha/horario";
 
-            //Recarga la vista mostrando el mensaje de erro (message)
+            //Recarga la vista mostrando el mensaje de error (message)
             return view('reserva.registrar',['funciones'=>$funciones,'pelicula'=>$pelicula,'fecha'=>$errorFecha,'horarios'=>$horarios,'datosReserva'=>$datosReserva,'message'=>$message]);
 
         }
     }
+
+    public function reservaCompleta($idReserva)
+    {
+
+        //Trae los datos de la reserva confirmada
+        $reserva=Reserva::find($idReserva);
+
+        //Retorna a la vista, los datos de la reserva confirmada
+        return view('reserva.reservaCompleta',['reserva'=>$reserva]);
+    }
+
+
+    public function estado($id,$estado){
+
+        //Se buscan los datos de la pelicula a editar el estado
+        $reserva=Reserva::find($id);
+
+        //Se comprueba si el estado es "Habilitar" se actualiza el estado a "Habilitada"
+        if($estado=="Habilitar"){
+            $reserva->estado="Habilitada";
+        }
+
+        //Se comprueba si el estado es "Inhabilitar" se actualiza el estado a "Inhabilitada"
+        if($estado=="Inhabilitar"){
+            $reserva->estado="Inhabilitada";
+        }
+
+        $reserva->update();
+
+        //Redireccion al listado de peliculas
+        return redirect()->route('reserva.lista')->with(['message' => 'La reserva '.$reserva->id.' fue '.$reserva->estado.' correctamente']);
+
+
+    }
+
+    public function lista()
+    {
+
+        //Trae la lista de reservas
+        $reservas=Reserva::orderby('fecha_funcion','asc')->paginate(15);
+
+        //Retorna a la vista las reservas registradas
+        return view('reserva.lista',['reservas'=>$reservas]);
+
+    }
+
 }

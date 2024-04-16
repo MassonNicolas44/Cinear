@@ -124,7 +124,7 @@
                             </li>
 
 
-                            <a class="nav-link" href="">Reserva</a>
+                            <a class="nav-link" href="{{ route('reserva.lista') }}">Reserva</a>
 
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

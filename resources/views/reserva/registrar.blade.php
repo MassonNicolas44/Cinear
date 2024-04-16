@@ -46,9 +46,13 @@
 
                                                 <div class="col-md-9">
                                                     <select id="horario" type="time" class="form-control @error('horario') is-invalid @enderror" name="horario" value="{{ $horarios["0"] }}" autocomplete="horario" autofocus>
-                                                    @foreach($horarios as $hora)
-                                                            <option value="{{ $hora }}"> {{ $hora }} Hs</option>
-                                                    @endforeach
+                                                        @if($horarios["0"]=="Sin Horario")
+                                                            <option value="{{ $horarios["0"] }}"> Sin Horario</option>
+                                                        @else
+                                                            @foreach($horarios as $hora)
+                                                                    <option value="{{ $hora }}"> {{ $hora }} Hs</option>
+                                                            @endforeach
+                                                        @endif
                                                     </select>
 
                                                     @error('horario')
@@ -95,8 +99,6 @@
     </div>
 </div>
 
-<br>
-<br>
 <br>
 
 @include('reserva.tabla')
