@@ -184,16 +184,6 @@ Route::get('/funcion/estado/{id}/{estado}', [App\Http\Controllers\FuncionControl
 //Lista
 Route::get('/funcion/lista', [App\Http\Controllers\FuncionController::class, 'lista'])->name('funcion.lista');
 
-
-
-
-
-
-
-
-
-
-
 //**  Reserva  
 
 //Alta
@@ -205,18 +195,6 @@ Route::get('/reserva/reservaCompleta/{idReserva}', [App\Http\Controllers\Reserva
 
 //Lista
 Route::get('/reserva/lista', [App\Http\Controllers\ReservaController::class, 'lista'])->name('reserva.lista');
-
-
-
-
-
-
-
-
-
-
-
-
 
 //Estado
 Route::get('/reserva/estado/{id}/{estado}', [App\Http\Controllers\ReservaController::class, 'estado'])->name('reserva.estado');

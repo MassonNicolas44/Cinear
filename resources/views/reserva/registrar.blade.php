@@ -101,6 +101,6 @@
 
 <br>
 
-@include('reserva.tabla')
+@include('reserva.tablaRegistro')
 
 @endsection

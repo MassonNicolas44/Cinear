@@ -8,6 +8,7 @@ use DateTime;
 
 use App\Models\Funcion;
 use App\Models\Pelicula;
+use App\Models\Sala;
 use App\Models\Reserva;
 
 use Hash;
@@ -35,46 +36,46 @@ class ReservaController extends Controller
         $horarios=array();
 
    
-        foreach($funciones as $aa){
+        foreach($funciones as $funcion){
 
-            if(!empty($aa->lvhorario1)){
-                $lvhorario1=(new DateTime($aa->lvhorario1))->format('H:i');
+            if(!empty($funcion->lvhorario1)){
+                $lvhorario1=(new DateTime($funcion->lvhorario1))->format('H:i');
                 array_push($horarios, $lvhorario1 );
             }
-            if(!empty($aa->lvhorario2)){
-                $lvhorario2=(new DateTime($aa->lvhorario2))->format('H:i');
+            if(!empty($funcion->lvhorario2)){
+                $lvhorario2=(new DateTime($funcion->lvhorario2))->format('H:i');
                 array_push($horarios, $lvhorario2 );
             }
-            if(!empty($aa->lvhorario3)){
-                $lvhorario3=(new DateTime($aa->lvhorario3))->format('H:i');
+            if(!empty($funcion->lvhorario3)){
+                $lvhorario3=(new DateTime($funcion->lvhorario3))->format('H:i');
                 array_push($horarios, $lvhorario3 );
             }
-            if(!empty($aa->lvhorario4)){
-                $lvhorario4=(new DateTime($aa->lvhorario4))->format('H:i');
+            if(!empty($funcion->lvhorario4)){
+                $lvhorario4=(new DateTime($funcion->lvhorario4))->format('H:i');
                 array_push($horarios, $lvhorario4 );
             }
 
 
 
-            if(!empty($aa->sdhorario1)){
-                $sdhorario1=(new DateTime($aa->sdhorario1))->format('H:i');
+            if(!empty($funcion->sdhorario1)){
+                $sdhorario1=(new DateTime($funcion->sdhorario1))->format('H:i');
                 array_push($horarios, $sdhorario1 );
             }
-            if(!empty($aa->sdhorario2)){
-                $sdhorario2=(new DateTime($aa->sdhorario2))->format('H:i');
+            if(!empty($funcion->sdhorario2)){
+                $sdhorario2=(new DateTime($funcion->sdhorario2))->format('H:i');
                 array_push($horarios, $sdhorario2 );
             }
-            if(!empty($aa->sdhorario3)){
-                $sdhorario3=(new DateTime($aa->sdhorario3))->format('H:i');
+            if(!empty($funcion->sdhorario3)){
+                $sdhorario3=(new DateTime($funcion->sdhorario3))->format('H:i');
                 array_push($horarios, $sdhorario3 );
             }
-            if(!empty($aa->sdhorario4)){
-                $sdhorario4=(new DateTime($aa->sdhorario4))->format('H:i');
+            if(!empty($funcion->sdhorario4)){
+                $sdhorario4=(new DateTime($funcion->sdhorario4))->format('H:i');
                 array_push($horarios, $sdhorario4 );
             }
 
             //Guardo el id de la funcion para luego utilizarlo en la busqueda de reserva
-            $idFuncion=$aa->id;
+            $idFuncion=$funcion->id;
         }
 
 
@@ -268,14 +269,57 @@ class ReservaController extends Controller
 
     }
 
-    public function lista()
+    public function lista(Request $request)
     {
 
-        //Trae la lista de reservas
-        $reservas=Reserva::orderby('fecha_funcion','asc')->paginate(15);
+        //-Agregar filtrado en la parte de reservas (por peliculas, sala, fecha, horario y/o fecha created_at)
+
+        $peliculas=Pelicula::all();
+        $salas=Sala::where("estado","Habilitada")->get();
+
+        //Se obtienen los valores
+        $peliculaBuscar=$request->input('id_Pelicula');
+        $salaBuscar=$request->input('id_Sala');
+        $fechaFuncionBuscar=$request->input('fechaFuncion');
+        $fechaReservaBuscar=$request->input('fechaReserva');
+
+        //Trae la lista de funciones filtrando por la pelicula y/o sala a buscar
+        $funciones=Funcion::where('id_Pelicula','LIKE',$peliculaBuscar)
+                    ->where('id_Sala','LIKE',$salaBuscar)
+                    ->orderby('id','asc')->get();
+
+        //Inicializo array para guardar las reservas con las filtraciones indicadas, para ser moestradas en la tabla
+        $arrayReserva=array();
+
+        //Recorre las funciones recuperadas anteriormente
+        foreach($funciones as $funcion){
+
+            //Si busca por fecha de reserva, la consulta del Where debe ser WhereDate por el formato del created_at
+            if(empty($fechaReservaBuscar)){
+                //Trae la lista de reservas filtrando por las funciones buscadas anteriormente, agregandole el filtrado por fecha de funcion y/o fecha de reserva
+                $reservas=Reserva::where('id_Funcion','LIKE',$funcion->id)
+                ->where('fecha_funcion','LIKE',$fechaFuncionBuscar)
+                ->get();
+            }else{
+                //Trae la lista de reservas filtrando por las funciones buscadas anteriormente, agregandole el filtrado por fecha de funcion y/o fecha de reserva
+                $reservas=Reserva::where('id_Funcion','LIKE',$funcion->id)
+                ->where('fecha_funcion','LIKE',$fechaFuncionBuscar)
+                ->whereDate('created_at','LIKE',$fechaReservaBuscar)
+                ->get();
+            }
+            
+            //Comprobacion de que el objeto recuperado tiene contenido
+            if(count($reservas)>0){
+
+                //Recorre los objetos recuperados, añandiendo cada uno al array de reserva
+                foreach($reservas as $reserva){
+                    array_push($arrayReserva, $reserva);
+                }
+            }
+        }     
 
         //Retorna a la vista las reservas registradas
-        return view('reserva.lista',['reservas'=>$reservas]);
+        return view('reserva.lista',['arrayReserva'=>$arrayReserva,'peliculas'=>$peliculas,'salas'=>$salas]);
 
     }
 

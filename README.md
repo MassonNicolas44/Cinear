@@ -69,20 +69,15 @@ Registro de Actividad:
 -Se añadio la vista de finalizacion de boleto (datos de la reserva finalizada)
 -Se añadio la anulacion de reserva de boleto
 
+17/4/24
+-Se añadio filtrado en la parte de reservas por pelicula, sala, fecha de la funcion y fecha de la reserva
 
 
 
-
-
-
-
-
-
-
+-Agregar en la tabla de funciones, un filtrado por pelicula y por sala
 
 -Boton para imprimir comprobante de boleto
 -Separar en "reserva/registrar" la parte de abajo solo para personal logeado
--Agregar filtrado en la parte de reservas (por peliculas, sala, fecha, horario y/o fecha created_at)
 -Revisar los listados (PELICULAS - FUNCION - RESERVA) teniendo en cuenta cuales estan HABILITADOS y cuales NO
 
 -Inhabilitar botor de "reserva/registrar" con CSS

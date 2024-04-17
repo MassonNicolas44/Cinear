@@ -4,63 +4,75 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Datos Peliculas y Salas') }} </div>
-                    <div class="card-body">                
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="text-align:center;">
-                            <thead>
-                                <th>Id</th>
-                                <th>Sala</th>
-                                <th>Pelicula</th>
-                                <th>Fecha funcion</th>
-                                <th>Hora funcion</th>
-                                <th>Fecha de reserva</th>
-                                <th>Cantidad boletos</th>
-                                <th>Estado</th>
-                            </thead>
+                <div class="card-header">{{ __('Filtrado de reserva') }} </div>
 
-                            <tbody>
-                                @foreach($reservas as $reserva)
+                <form method="GET" action="{{ route('reserva.lista') }}">
+                    @csrf
+                        <div class="homeFilter">
+                            <label for="id_Pelicula" class="col-md-0 col-form-label text-md-end">Pelicula</label>
+                            <div>
+                                <select id="id_Pelicula" class="form-control {{ $errors->has('id_Pelicula') ? 'is-invalid' : '' }}" value="{{ old('id_Pelicula') }}" name="id_Pelicula"/>
+                                    <option value="">-- Escoja una Opcion --</option>
+                                    @foreach ($peliculas as $pelicula)
+                                        <option value="{{ $pelicula['id'] }}">
+                                            {{$pelicula->nombre}} [{{$pelicula->duracion}} Min]
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            
+                            <label for="id_Sala" class="col-md-0 col-form-label text-md-end">Sala</label>
+                            <div>
+                                <select id="id_Sala" class="form-control {{ $errors->has('id_Sala') ? 'is-invalid' : '' }}" value="{{ old('id_Sala') }}" name="id_Sala"/>
+                                    <option value="">-- Escoja una Opcion --</option>
+                                    @foreach ($salas as $sala)
+                                        <option value="{{ $sala['id'] }}">
+                                            {{$sala->nombre}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
 
-                                    <?php
-                                        //Formateo de fecha para visualizacion mas amigable
-                                        $fechaFuncion=date('d-m-Y',strtotime($reserva->fecha_funcion));
-                                        $horaFuncion=(new DateTime($reserva->hora_funcion))->format('H:i');
+                            <div class="row mb-4">
+                                <label for="fechaFuncion" class="col-md-6 col-form-label text-md-center">Fecha Funcion</label>
+                                <div class="col-md-3">
+                                    <input id="fechaFuncion" type="date" class="form-control @error('fechaFuncion') is-invalid @enderror" name="fechaFuncion" value="{{ old('fechaFuncion')}}"  autocomplete="fechaFuncion" autofocus>
 
-                                        $fechaReserva=date('d-m-Y',strtotime($reserva->created_at));
-                                        $horaReserva=(new DateTime($reserva->created_at))->format('H:i');
-                                    ?>
+                                    @error('fechaFuncion')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>  
 
-                                    <tr>
-                                        <td>{{$reserva->id}}</td>
-                                        <td>{{$reserva->funcion->sala->nombre}}</td>
-                                        <td>{{$reserva->funcion->pelicula->nombre}}</td>
-                                        <td>{{$fechaFuncion}}</td>
-                                        <td>{{$horaFuncion}} Hs</td>
-                                        <td>{{$fechaReserva}}  [{{$horaReserva}} Hs]</td>
-                                        <td>{{$reserva->cantidad_boleto}}</td>
-                                        <td>
-                                            <div class="list">
-                                                <?php if($reserva->estado=="Habilitada"){    ?>
-                                                    <a href="{{ route('reserva.estado',['id'=>$reserva->id,'estado'=>"Inhabilitar"]) }}" ="sucess" class="btn btn-success btn-sm"> Anular</a>
-                                                <?php }else{  ?>
-                                                    <a class="btn btn-success btn-sm"> Anulado</a>
-                                                <?php  }  ?>                                                  
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach 
-                            </tbody>
-                        </table>
-                        <div class="clearfix"></div>
-                            {{ $reservas->links() }}
+                            <div class="row mb-4">
+                                <label for="fechaReserva" class="col-md-6 col-form-label text-md-center">Fecha Reserva</label>
+                                <div class="col-md-3">
+                                    <input id="fechaReserva" type="date" class="form-control @error('fechaReserva') is-invalid @enderror" name="fechaReserva" value="{{ old('fechaReserva')}}"  autocomplete="fechaReserva" autofocus>
+
+                                    @error('fechaReserva')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>  
+                            
+                            <div class="col-md-2">
+                                <input type="submit" class="btn btn-primary" value="Buscar">
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+@include('reserva.tablaLista')
+
 @endsection
+
