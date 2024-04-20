@@ -362,12 +362,16 @@ class FuncionController extends Controller
             return redirect()->route('funcion.editarTotal')->with(['message' => 'La fecha final debe ser MAYOR a la fecha de inicio']);
         }
 
+        //Se buscan los datos de la pelicual y sala seleccionada
+        $funcion=Funcion::find($id_Funcion);
+
         //Se obtiene las funciones existente que coincidan con la sala y la pelicula a registrar
-        $funciones = Funcion:: where('id_Sala', $id_Sala)
-                                ->where('id_Pelicula', $id_Pelicula)
+        $funciones = Funcion:: where('id_Sala', $funcion->id_Sala)
+                                ->where('id_Pelicula', $funcion->id_Pelicula)
+                                ->where('fechaInicio', $funcion->fechaInicio)
+                                ->where('fechaFin', $funcion->fechaFin)
                                 ->get();      
-                                
-                                
+                                                                
         //Formateo de fecha inicial y final
         $aa = new DateTime($fechaInicio);
         $bb = new DateTime($fechaFin);
@@ -380,10 +384,11 @@ class FuncionController extends Controller
 
                 //Busca si el rango entre la fecha de inicio y la fecha final existe el id, sino existe, lo crea
                 $fechaBD = Funcion::
-                where('fecha', $i)
+                where('id_Sala', $id_Sala)
+                ->where('id_Pelicula', $id_Pelicula)
+                ->where('fecha', $i)
                 ->get(); 
                 
-                  
                 //En caso que la fecha exista en la base de datos, actualiza ese objeto, caso contrario crea uno nuevo
                 if(count($fechaBD)==0){
                     $funcion = new Funcion();
@@ -464,12 +469,14 @@ class FuncionController extends Controller
                         }
                     }
                 }  
+
             }  
+
             //Reformateo la fecha para que tome los valores iniciales al reiniciar el ciclo del foreach
             $aa = new DateTime($fechaInicio);
             $bb = new DateTime($fechaFin);
         } 
-
+        
         //Trae la sala y pelicula de la funcion a registrar para ser mostrados por mensaje
         $sala=Sala::find($id_Sala);
         $pelicula=Pelicula::find($id_Pelicula);
@@ -529,21 +536,55 @@ class FuncionController extends Controller
             $funcion->update();
         }
 
+        //Formateo de fecha para que sea mas amigable al usuario
+        $fechaInicio = (new DateTime($funcion->fechaInicio))->format('d-m-Y');
+        $fechaFin = (new DateTime($funcion->fechaFin))->format('d-m-Y');
+
         //Redireccion al listado de funcion
-        return redirect()->route('funcion.lista')->with(['message' => 'La funcion del dia '.$funcion->fecha.' fue '.$funcion->estado.' correctamente']);
+        return redirect()->route('funcion.lista')->with(['message' => 'La funcion '.$funcion->pelicula->nombre.' de la sala '.$funcion->sala->nombre.'  desde el '.$fechaInicio.' al  '.$fechaFin.' fue '.$funcion->estado.' correctamente']);
 
     }
 
-    public function lista()
+    public function lista(Request $request,$id=null)
     {
+        $peliculaBuscar=$request->input('id_Pelicula');
+        $salaBuscar=$request->input('id_Sala');
 
-        $funciones=Funcion::orderby('fecha','asc')->get();
+        //Condicion para verificar si se selecciono alguna pelicula con su sala respectiva
+        if($id){
 
-        //Trae la lista de pelicualas y sala (sin repetir valores) para ser mostrados en la tabla simple
-        $datos=Funcion::select('*')->groupBy('id_Pelicula' , 'id_Sala', 'fechaInicio', 'fechaFin')->get();
+            //Se buscan los datos de la pelicual y sala seleccionada
+            $funcion=Funcion::find($id);
+
+            //Trae la lista de funciones de la pelicula y sala seleccionada
+            $funciones=Funcion::where('id_Sala',$funcion->id_Sala)
+            ->where('id_Pelicula',$funcion->id_Pelicula)
+            ->where('fechaInicio','>=',$funcion->fechaInicio)
+            ->where('fechaFin','<=',$funcion->fechaFin)
+            ->orderby('fecha','asc')->get();
+
+
+        }else{
+            //Trae la lista de funciones de todas las peliculas y sala
+            $funciones=Funcion::where('id_Pelicula','LIKE',$peliculaBuscar)
+                                ->where('id_Sala','LIKE',$salaBuscar)
+                                ->orderby('fecha','asc')
+                                ->get();
+        }
+
+        //Trae la lista de peliculas y sala (sin repetir valores) para ser mostrados en la tabla simple
+        $datos=Funcion::select('*')
+                        ->where('id_Pelicula','LIKE',$peliculaBuscar)
+                        ->where('id_Sala','LIKE',$salaBuscar)
+                        ->groupBy('id_Pelicula' , 'id_Sala', 'fechaInicio', 'fechaFin')
+                        ->get();
+
+        //Trae la lista de peliculas y salas habilitada
+        $peliculas=Pelicula::all();
+        $salas=Sala::where("estado","Habilitada")->get();
 
         //Retorna a la vista las peliculas registradas
-        return view('funcion.lista',['funciones'=>$funciones,'datos'=>$datos]);
+        return view('funcion.lista',['funciones'=>$funciones,'datos'=>$datos,'peliculas'=>$peliculas,'salas'=>$salas]);
 
     }
 

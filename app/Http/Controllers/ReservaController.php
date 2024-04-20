@@ -11,7 +11,6 @@ use App\Models\Pelicula;
 use App\Models\Sala;
 use App\Models\Reserva;
 
-use Hash;
 
 class ReservaController extends Controller
 {
@@ -24,67 +23,79 @@ class ReservaController extends Controller
     public function registrar(Request $request)
     {
 
-        $id=$request->input('id');
+        $idPelicula=$request->input('idPelicula');
+        $idSala=$request->input('idSala');
         $fecha=$request->input('fecha');
 
         //Trae la lista de funciones con la fecha seleccionada de la pelicula seleccionada desde la Base de Datos
-        $funciones=Funcion::where('id_Pelicula',$id)
+        $funciones=Funcion::where('id_Pelicula',$idPelicula)
+        ->where('id_Sala',$idSala)
         ->where('fecha',$fecha)
         ->orderby('id_Pelicula','asc')->get();
+
+                                                         
+        //Array de los dias la busqueda de horario
+        $nombresDias = array("Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado" );
+
+        $fechaDia = (new DateTime($fecha))->format("w");
+
+        //Traemos el nombre del dia
+        $dia=$nombresDias[$fechaDia];
 
 
         $horarios=array();
 
-   
         foreach($funciones as $funcion){
 
-            if(!empty($funcion->lvhorario1)){
-                $lvhorario1=(new DateTime($funcion->lvhorario1))->format('H:i');
-                array_push($horarios, $lvhorario1 );
-            }
-            if(!empty($funcion->lvhorario2)){
-                $lvhorario2=(new DateTime($funcion->lvhorario2))->format('H:i');
-                array_push($horarios, $lvhorario2 );
-            }
-            if(!empty($funcion->lvhorario3)){
-                $lvhorario3=(new DateTime($funcion->lvhorario3))->format('H:i');
-                array_push($horarios, $lvhorario3 );
-            }
-            if(!empty($funcion->lvhorario4)){
-                $lvhorario4=(new DateTime($funcion->lvhorario4))->format('H:i');
-                array_push($horarios, $lvhorario4 );
-            }
+            //Verificacion de dia, para ver que horario estan disponibles
+            if($dia=="Lunes" || $dia=="Martes" || $dia=="Miercoles" || $dia=="Jueves" || $dia=="Viernes"){
+                if(!empty($funcion->lvhorario1)){
+                    $lvhorario1=(new DateTime($funcion->lvhorario1))->format('H:i');
+                    array_push($horarios, $lvhorario1 );
+                }
+                if(!empty($funcion->lvhorario2)){
+                    $lvhorario2=(new DateTime($funcion->lvhorario2))->format('H:i');
+                    array_push($horarios, $lvhorario2 );
+                }
+                if(!empty($funcion->lvhorario3)){
+                    $lvhorario3=(new DateTime($funcion->lvhorario3))->format('H:i');
+                    array_push($horarios, $lvhorario3 );
+                }
+                if(!empty($funcion->lvhorario4)){
+                    $lvhorario4=(new DateTime($funcion->lvhorario4))->format('H:i');
+                    array_push($horarios, $lvhorario4 );
+                }
 
+            }else{
 
-
-            if(!empty($funcion->sdhorario1)){
-                $sdhorario1=(new DateTime($funcion->sdhorario1))->format('H:i');
-                array_push($horarios, $sdhorario1 );
-            }
-            if(!empty($funcion->sdhorario2)){
-                $sdhorario2=(new DateTime($funcion->sdhorario2))->format('H:i');
-                array_push($horarios, $sdhorario2 );
-            }
-            if(!empty($funcion->sdhorario3)){
-                $sdhorario3=(new DateTime($funcion->sdhorario3))->format('H:i');
-                array_push($horarios, $sdhorario3 );
-            }
-            if(!empty($funcion->sdhorario4)){
-                $sdhorario4=(new DateTime($funcion->sdhorario4))->format('H:i');
-                array_push($horarios, $sdhorario4 );
+                if(!empty($funcion->sdhorario1)){
+                    $sdhorario1=(new DateTime($funcion->sdhorario1))->format('H:i');
+                    array_push($horarios, $sdhorario1 );
+                }
+                if(!empty($funcion->sdhorario2)){
+                    $sdhorario2=(new DateTime($funcion->sdhorario2))->format('H:i');
+                    array_push($horarios, $sdhorario2 );
+                }
+                if(!empty($funcion->sdhorario3)){
+                    $sdhorario3=(new DateTime($funcion->sdhorario3))->format('H:i');
+                    array_push($horarios, $sdhorario3 );
+                }
+                if(!empty($funcion->sdhorario4)){
+                    $sdhorario4=(new DateTime($funcion->sdhorario4))->format('H:i');
+                    array_push($horarios, $sdhorario4 );
+                }
             }
 
             //Guardo el id de la funcion para luego utilizarlo en la busqueda de reserva
             $idFuncion=$funcion->id;
         }
 
-
         if(empty($horarios)){
             array_push($horarios, "Sin Horario" );
         }
 
         //Trae la pelicula seleccionada
-        $pelicula=Pelicula::select('nombre')->where('id',$id)->first();
+        $pelicula=Pelicula::select('nombre')->where('id',$idPelicula)->first();
 
         //Formateo de fecha para visualizacion mas amigable
         $fecha=date('d-m-Y',strtotime($fecha));
@@ -272,8 +283,7 @@ class ReservaController extends Controller
     public function lista(Request $request)
     {
 
-        //-Agregar filtrado en la parte de reservas (por peliculas, sala, fecha, horario y/o fecha created_at)
-
+        //Trae la lista de peliculas y salas habilitada
         $peliculas=Pelicula::all();
         $salas=Sala::where("estado","Habilitada")->get();
 

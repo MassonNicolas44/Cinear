@@ -72,10 +72,21 @@ Registro de Actividad:
 17/4/24
 -Se añadio filtrado en la parte de reservas por pelicula, sala, fecha de la funcion y fecha de la reserva
 
+19/4/24
+-En la parte de funciones se agrego para poder seleccionar una pelicula y la sala para poder visualizar los datos, sin tener que mostrar todas las funciones existentes.
+-Se arreglo un error el cual no registraba nuevas funciones al extender el rango de fecha de la pelicula y sala
+-Se añadio filtrado en la parte de funciones por pelicula y sala
+-Se añadio cartel al no tener registros cuando se filtra en funciones como en reservas
+-Se arreglo un error que traia los horarios de semana y finde juntos
 
 
--Agregar en la tabla de funciones, un filtrado por pelicula y por sala
 
+
+-Al seleccionar una pelicula, deben aparecer ambas salas?
+-Agregar el calculo del precio del boleto al reservar un boleto
+
+
+-Centrar "No hay datos para mostrar"  en las tablas de funciones y reservas(tanto en lista como en registro)
 -Boton para imprimir comprobante de boleto
 -Separar en "reserva/registrar" la parte de abajo solo para personal logeado
 -Revisar los listados (PELICULAS - FUNCION - RESERVA) teniendo en cuenta cuales estan HABILITADOS y cuales NO

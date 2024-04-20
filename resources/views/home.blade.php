@@ -7,9 +7,6 @@
             <div class="card">
                 <div class="card-header">{{ __('Bienvenido') }}</div>
                 @include('include.message')
-
-                    <form method="POST" action="{{ route('reserva.registrar') }}">
-                    @csrf
                         <div class="card-body">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="text-align:center;">
                                 <thead>
@@ -22,58 +19,60 @@
                                 <tbody>
                                 @foreach($datos as $dato)
 
-                                        <tr>
-                                            <td>{{$dato->pelicula->nombre}}</td>
-                                            <td>{{$dato->sala->nombre}}</td>
-                                            <td>
+                                    <form method="POST" action="{{ route('reserva.registrar') }}">
+                                    @csrf
+                                    <tr>
+                                        <td>{{$dato->pelicula->nombre}}</td>
+                                        <td>{{$dato->sala->nombre}}</td>
+                                        <td>
 
-                                                <?php
-                                                //Formateo de fecha para visualizacion mas amigable
-                                                $fechaInicio=date('d-m-Y',strtotime($dato->fechaInicio));
-                                                $fechaFin=date('d-m-Y',strtotime($dato->fechaFin));
+                                            <?php
+                                            //Formateo de fecha para visualizacion mas amigable
+                                            $fechaInicio=date('d-m-Y',strtotime($dato->fechaInicio));
+                                            $fechaFin=date('d-m-Y',strtotime($dato->fechaFin));
 
-                                                $min=date('Y-m-d',strtotime($dato->fechaInicio));
-                                                $max=date('Y-m-d',strtotime($dato->fechaFin));
+                                            $min=date('Y-m-d',strtotime($dato->fechaInicio));
+                                            $max=date('Y-m-d',strtotime($dato->fechaFin));
 
-                                                $hoy = date('Y-m-d');
-                                                ?>
+                                            $hoy = date('Y-m-d');
+                                            ?>
 
-                                                <div class="row mb-4">
-                                                    <label for="fecha" class="col-md-6 col-form-label text-md-center">{{$fechaInicio}} al {{$fechaFin}}</label>
+                                            <div class="row mb-4">
+                                                <label for="fecha" class="col-md-6 col-form-label text-md-center">{{$fechaInicio}} al {{$fechaFin}}</label>
 
-                                                    <div class="col-md-3">
-                                                        <input id="fecha" type="date" class="form-control @error('fecha') is-invalid @enderror" name="fecha" value="{{$hoy}}"
-                                                        
-                                                        min="<?php echo $hoy;?>" 
-                                                        
-                                                        max="<?php echo $max;?>"
-                                                        
-                                                        required autocomplete="fecha" autofocus>
+                                                <div class="col-md-3">
+                                                    <input id="fecha" type="date" class="form-control @error('fecha') is-invalid @enderror" name="fecha" value="{{$hoy}}"
+                                                    
+                                                    min="<?php echo $hoy;?>" 
+                                                    
+                                                    max="<?php echo $max;?>"
+                                                    
+                                                    required autocomplete="fecha" autofocus>
 
-                                                        @error('fecha')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                    </div>
-                                                </div>  
+                                                    @error('fecha')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>  
 
-                                            </td>
+                                        </td>
 
-                                            <td>
-                                                <input type="hidden" name="id" value="{{$dato->pelicula->id}}"/>
-                                                <button type="submit" class="btn btn-primary">
-                                                    {{ __('Seleccionar') }}
-                                                </button>
-                                            </td>
-                                            
-                                        </tr>
-                                            
-                                    @endforeach 
-                                </tbody>
-                            </table>
-                        </div>
-                    </form>
+                                        <td>
+                                            <input type="hidden" name="idPelicula" value="{{$dato->pelicula->id}}"/>
+                                            <input type="hidden" name="idSala" value="{{$dato->sala->id}}"/>
+                                            <button type="submit" class="btn btn-primary">
+                                                {{ __('Seleccionar') }}
+                                            </button>
+                                        </td>
+                                        
+                                    </tr>
+                                    </form>
+                                @endforeach 
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

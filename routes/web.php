@@ -182,7 +182,7 @@ Route::get('/funcion/eliminar/{id}', [App\Http\Controllers\FuncionController::cl
 Route::get('/funcion/estado/{id}/{estado}', [App\Http\Controllers\FuncionController::class, 'estado'])->name('funcion.estado');
 
 //Lista
-Route::get('/funcion/lista', [App\Http\Controllers\FuncionController::class, 'lista'])->name('funcion.lista');
+Route::get('/funcion/lista/{id?}', [App\Http\Controllers\FuncionController::class, 'lista'])->name('funcion.lista');
 
 //**  Reserva  
 
