@@ -22,6 +22,7 @@
                     <h3>Fecha: {{$Fecha}}</h3>
                     <h3>Hora: {{$Hora}} Hs</h3>
                     <h3>Cantidad de Boletos: {{$reserva->cantidad_boleto}}</h3>
+                    <h3>Precio Final: {{$reserva->precio_final}} $</h3>
 
                     <a href="{{ route('home') }}"="sucess" class="btn  btn-danger">Ir al inicio</a>
                 

@@ -23,16 +23,17 @@
                             <th>Fecha</th>
                             <th>Horario/s</th>
                             <th>Boleto/s</th>
+                            <th>Precio c/u boleto</th>
                             <th>Accion</th>
                         </thead>
-
-                        <input type="hidden" name="errorPelicula" value="{{$pelicula->nombre}}"/>
-                        <input type="hidden" name="errorFecha" value="{{$fecha}}"/>
 
                         <tbody>
                             @foreach($funciones as $funcion)
                                 <form method="POST" action="{{ route('reserva.guardarRegistro') }}">
                                 @csrf
+                                    <input type="hidden" name="errorPelicula" value="{{$pelicula->nombre}}"/>
+                                    <input type="hidden" name="errorSala" value="{{$sala->nombre}}"/>
+                                    <input type="hidden" name="errorFecha" value="{{$fecha}}"/>
                                 <tr>
                                     <td>{{$funcion->sala->nombre}}
                                         <input type="hidden" name="idFuncion" value="{{$funcion->id}}"/>
@@ -64,8 +65,8 @@
                                     </td>
                                     <td>
                                         <div class="row mb-4">
-                                            <label for="cantBoleto" class="col-md-4 col-md-offset-4"></label>
-                                            <div class="col-md-6">
+                                            <label for="cantBoleto" class="col-md-3 col-md-offset-4"></label>
+                                            <div class="col-md-7">
                                                 <input id="cantBoleto" type="number" class="form-control @error('cantBoleto') is-invalid @enderror" name="cantBoleto" min ="1" max="{{ $funcion->sala->cantidad_asiento }}" value="1" required autocomplete="cantBoleto" autofocus>
 
                                                 @error('cantBoleto')
@@ -76,6 +77,7 @@
                                             </div>
                                         </div> 
                                     </td>
+                                    <td>{{$funcion->pelicula->precio}} $</td>
                                     <td>
                                         <div class="list">
                                             @if($horarios["0"]=="Sin Horario")

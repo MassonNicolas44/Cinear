@@ -79,13 +79,13 @@ Registro de Actividad:
 -Se añadio cartel al no tener registros cuando se filtra en funciones como en reservas
 -Se arreglo un error que traia los horarios de semana y finde juntos
 
+20/4/24
+-Se agrego precio final al finalizar compra
+-Se agrego el precio final en las columnas de funciones y reservas
 
 
 
--Al seleccionar una pelicula, deben aparecer ambas salas?
--Agregar el calculo del precio del boleto al reservar un boleto
-
-
+-Centrar las filas en la aprte de registro boleto
 -Centrar "No hay datos para mostrar"  en las tablas de funciones y reservas(tanto en lista como en registro)
 -Boton para imprimir comprobante de boleto
 -Separar en "reserva/registrar" la parte de abajo solo para personal logeado

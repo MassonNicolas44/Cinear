@@ -15,6 +15,7 @@
                                     <th>Hora funcion</th>
                                     <th>Fecha de reserva</th>
                                     <th>Cantidad boletos</th>
+                                    <th>Precio final</th>
                                 </thead>
                                 <tbody>
                                     @foreach($datosReserva as $reserva)
@@ -34,6 +35,7 @@
                                             <td>{{$hora}} Hs</td>
                                             <td>{{$fechaReserva}}  [{{$horaReserva}} Hs]</td>
                                             <td>{{$reserva->cantidad_boleto}}</td>
+                                            <td>{{$reserva->precio_final}} $</td>
                                         </tr>
                                     @endforeach 
                                 </tbody>

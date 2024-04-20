@@ -15,6 +15,7 @@
                                     <th>Hora funcion</th>
                                     <th>Fecha de reserva</th>
                                     <th>Cantidad boletos</th>
+                                    <th>Precio Final</th>
                                     <th>Estado</th>
                                 </thead>
 
@@ -38,6 +39,7 @@
                                             <td>{{$horaFuncion}} Hs</td>
                                             <td>{{$fechaReserva}}  [{{$horaReserva}} Hs]</td>
                                             <td>{{$reserva->cantidad_boleto}}</td>
+                                            <td>{{$reserva->precio_final}} $</td>
                                             <td>
                                                 <div class="list">
                                                     <?php if($reserva->estado=="Habilitada"){    ?>
