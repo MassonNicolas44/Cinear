@@ -40,17 +40,29 @@ class SalaController extends Controller
         $nombre = $request->input('nombre');
         $cantAsiento = $request->input('cantAsiento');
 
-        //Cargar valores
-        $sala = new Sala();
+        //Comprobacion que el nombre a registrar, existe o no en la base de datos
+        $nombreExiste=Sala::select('nombre')->where('nombre',$nombre)->first();
 
-        $sala->nombre=$nombre;
-        $sala->cantidad_asiento=$cantAsiento;
-        $sala->estado="Habilitada";
+        if($nombreExiste){
 
-        $sala->save();
+            //Redireccion al registro de sala, mostrar el error
+            return redirect()->route('sala.registrar')->with(['message' => 'La sala '.$nombre.' ya existe. Ingrese otro nombre']);
 
-        //Redireccion al registro de sala
-        return redirect()->route('sala.registrar')->with(['message' => 'La sala '.$nombre.' fue agregada correctamente']);
+        }else{
+        
+            //Cargar valores
+            $sala = new Sala();
+
+            $sala->nombre=$nombre;
+            $sala->cantidad_asiento=$cantAsiento;
+            $sala->estado="Habilitada";
+
+            $sala->save();
+
+            //Redireccion al registro de sala
+            return redirect()->route('sala.registrar')->with(['message' => 'La sala '.$nombre.' fue agregada correctamente']);
+        }
+
     }
 
 
@@ -89,15 +101,29 @@ class SalaController extends Controller
             //Se buscan los datos de la sala a editar
             $sala = Sala::find($id);
     
-            //Cargar valores
-            $sala->nombre=$nombre;
-            $sala->cantidad_asiento=$cantAsiento;
+            //Comprobacion que el nombre a registrar, existe o no en la base de datos
+            $nombreExiste=Sala::select('nombre')->where('nombre',$nombre)->first();
 
 
-            $sala->update();
+            //Comprobacion si el nombre a ingresar ya existe, ademas de si el nombre a ingresar es distinto al nombre de la sala que se esta editando
+            if(($nombreExiste) && ($nombreExiste->nombre!=$sala->nombre)){
+
+                //Redireccion al registro de sala, mostrando el error
+                return redirect()->route('sala.editar',['id'=>$id])->with(['message' => 'La sala '.$nombre.' ya existe. Ingrese otro nombre']);
+              
+            }else{
+
+                //Cargar valores
+                $sala->nombre=$nombre;
+                $sala->cantidad_asiento=$cantAsiento;
+
+                $sala->update();
+
+                //Redireccion al registro de sala
+                return redirect()->route('sala.registrar')->with(['message' => 'La sala '.$nombre.' fue modificada correctamente']);
+
+            }
     
-            //Redireccion al registro de sala
-            return redirect()->route('sala.registrar')->with(['message' => 'La sala '.$nombre.' fue modificada correctamente']);
 
     }
 

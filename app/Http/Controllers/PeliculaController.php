@@ -72,35 +72,48 @@ class PeliculaController extends Controller
         $precio = $request->input('precio'); 
         $imagen = $request->file('imagen'); 
 
-        //Cargar valores
-        $pelicula = new Pelicula();
+        //Comprobacion que el nombre a registrar, existe o no en la base de datos
+        $nombreExiste=Pelicula::select('nombre')->where('nombre',$nombre)->first();
 
-        $pelicula->nombre=$nombre;
-        $pelicula->año=$año;
-        $pelicula->descripcion=$descripcion;
-        $pelicula->id_Categoria=$categoria;
-        $pelicula->id_Nacionalidad_Pel=$nacionalidad;
-        $pelicula->id_Idioma=$idioma;
-        $pelicula->id_Tipo=$tipo;
-        $pelicula->id_Restriccion=$restriccion;
-        $pelicula->precio=$precio;
-        $pelicula->duracion=$duracion;
-        $pelicula->image_path=$imagen;
-        $pelicula->estado="Habilitada";
+        if($nombreExiste){
 
-        //Se verifica si hay una imagen a cargar para la pelicula
-        if($imagen){
-            $imagen_nombre=time().$imagen->getClientOriginalName();
-            Storage::disk('imagenes')->put($imagen_nombre,File::get($imagen));
-            $pelicula->image_path=$imagen_nombre;
+            //Redireccion al listado de peliculas
+            return redirect()->route('pelicula.registrar')->with(['message' => 'La pelicula '.$nombre.' ya existe. Ingrese otro nombre']);
+
         }else{
-            $pelicula->image_path="noImagen.png";
+
+            //Cargar valores
+            $pelicula = new Pelicula();
+
+            $pelicula->nombre=$nombre;
+            $pelicula->año=$año;
+            $pelicula->descripcion=$descripcion;
+            $pelicula->id_Categoria=$categoria;
+            $pelicula->id_Nacionalidad_Pel=$nacionalidad;
+            $pelicula->id_Idioma=$idioma;
+            $pelicula->id_Tipo=$tipo;
+            $pelicula->id_Restriccion=$restriccion;
+            $pelicula->precio=$precio;
+            $pelicula->duracion=$duracion;
+            $pelicula->image_path=$imagen;
+            $pelicula->estado="Habilitada";
+
+            //Se verifica si hay una imagen a cargar para la pelicula
+            if($imagen){
+                $imagen_nombre=time().$imagen->getClientOriginalName();
+                Storage::disk('imagenes')->put($imagen_nombre,File::get($imagen));
+                $pelicula->image_path=$imagen_nombre;
+            }else{
+                $pelicula->image_path="noImagen.png";
+            }
+
+            $pelicula->save();
+
+            //Redireccion al listado de peliculas
+            return redirect()->route('pelicula.lista')->with(['message' => 'La pelicula '.$nombre.' fue agregada correctamente']);
+
         }
 
-        $pelicula->save();
-
-        //Redireccion al listado de peliculas
-        return redirect()->route('pelicula.lista')->with(['message' => 'La pelicula '.$nombre.' fue agregada correctamente']);
     }
 
     public function lista()
@@ -173,32 +186,44 @@ class PeliculaController extends Controller
             //Se buscan los datos de la pelicula a editar
             $pelicula = Pelicula::find($id);
 
-            //Cargar valores
-            $pelicula->nombre=$nombre;
-            $pelicula->año=$año;
-            $pelicula->descripcion=$descripcion;
-            $pelicula->id_Categoria=$categoria;
-            $pelicula->id_Nacionalidad_Pel=$nacionalidad;
-            $pelicula->id_Idioma=$idioma;
-            $pelicula->id_Tipo=$tipo;
-            $pelicula->id_Restriccion=$restriccion;
-            $pelicula->duracion=$duracion;
-            $pelicula->precio=$precio;
+            //Comprobacion que el nombre a registrar, existe o no en la base de datos
+            $nombreExiste=Pelicula::select('nombre')->where('nombre',$nombre)->first();
 
-            //Si la imagen cargada es igual a la imagen que esta en el sistema, no se realiza ningun cambio
-            if($imagen){
-                if($pelicula->image_path!=$imagen->getClientOriginalName()){
-                    $imagen_nombre=time().$imagen->getClientOriginalName();
-                    Storage::disk('imagenes')->put($imagen_nombre,File::get($imagen));
-                    $pelicula->image_path=$imagen_nombre;
+            //Comprobacion si el nombre a ingresar ya existe, ademas de si el nombre a ingresar es distinto al nombre de la pelicula que se esta editando
+            if(($nombreExiste) && ($nombreExiste->nombre!=$pelicula->nombre)){
+
+                //Redireccion al registro de sala, mostrando el error
+                return redirect()->route('pelicula.editar',['id'=>$id])->with(['message' => 'La pelicula '.$nombre.' ya existe. Ingrese otro nombre']);
+                
+            }else{
+
+                //Cargar valores
+                $pelicula->nombre=$nombre;
+                $pelicula->año=$año;
+                $pelicula->descripcion=$descripcion;
+                $pelicula->id_Categoria=$categoria;
+                $pelicula->id_Nacionalidad_Pel=$nacionalidad;
+                $pelicula->id_Idioma=$idioma;
+                $pelicula->id_Tipo=$tipo;
+                $pelicula->id_Restriccion=$restriccion;
+                $pelicula->duracion=$duracion;
+                $pelicula->precio=$precio;
+
+                //Si la imagen cargada es igual a la imagen que esta en el sistema, no se realiza ningun cambio
+                if($imagen){
+                    if($pelicula->image_path!=$imagen->getClientOriginalName()){
+                        $imagen_nombre=time().$imagen->getClientOriginalName();
+                        Storage::disk('imagenes')->put($imagen_nombre,File::get($imagen));
+                        $pelicula->image_path=$imagen_nombre;
+                    }
                 }
+
+                $pelicula->update();
+        
+                //Redireccion al listado de peliculas
+                return redirect()->route('pelicula.lista')->with(['message' => 'La pelicula '.$nombre.' fue modificada correctamente']);
+
             }
-
-            $pelicula->update();
-    
-            //Redireccion al listado de peliculas
-            return redirect()->route('pelicula.lista')->with(['message' => 'La pelicula '.$nombre.' fue modificada correctamente']);
-
     }
 
     public function estado($id,$estado){

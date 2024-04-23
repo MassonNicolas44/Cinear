@@ -7,8 +7,6 @@
             <div class="card">
                 <div class="card-header">{{ __('Editando la sala:') }} {{$sala->nombre}} </div>
 
-                @include('include.message')
-
                 <div class="card-body">
                     <form method="POST" action="{{ route('sala.guardarModificacion') }}">
                         @csrf

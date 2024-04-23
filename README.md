@@ -83,7 +83,16 @@ Registro de Actividad:
 -Se agrego precio final al finalizar compra
 -Se agrego el precio final en las columnas de funciones y reservas
 
+22/4/24
+-Se agrego la comprobacion para las peliculas, al registrar (si el nombre ya existe en la base de datos) y al editar (si el nombre ya existe en la base de datos y luego si el nombre a ingresar es igual a la pelicula editando)
+-Se agrego la comprobacion para las salas, al registrar (si el nombre ya existe en la base de datos) y al editar (si el nombre ya existe en la base de datos y luego si el nombre a ingresar es igual a la sala editando)
+-Se agregaron validaciones de estado, al registrar una funcion, que se pueda elegir entre peliculas y salas habilitadas 
 
+
+
+
+-Agregar al logearse el cambio de contraseña, y administracion de claves y contraseñas (solamente para el administrador)
+-Agregar vista (solo para personal logeado) donde muestra un resumen de als ventas (cantidad y precio)
 
 -Centrar las filas en la aprte de registro boleto
 -Centrar "No hay datos para mostrar"  en las tablas de funciones y reservas(tanto en lista como en registro)

@@ -37,8 +37,8 @@ class FuncionController extends Controller
 
 
         //Trae la lista de salas, peliculas y funciones desde la Base de Datos
-        $salas=Sala::orderby('nombre','asc')->get();
-        $peliculas=Pelicula::orderby('nombre','asc')->get();
+        $salas=Sala::where('estado',"Habilitada")->orderby('nombre','asc')->get();
+        $peliculas=Pelicula::where('estado',"Habilitada")->orderby('nombre','asc')->get();
         $funciones=Funcion::orderby('fecha','asc')->get();
 
 
