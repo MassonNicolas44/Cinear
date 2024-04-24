@@ -46,7 +46,7 @@ Route::get('/nacionalidad/lista', [App\Http\Controllers\NacionalidadController::
 //**  Tipo  
 
 //Alta
-Route::get('/tipo/registrar', [App\Http\Controllers\TipoController::class, 'registrar'])->name('tipo.registrar');
+Route::get('/tipo', [App\Http\Controllers\TipoController::class, 'registrar'])->name('tipo.registrar');
 Route::post('/tipo/guardarRegistro', [App\Http\Controllers\TipoController::class, 'guardarRegistro'])->name('tipo.guardarRegistro');
 
 //Editar
@@ -76,7 +76,7 @@ Route::get('/idioma/lista', [App\Http\Controllers\IdiomaController::class, 'list
 //**  Restriccion  
 
 //Alta
-Route::get('/restriccion/registrar', [App\Http\Controllers\RestriccionController::class, 'registrar'])->name('restriccion.registrar');
+Route::get('/restriccion', [App\Http\Controllers\RestriccionController::class, 'registrar'])->name('restriccion.registrar');
 Route::post('/restriccion/guardarRegistro', [App\Http\Controllers\RestriccionController::class, 'guardarRegistro'])->name('restriccion.guardarRegistro');
 
 //Editar
@@ -148,7 +148,7 @@ Route::get('/reparto/eliminar/{id}/{idPelicula}', [App\Http\Controllers\RepartoC
 //**  Sala  
 
 //Alta
-Route::get('/sala/registrar', [App\Http\Controllers\SalaController::class, 'registrar'])->name('sala.registrar');
+Route::get('/sala', [App\Http\Controllers\SalaController::class, 'registrar'])->name('sala.registrar');
 Route::post('/sala/guardarRegistro', [App\Http\Controllers\SalaController::class, 'guardarRegistro'])->name('sala.guardarRegistro');
 
 //Editar
@@ -194,8 +194,15 @@ Route::post('/reserva/guardarRegistro', [App\Http\Controllers\ReservaController:
 Route::get('/reserva/reservaCompleta/{idReserva}', [App\Http\Controllers\ReservaController::class, 'reservaCompleta'])->name('reserva.reservaCompleta');
 
 //Lista
-Route::get('/reserva/lista', [App\Http\Controllers\ReservaController::class, 'lista'])->name('reserva.lista');
+Route::get('/reserva', [App\Http\Controllers\ReservaController::class, 'lista'])->name('reserva.lista');
 
 //Estado
 Route::get('/reserva/estado/{id}/{estado}', [App\Http\Controllers\ReservaController::class, 'estado'])->name('reserva.estado');
+
+
+//**  Venta  
+
+//Listado
+Route::get('/venta', [App\Http\Controllers\VentaController::class, 'listado'])->name('venta.listado');
+
 

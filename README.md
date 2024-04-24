@@ -88,17 +88,22 @@ Registro de Actividad:
 -Se agrego la comprobacion para las salas, al registrar (si el nombre ya existe en la base de datos) y al editar (si el nombre ya existe en la base de datos y luego si el nombre a ingresar es igual a la sala editando)
 -Se agregaron validaciones de estado, al registrar una funcion, que se pueda elegir entre peliculas y salas habilitadas 
 
+23/4/24
+-Se agrego VentaController, ademas de agregar una vista para ver las ventas total, filtrar por fechas y por pelicula y sala
+
+
+
 
 
 
 -Agregar al logearse el cambio de contraseña, y administracion de claves y contraseñas (solamente para el administrador)
--Agregar vista (solo para personal logeado) donde muestra un resumen de als ventas (cantidad y precio)
+-Agregar boton para imprimir informes de ventas y reservas
+
 
 -Centrar las filas en la aprte de registro boleto
 -Centrar "No hay datos para mostrar"  en las tablas de funciones y reservas(tanto en lista como en registro)
 -Boton para imprimir comprobante de boleto
 -Separar en "reserva/registrar" la parte de abajo solo para personal logeado
--Revisar los listados (PELICULAS - FUNCION - RESERVA) teniendo en cuenta cuales estan HABILITADOS y cuales NO
 
 -Inhabilitar botor de "reserva/registrar" con CSS
 -Inhabilitar botor de "reserva/lista" ANULADO con CSS
