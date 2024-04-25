@@ -91,12 +91,16 @@ Registro de Actividad:
 23/4/24
 -Se agrego VentaController, ademas de agregar una vista para ver las ventas total, filtrar por fechas y por pelicula y sala
 
+24/4/24
+-Se agrego una solapa en la cual SOLO el administrador pueda editar datos de las personas registradas en el sistema
+-Se agrego un boton para resetear contraseña de las personas registradas (la contraseña a resetear es "123")
+-Se comprobo que se pueda solamente ingresar al registro de un boleto, personal logeado y no logeado 
 
 
 
+-Agregar vista para cambiar contraseña
 
 
--Agregar al logearse el cambio de contraseña, y administracion de claves y contraseñas (solamente para el administrador)
 -Agregar boton para imprimir informes de ventas y reservas
 
 
