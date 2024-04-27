@@ -96,9 +96,9 @@ Registro de Actividad:
 -Se agrego un boton para resetear contraseña de las personas registradas (la contraseña a resetear es "123")
 -Se comprobo que se pueda solamente ingresar al registro de un boleto, personal logeado y no logeado 
 
+26/4/24
+-Se agrego la vista de modificacion de contraseña (incluyendo las comprobaciones correspondientes)
 
-
--Agregar vista para cambiar contraseña
 
 
 -Agregar boton para imprimir informes de ventas y reservas

@@ -56,7 +56,7 @@
                                                         <a href="{{ route('usuario.estado',['id'=>$usuario->id,'estado'=>"Habilitar"]) }}" ="sucess" class="btn btn-success btn-sm"> Habilitar</a>
                                                     <?php  }  ?>
 
-                                                    <a href="{{ route('usuario.editarContraseña',['id'=>$usuario->id]) }}" ="sucess" class="btn btn-danger btn-sm"> Resetear Contraseña</a>
+                                                    <a href="{{ route('usuario.resetearContraseña',['id'=>$usuario->id]) }}" ="sucess" class="btn btn-danger btn-sm"> Resetear Contraseña</a>
                                                 </div>
                                             </td>
                                         </tr>

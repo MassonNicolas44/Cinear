@@ -164,7 +164,65 @@ class UsuarioController extends Controller
     
     }
 
-    public function editarContraseña($id)
+    public function editarContraseña()
+    {
+        //Retorna a la vista
+        return view('usuario.editarContraseña');
+    }
+
+    public function guardarModificacionContraseña(Request $request)
+    {
+
+        //Validacion de datos antes de cargar
+       $validate = $this->validate($request, [
+        'contraseña_actual' => ['required', 'min:1'],
+        'contraseña_nueva' => ['required', 'min:1'],
+        'contraseña_confirmacion' => ['required', 'min:1']
+
+        ] );
+
+        //Se obtienen los datos
+        $contraseñaActual = $request->input('contraseña_actual');     
+        $contraseñaNueva = $request->input('contraseña_nueva');   
+        $contraseñaConfirmacion = $request->input('contraseña_confirmacion');   
+        
+    
+
+
+        //Comprobacion de que la contraseña actual ingresada sea la misma que la contraseña ya registrada
+        if(Hash::check($contraseñaActual,auth()->user()->password)){
+
+            //Comprobacion de que la nueva contraseña sea distinta a la contraseña actual
+            if(Hash::check($contraseñaNueva,auth()->user()->password)){
+                return redirect()->route('usuario.editarContraseña')->with(['message' => 'La nueva contraseña coincide con la registrada anteriormente']);
+            
+            }else{
+
+                //Comprobacion de que la confirmacion de contraseña sea igual a la nueva contraseña
+                if (strcmp($contraseñaNueva, $contraseñaConfirmacion) === 0){
+                    
+                    //Se buscan los datos de la pelicula a editar
+                    $usuario = User::find(auth()->user()->id);
+
+                    $usuario->password=Hash::make($contraseñaNueva);
+
+                    $usuario->update();
+                    
+                    return redirect()->route('usuario.lista')->with(['message' => 'La contraseña ha sido actualizada correctamente']);
+
+                }else{
+                    
+                    return redirect()->route('usuario.editarContraseña')->with(['message' => 'La nueva contraseña y la contraseña de confirmacion no coinciden']);
+                }
+            }
+
+        }else{
+            return redirect()->route('usuario.editarContraseña')->with(['message' => 'La contraseña actual no coincide con la registrada anteriormente']);
+        }           
+    
+    }
+
+    public function resetearContraseña($id)
     {
 
         //Se obtienen los datos del usuario a resetear contraseña

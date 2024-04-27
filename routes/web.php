@@ -228,11 +228,14 @@ Route::get('/usuario/editar/{id}', [App\Http\Controllers\UsuarioController::clas
 Route::post('/usuario/guardarModificacion', [App\Http\Controllers\UsuarioController::class, 'guardarModificacion'])->name('usuario.guardarModificacion');
 
 //Resetear Contraseña
-Route::get('/usuario/editarContraseña/{id}', [App\Http\Controllers\UsuarioController::class, 'editarContraseña'])->name('usuario.editarContraseña');
+Route::get('/usuario/resetearContraseña/{id}', [App\Http\Controllers\UsuarioController::class, 'resetearContraseña'])->name('usuario.resetearContraseña');
 
 //Estado
 Route::get('/usuario/estado/{id}/{estado}', [App\Http\Controllers\UsuarioController::class, 'estado'])->name('usuario.estado');
 
+//Editar
+Route::get('/usuario/editarContraseña', [App\Http\Controllers\UsuarioController::class, 'editarContraseña'])->name('usuario.editarContraseña');
+Route::post('/usuario/guardarModificacionContraseña', [App\Http\Controllers\UsuarioController::class, 'guardarModificacionContraseña'])->name('usuario.guardarModificacionContraseña');
 
 
 //**  Venta  
