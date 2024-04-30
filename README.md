@@ -99,15 +99,17 @@ Registro de Actividad:
 26/4/24
 -Se agrego la vista de modificacion de contraseña (incluyendo las comprobaciones correspondientes)
 
+29/4/24
+-Se agrego en la parte "reserva/registrar" la parte de abajo solo para personal logeado
+-Se agrego boton para la visualizar y la descargar de un reporte de las peliculas registradas en formato PDF
+
 
 
 -Agregar boton para imprimir informes de ventas y reservas
 
-
 -Centrar las filas en la aprte de registro boleto
 -Centrar "No hay datos para mostrar"  en las tablas de funciones y reservas(tanto en lista como en registro)
 -Boton para imprimir comprobante de boleto
--Separar en "reserva/registrar" la parte de abajo solo para personal logeado
 
 -Inhabilitar botor de "reserva/registrar" con CSS
 -Inhabilitar botor de "reserva/lista" ANULADO con CSS

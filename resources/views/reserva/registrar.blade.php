@@ -102,6 +102,11 @@
 
 <br>
 
-@include('reserva.tablaRegistro')
+
+ 
+{{--Comprobacion de acceso para persona logeada --}}
+@if(auth()->user())
+    @include('reserva.tablaRegistro')
+@endif
 
 @endsection

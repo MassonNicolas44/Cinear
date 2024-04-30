@@ -26,7 +26,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //**  Actor  
 
 //Alta
-Route::get('/actor/registrar', [App\Http\Controllers\ActorController::class, 'registrar'])->name('actor.registrar');
+Route::get('/actor', [App\Http\Controllers\ActorController::class, 'registrar'])->name('actor.registrar');
 Route::post('/actor/guardarRegistro', [App\Http\Controllers\ActorController::class, 'guardarRegistro'])->name('actor.guardarRegistro');
 
 //Editar
@@ -44,7 +44,7 @@ Route::get('/actor/lista', [App\Http\Controllers\ActorController::class, 'lista'
 //**  Categoria  
 
 //Alta
-Route::get('/categoria/registrar', [App\Http\Controllers\CategoriaController::class, 'registrar'])->name('categoria.registrar');
+Route::get('/categoria', [App\Http\Controllers\CategoriaController::class, 'registrar'])->name('categoria.registrar');
 Route::post('/categoria/guardarRegistro', [App\Http\Controllers\CategoriaController::class, 'guardarRegistro'])->name('categoria.guardarRegistro');
 
 //Editar
@@ -59,7 +59,7 @@ Route::get('/categoria/eliminar/{id}', [App\Http\Controllers\CategoriaController
 //**  Funcion
 
 //Alta
-Route::get('/funcion/registrar', [App\Http\Controllers\FuncionController::class, 'registrar'])->name('funcion.registrar');
+Route::get('/funcion', [App\Http\Controllers\FuncionController::class, 'registrar'])->name('funcion.registrar');
 Route::post('/funcion/guardarRegistro', [App\Http\Controllers\FuncionController::class, 'guardarRegistro'])->name('funcion.guardarRegistro');
 
 //EditarIndividual
@@ -84,7 +84,7 @@ Route::get('/funcion/lista/{id?}', [App\Http\Controllers\FuncionController::clas
 //**  Idioma  
 
 //Alta
-Route::get('/idioma/registrar', [App\Http\Controllers\IdiomaController::class, 'registrar'])->name('idioma.registrar');
+Route::get('/idioma', [App\Http\Controllers\IdiomaController::class, 'registrar'])->name('idioma.registrar');
 Route::post('/idioma/guardarRegistro', [App\Http\Controllers\IdiomaController::class, 'guardarRegistro'])->name('idioma.guardarRegistro');
 
 //Editar
@@ -102,7 +102,7 @@ Route::get('/idioma/lista', [App\Http\Controllers\IdiomaController::class, 'list
 //**  Nacionalidades  
 
 //Alta
-Route::get('/nacionalidad/registrar', [App\Http\Controllers\NacionalidadController::class, 'registrar'])->name('nacionalidad.registrar');
+Route::get('/nacionalidad', [App\Http\Controllers\NacionalidadController::class, 'registrar'])->name('nacionalidad.registrar');
 Route::post('/nacionalidad/guardarRegistro', [App\Http\Controllers\NacionalidadController::class, 'guardarRegistro'])->name('nacionalidad.guardarRegistro');
 
 //Editar
@@ -120,7 +120,7 @@ Route::get('/nacionalidad/lista', [App\Http\Controllers\NacionalidadController::
 //**  Pelicula  
 
 //Alta
-Route::get('/pelicula/registrar', [App\Http\Controllers\PeliculaController::class, 'registrar'])->name('pelicula.registrar');
+Route::get('/pelicula', [App\Http\Controllers\PeliculaController::class, 'registrar'])->name('pelicula.registrar');
 Route::post('/pelicula/guardarRegistro', [App\Http\Controllers\PeliculaController::class, 'guardarRegistro'])->name('pelicula.guardarRegistro');
 
 //Editar
@@ -135,6 +135,12 @@ Route::get('/pelicula/estado/{id}/{estado}', [App\Http\Controllers\PeliculaContr
 
 //Lista
 Route::get('/pelicula/lista', [App\Http\Controllers\PeliculaController::class, 'lista'])->name('pelicula.lista');
+
+//Visualizar reporte en PDF
+Route::get('/pelicula/reporte/visualizar', [App\Http\Controllers\PeliculaController::class, 'visualizarReportePelicula'])->name('pelicula.reporte.visualizar');
+
+//Descargar reporte en PDF
+Route::get('/pelicula/reporte/descargar', [App\Http\Controllers\PeliculaController::class, 'descargarReportePelicula'])->name('pelicula.reporte.descargar');
 
 
 
@@ -152,7 +158,7 @@ Route::get('/reparto/eliminar/{id}/{idPelicula}', [App\Http\Controllers\RepartoC
 //**  Reserva  
 
 //Alta
-Route::post('/reserva/registrar', [App\Http\Controllers\ReservaController::class, 'registrar'])->name('reserva.registrar');
+Route::post('/reserva', [App\Http\Controllers\ReservaController::class, 'registrar'])->name('reserva.registrar');
 Route::post('/reserva/guardarRegistro', [App\Http\Controllers\ReservaController::class, 'guardarRegistro'])->name('reserva.guardarRegistro');
 
 //Finalizacion Reserva
@@ -217,7 +223,7 @@ Route::get('/tipo/eliminar/{id}', [App\Http\Controllers\TipoController::class, '
 //**  Usuario  
 
 //Alta
-Route::get('/usuario/registrar', [App\Http\Controllers\UsuarioController::class, 'registrar'])->name('usuario.registrar');
+Route::get('/usuario', [App\Http\Controllers\UsuarioController::class, 'registrar'])->name('usuario.registrar');
 Route::post('/usuario/guardar', [App\Http\Controllers\UsuarioController::class, 'guardar'])->name('usuario.guardar');
 
 //Listado de perfiles registrados

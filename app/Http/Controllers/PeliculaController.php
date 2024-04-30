@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\facades\Storage;
 use Illuminate\Support\facades\File;
 
+use Barryvdh\DomPDF\Facade\Pdf;
 
 use App\Models\Pelicula;
 use App\Models\Categoria;
@@ -268,6 +269,32 @@ class PeliculaController extends Controller
 
     }
 
+
+    public function visualizarReportePelicula(){
+
+        $peliculas=Pelicula::all();
+
+        $fecha=date('d/m/Y',strtotime(now()));
+        $hora = date("H:i");
+
+        $pdf=PDF::loadView('pelicula.reporte',compact('peliculas','fecha','hora'));
+
+        return $pdf->stream('ListadoPeliculas.pdf');
+
+    }
+
+    public function descargarReportePelicula(){
+
+        $peliculas=Pelicula::all();
+
+        $fecha=date('d/m/Y',strtotime(now()));
+        $hora = date("H:i");
+
+        $pdf=PDF::loadView('pelicula.reporte',compact('peliculas','fecha','hora'));
+
+        return $pdf->download('ListadoPeliculas.pdf');
+
+    }
 
 
 }

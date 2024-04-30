@@ -11,6 +11,14 @@
                 @include('include.message')
 
                 <div class="card-body">
+
+                <a href="{{ route('pelicula.reporte.visualizar') }}"="sucess" target="_blank" class="btn  btn-success">Ver reporte de las peliculas</a>
+                <br>
+                <br>
+                <a href="{{ route('pelicula.reporte.descargar') }}"="sucess" target="_blank" class="btn  btn-success">Descargar reporte de las peliculas</a>
+                <br>
+                <br>
+
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="text-align:center;">
                                 <thead>
                                     <th>Id</th>
@@ -54,7 +62,7 @@
                                                     <?php }else{  ?>
                                                         <a href="{{ route('pelicula.estado',['id'=>$pelicula->id,'estado'=>"Habilitar"]) }}" ="sucess" class="btn btn-success btn-sm"> Habilitar</a>
                                                     <?php  }  ?>
-                                                                                                        
+                                                             
                                                     <a href="{{ route('pelicula.eliminar',['id'=>$pelicula->id]) }}"="sucess" class="btn  btn-danger btn-sm">Eliminar</a>
                                                 </div>
                                             </td>
