@@ -136,11 +136,9 @@ Route::get('/pelicula/estado/{id}/{estado}', [App\Http\Controllers\PeliculaContr
 //Lista
 Route::get('/pelicula/lista', [App\Http\Controllers\PeliculaController::class, 'lista'])->name('pelicula.lista');
 
-//Visualizar reporte en PDF
-Route::get('/pelicula/reporte/visualizar', [App\Http\Controllers\PeliculaController::class, 'visualizarReportePelicula'])->name('pelicula.reporte.visualizar');
+//Reporte en PDF
+Route::get('/pelicula/reporte', [App\Http\Controllers\PeliculaController::class, 'reportePelicula'])->name('pelicula.reporte');
 
-//Descargar reporte en PDF
-Route::get('/pelicula/reporte/descargar', [App\Http\Controllers\PeliculaController::class, 'descargarReportePelicula'])->name('pelicula.reporte.descargar');
 
 
 
@@ -169,6 +167,9 @@ Route::get('/reserva', [App\Http\Controllers\ReservaController::class, 'lista'])
 
 //Estado
 Route::get('/reserva/estado/{id}/{estado}', [App\Http\Controllers\ReservaController::class, 'estado'])->name('reserva.estado');
+
+//Comprobante en PDF
+Route::get('/reserva/comprobante', [App\Http\Controllers\ReservaController::class, 'comprobante'])->name('reserva.comprobante');
 
 
 

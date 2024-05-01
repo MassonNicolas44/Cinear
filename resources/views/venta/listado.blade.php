@@ -38,9 +38,16 @@
                             <div class="row mb-4">
                                 <label for="fechaFuncion" class="col-md-6 col-form-label text-md-center">Fecha Funcion</label>
                                 <div class="col-md-3">
-                                    <input id="fechaFuncion" type="date" class="form-control @error('fechaFuncion') is-invalid @enderror" name="fechaFuncion" value="{{ old('fechaFuncion')}}"  autocomplete="fechaFuncion" autofocus>
+                                    Desde: <input id="fechaFuncionInicio" type="date" class="form-control @error('fechaFuncionInicio') is-invalid @enderror" name="fechaFuncionInicio" value="{{ old('fechaFuncionInicio')}}"  autocomplete="fechaFuncionInicio" autofocus> 
+                                    Hasta: <input id="fechaFuncionFin" type="date" class="form-control @error('fechaFuncionFin') is-invalid @enderror" name="fechaFuncionFin" value="{{ old('fechaFuncionFin')}}"  autocomplete="fechaFuncionFin" autofocus>
+                                    
+                                    @error('fechaFuncionInicio')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
 
-                                    @error('fechaFuncion')
+                                    @error('fechaFuncionFin')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -65,12 +72,36 @@
                                 <input type="submit" class="btn btn-primary" value="Buscar">
                             </div>
                         </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">{{ __('Reporte de ventas') }} </div>
+
+                        <div class="homeFilter">
+                            
+                            <br>
+                            <input type="submit" name="reporte" value="Ver reporte de las ventas" class="btn  btn-success">
+                            <br>
+                            <br>
+                            <input type="submit" name="reporte" value="Descargar reporte de las ventas" class="btn  btn-success">
+                            <br>
+                            <br>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<br>
 
 @include('venta.tabla')
 

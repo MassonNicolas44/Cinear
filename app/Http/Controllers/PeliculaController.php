@@ -270,31 +270,26 @@ class PeliculaController extends Controller
     }
 
 
-    public function visualizarReportePelicula(){
+    public function reportePelicula(Request $request){
 
-        $peliculas=Pelicula::all();
+        $reporte = $request->input('reporte');   
 
-        $fecha=date('d/m/Y',strtotime(now()));
-        $hora = date("H:i");
-
-        $pdf=PDF::loadView('pelicula.reporte',compact('peliculas','fecha','hora'));
-
-        return $pdf->stream('ListadoPeliculas.pdf');
-
-    }
-
-    public function descargarReportePelicula(){
-
-        $peliculas=Pelicula::all();
+        //Trae la lista de peliculas registradas
+        $peliculas=Pelicula::orderby('nombre','asc')->get();
 
         $fecha=date('d/m/Y',strtotime(now()));
         $hora = date("H:i");
 
         $pdf=PDF::loadView('pelicula.reporte',compact('peliculas','fecha','hora'));
 
-        return $pdf->download('ListadoPeliculas.pdf');
+        if($reporte=="Ver reporte de las peliculas"){
 
+            return $pdf->stream('ListadoPeliculas.pdf');
+            
+        }elseif($reporte=="Descargar reporte de las peliculas"){
+
+            return $pdf->download('ListadoPeliculas.pdf');
+        }
     }
-
 
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Barryvdh\DomPDF\Facade\Pdf;
+
 Use App\Models\Reserva;
 use App\Models\Funcion;
 use App\Models\Pelicula;
@@ -26,9 +28,11 @@ class VentaController extends Controller
         $salas=Sala::where("estado","Habilitada")->get();
 
         //Se obtienen los valores
+        $reporte=$request->input('reporte');
         $peliculaBuscar=$request->input('id_Pelicula');
         $salaBuscar=$request->input('id_Sala');
-        $fechaFuncionBuscar=$request->input('fechaFuncion');
+        $fechaFuncionInicio=$request->input('fechaFuncionInicio');
+        $fechaFuncionFin=$request->input('fechaFuncionFin');
         $fechaReservaBuscar=$request->input('fechaReserva');
 
         //Trae la lista de funciones filtrando por la pelicula y/o sala a buscar
@@ -36,6 +40,9 @@ class VentaController extends Controller
                     ->where('id_Sala','LIKE',$salaBuscar)
                     ->orderby('id','asc')
                     ->get();
+
+        //Fecha de hoy
+        $fechaHoy=date('Y-m-d',strtotime(now()));
 
         //Inicializo array para guardar las reservas con las filtraciones indicadas, para ser moestradas en la tabla
         $arrayReserva=array();
@@ -45,15 +52,30 @@ class VentaController extends Controller
 
             //Si busca por fecha de reserva, la consulta del Where debe ser WhereDate por el formato del created_at
             if(empty($fechaReservaBuscar)){
-                //Trae la lista de reservas filtrando por las funciones buscadas anteriormente, agregandole el filtrado por fecha de funcion y/o fecha de reserva
-                $reservas=Reserva::where('id_Funcion','LIKE',$funcion->id)
-                ->where('fecha_funcion','LIKE',$fechaFuncionBuscar)
-                ->get();
+
+                //Comprobacion si existe rango de fecha seleccionado
+                if(empty($fechaFuncionInicio) && empty($fechaFuncionFin)){
+                    $reservas=Reserva::where('id_Funcion','LIKE',$funcion->id)
+                    ->where('estado',"Habilitada")
+                    ->get();
+                }elseif(empty($fechaFuncionFin)){
+                    $reservas=Reserva::where('id_Funcion','LIKE',$funcion->id)
+                    ->where('estado',"Habilitada")
+                    ->whereBetween('fecha_funcion', [$fechaFuncionInicio,$fechaHoy])
+                    ->get();
+                }else{
+                    $reservas=Reserva::where('id_Funcion','LIKE',$funcion->id)
+                    ->where('estado',"Habilitada")
+                    ->whereBetween('fecha_funcion', [$fechaFuncionInicio,$fechaFuncionFin])
+                    ->get();
+                }
+
 
             }else{
                 //Trae la lista de reservas filtrando por las funciones buscadas anteriormente, agregandole el filtrado por fecha de funcion y/o fecha de reserva
                 $reservas=Reserva::where('id_Funcion','LIKE',$funcion->id)
-                ->where('fecha_funcion','LIKE',$fechaFuncionBuscar)
+                ->where('estado',"Habilitada")
+                ->whereBetween('fecha_funcion', [$fechaFuncionInicio,$fechaFuncionFin])
                 ->whereDate('created_at','LIKE',$fechaReservaBuscar)
                 ->get();
             }
@@ -80,6 +102,26 @@ class VentaController extends Controller
             $totalPrecio=$totalPrecio+($contador->precio_final);
         }
 
+        if($reporte=="Ver reporte de las ventas"){
+
+            $fecha=date('d/m/Y',strtotime(now()));
+            $hora = date("H:i");
+
+            $pdf=PDF::loadView('venta.reporte',compact('arrayReserva','fecha','hora','totalBoletos','totalPrecio'));
+
+            return $pdf->stream('ListadoVentas.pdf');
+            
+        }elseif($reporte=="Descargar reporte de las ventas"){
+
+            $fecha=date('d/m/Y',strtotime(now()));
+            $hora = date("H:i");
+
+            $pdf=PDF::loadView('venta.reporte',compact('arrayReserva','fecha','hora','totalBoletos','totalPrecio'));
+
+            return $pdf->download('ListadoVentas.pdf');
+
+        }
+    
         //Retorna a la vista las reservas registradas
         return view('venta.listado',['arrayReserva'=>$arrayReserva,'peliculas'=>$peliculas,'salas'=>$salas,'totalBoletos'=>$totalBoletos,'totalPrecio'=>$totalPrecio]);
 

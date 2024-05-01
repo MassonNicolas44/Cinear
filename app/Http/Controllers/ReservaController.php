@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use DateTime;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 use App\Models\Funcion;
 use App\Models\Pelicula;
@@ -279,6 +280,21 @@ class ReservaController extends Controller
         return view('reserva.reservaCompleta',['reserva'=>$reserva]);
     }
 
+    public function comprobante(Request $request)
+    {
+
+        //Se obtienen los datos
+        $idComprobante = $request->input('idComprobante'); 
+        
+        //Trae los datos de la reserva confirmada
+        $reserva=Reserva::find($idComprobante);
+
+        $pdf=PDF::loadView('reserva.comprobante',compact('reserva'));
+
+        return $pdf->download('DatosReserva.pdf');
+
+    }
+
 
     public function estado($id,$estado){
 
@@ -320,9 +336,11 @@ class ReservaController extends Controller
             $salas=Sala::where("estado","Habilitada")->get();
 
             //Se obtienen los valores
+            $reporte=$request->input('reporte');
             $peliculaBuscar=$request->input('id_Pelicula');
             $salaBuscar=$request->input('id_Sala');
-            $fechaFuncionBuscar=$request->input('fechaFuncion');
+            $fechaFuncionInicio=$request->input('fechaFuncionInicio');
+            $fechaFuncionFin=$request->input('fechaFuncionFin');
             $fechaReservaBuscar=$request->input('fechaReserva');
 
             //Trae la lista de funciones filtrando por la pelicula y/o sala a buscar
@@ -330,6 +348,9 @@ class ReservaController extends Controller
                         ->where('id_Sala','LIKE',$salaBuscar)
                         ->orderby('id','asc')
                         ->get();
+
+            //Fecha de hoy
+            $fechaHoy=date('Y-m-d',strtotime(now()));
 
             //Inicializo array para guardar las reservas con las filtraciones indicadas, para ser moestradas en la tabla
             $arrayReserva=array();
@@ -339,15 +360,26 @@ class ReservaController extends Controller
 
                 //Si busca por fecha de reserva, la consulta del Where debe ser WhereDate por el formato del created_at
                 if(empty($fechaReservaBuscar)){
-                    //Trae la lista de reservas filtrando por las funciones buscadas anteriormente, agregandole el filtrado por fecha de funcion y/o fecha de reserva
-                    $reservas=Reserva::where('id_Funcion','LIKE',$funcion->id)
-                    ->where('fecha_funcion','LIKE',$fechaFuncionBuscar)
-                    ->get();
+
+                    //Comprobacion si existe rango de fecha seleccionado
+                    if(empty($fechaFuncionInicio) && empty($fechaFuncionFin)){
+                        $reservas=Reserva::where('id_Funcion','LIKE',$funcion->id)
+                        ->get();
+                    }elseif(empty($fechaFuncionFin)){
+                        $reservas=Reserva::where('id_Funcion','LIKE',$funcion->id)
+                        ->whereBetween('fecha_funcion', [$fechaFuncionInicio,$fechaHoy])
+                        ->get();
+                    }else{
+                        $reservas=Reserva::where('id_Funcion','LIKE',$funcion->id)
+                        ->whereBetween('fecha_funcion', [$fechaFuncionInicio,$fechaFuncionFin])
+                        ->get();
+                    }
+
 
                 }else{
                     //Trae la lista de reservas filtrando por las funciones buscadas anteriormente, agregandole el filtrado por fecha de funcion y/o fecha de reserva
                     $reservas=Reserva::where('id_Funcion','LIKE',$funcion->id)
-                    ->where('fecha_funcion','LIKE',$fechaFuncionBuscar)
+                    ->whereBetween('fecha_funcion', [$fechaFuncionInicio,$fechaFuncionFin])
                     ->whereDate('created_at','LIKE',$fechaReservaBuscar)
                     ->get();
                 }
@@ -365,6 +397,26 @@ class ReservaController extends Controller
             //Reordeno el array por id de manera descendiente
             sort($arrayReserva);
     
+            if($reporte=="Ver reporte de las reservas"){
+
+                $fecha=date('d/m/Y',strtotime(now()));
+                $hora = date("H:i");
+
+                $pdf=PDF::loadView('reserva.reporte',compact('arrayReserva','fecha','hora'));
+
+                return $pdf->stream('ListadoReservas.pdf');
+                
+            }elseif($reporte=="Descargar reporte de las reservas"){
+
+                $fecha=date('d/m/Y',strtotime(now()));
+                $hora = date("H:i");
+
+                $pdf=PDF::loadView('reserva.reporte',compact('arrayReserva','fecha','hora'));
+
+                return $pdf->download('ListadoReservas.pdf');
+
+            }
+
             //Retorna a la vista las reservas registradas
             return view('reserva.lista',['arrayReserva'=>$arrayReserva,'peliculas'=>$peliculas,'salas'=>$salas]);
 
