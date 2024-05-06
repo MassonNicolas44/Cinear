@@ -38,14 +38,9 @@
                                 @enderror
                             </div>
                         </div>   
-
-                        <div class="row mb-2">
-                            <div class="col-md-6 offset-md-5">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Ingresar') }}
-                                </button>
-                            </div>
-                        </div>
+                        <button type="submit" class="bottonIngresar">
+                            {{ __('Ingresar sala') }}
+                        </button>
                     </form>
                 </div>
             </div>

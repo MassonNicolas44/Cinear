@@ -4,7 +4,7 @@
         <div class="col-md-8">
             <div class="card">
 
-                <div class="card-header">{{ __('Listado de Restriccion de edad') }}</div>
+                <div class="card-header">{{ __('Restriccion de edad registradas') }}</div>
 
                 @include('include.message')
 
@@ -24,9 +24,9 @@
                                             <td>{{$restriccion->id}}</td>
                                             <td>{{$restriccion->descripcion}}</td>
                                             <td>
-                                                <div class="list">
-                                                    <a href="{{ route('restriccion.editar',['id'=>$restriccion->id]) }}" ="sucess" class="btn btn-warning btn-sm"> Editar</a>
-                                                    <a href="{{ route('restriccion.eliminar',['id'=>$restriccion->id]) }}"="sucess" class="btn  btn-danger btn-sm">Eliminar</a>
+                                                <div class="grupoBottones">
+                                                    <a href="{{ route('restriccion.editar',['id'=>$restriccion->id]) }}" ="sucess" class="bottonEditar"> Editar</a>
+                                                    <a href="{{ route('restriccion.eliminar',['id'=>$restriccion->id]) }}"="sucess" class="bottonEliminar">Eliminar</a>
                                                 </div>
                                             </td>
                                         </tr>

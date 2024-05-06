@@ -28,14 +28,14 @@
                     <h3>Cantidad de Boletos: {{$reserva->cantidad_boleto}}</h3>
                     <h3>Precio Final: {{$reserva->precio_final}} $</h3>
 
-                    <a href="{{ route('home') }}"="sucess" class="btn  btn-danger">Ir al inicio</a>
+                    <a href="{{ route('home') }}"="sucess" class="bottonIngresar">Ir al inicio</a>
                     <br>
 
                     <form method="GET" action="{{ route('reserva.comprobante') }}">
                     @csrf
                         <input type="hidden" name="idComprobante" value="{{$reserva->id}}"/>
                         <div class="col-md-2">
-                            <input type="submit" class="btn btn-primary" value="Descargar comprobante">
+                            <input type="submit" class="bottonModificar" value="Descargar comprobante">
                         </div>
                     </form>
                 

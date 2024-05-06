@@ -4,9 +4,9 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Reporte de peliculas') }} </div>
+                <div class="card-header">{{ __('Reportes') }} </div>
                 <form method="GET" action="{{ route('pelicula.reporte') }}">
                     @csrf
                         <div class="homeFilter">
@@ -35,7 +35,7 @@
         <div class="col-md-12">
             <div class="card">
 
-                <div class="card-header">{{ __('Listado de Peliculas') }}</div>
+                <div class="card-header">{{ __('Peliculas registradas') }}</div>
 
                 @include('include.message')
 
@@ -73,18 +73,18 @@
                                     <td><img src="{{ asset('../storage/app/imagenes/' . $pelicula->image_path) }}" width="100%" height="85px" ></td>
                                     <td>{{$pelicula->estado}}</td>
                                     <td>
-                                        <div class="list">
-                                            <a href="{{ route('pelicula.editar',['id'=>$pelicula->id]) }}" ="sucess" class="btn btn-warning btn-sm"> Editar</a>
+                                        <div class="grupoBottones">
+                                            <a href="{{ route('pelicula.editar',['id'=>$pelicula->id]) }}" ="sucess" class="bottonEditar"> Editar</a>
 
-                                            <a href="{{ route('reparto.asignar',['id'=>$pelicula->id]) }}" ="sucess" class="btn btn-success btn-sm"> Reparto </a>
+                                            <a href="{{ route('reparto.asignar',['id'=>$pelicula->id]) }}" ="sucess" class="bottonSeleccionar"> Reparto </a>
 
                                             <?php if($pelicula->estado=="Habilitada"){    ?>
-                                                <a href="{{ route('pelicula.estado',['id'=>$pelicula->id,'estado'=>"Inhabilitar"]) }}" ="sucess" class="btn btn-success btn-sm"> Inhabilitar</a>
+                                                <a href="{{ route('pelicula.estado',['id'=>$pelicula->id,'estado'=>"Inhabilitar"]) }}" ="sucess" class="bottonInhabilitar"> Inhabilitar</a>
                                             <?php }else{  ?>
-                                                <a href="{{ route('pelicula.estado',['id'=>$pelicula->id,'estado'=>"Habilitar"]) }}" ="sucess" class="btn btn-success btn-sm"> Habilitar</a>
+                                                <a href="{{ route('pelicula.estado',['id'=>$pelicula->id,'estado'=>"Habilitar"]) }}" ="sucess" class="bottonHabilitar"> Habilitar</a>
                                             <?php  }  ?>
                                                         
-                                            <a href="{{ route('pelicula.eliminar',['id'=>$pelicula->id]) }}"="sucess" class="btn  btn-danger btn-sm">Eliminar</a>
+                                            <a href="{{ route('pelicula.eliminar',['id'=>$pelicula->id]) }}"="sucess" class="bottonEliminar">Eliminar</a>
                                         </div>
                                     </td>
                                 </tr>

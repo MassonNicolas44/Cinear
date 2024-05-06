@@ -35,14 +35,9 @@
                             </div>
                         </div>      
                         
-
-                        <div class="row mb-2">
-                            <div class="col-md-6 offset-md-6">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Asignar') }}
-                                </button>
-                            </div>
-                        </div>
+                        <button type="submit" class="bottonIngresar">
+                            {{ __('Asignar actor') }}
+                        </button>
                     </form>
                 </div>
             </div>

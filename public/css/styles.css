@@ -1,0 +1,203 @@
+
+.mensaje{
+    text-align: center;
+    font-size: 35px;
+    padding: 2% 5%;
+    font-weight: bold;
+    font-style: italic;
+}
+
+
+.bottonIngresar{
+    display: block;
+    margin: 0 auto;
+    font-size: 16px;
+    border-radius: 20%;
+    background-color: rgb(2, 2, 145);
+    color: white;
+    padding: 1% 5%;
+    text-decoration: none;
+    border: none;
+    transition-duration: 0.4s;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 2px 6px 0 rgba(0,0,0,0.19);
+    margin-bottom: 10px;
+}
+
+.bottonIngresar:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 10px 20px 0 rgba(0,0,0,0.19);
+    background-color: rgb(67, 67, 163);
+    color: white;
+}
+
+.bottonModificar{
+    display: block;
+    margin: 0 auto;
+    font-size: 16px;
+    border-radius: 20%;
+    background-color: #777900;
+    color: white;
+    padding: 1% 5%;
+    text-decoration: none;
+    border: none;
+    transition-duration: 0.4s;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 2px 6px 0 rgba(0,0,0,0.19);
+    margin-bottom: 10px;
+}
+
+.bottonModificar:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 10px 20px 0 rgba(0,0,0,0.19);
+    background-color: #828336;
+    color: white;
+}
+
+.bottonBuscar{
+    display: block;
+    margin: 0 auto;
+    font-size: 16px;
+    border-radius: 20%;
+    background-color: #027e02;
+    color: white;
+    padding: 1% 5%;
+    text-decoration: none;
+    border: none;
+    transition-duration: 0.4s;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 2px 6px 0 rgba(0,0,0,0.19);
+    margin-bottom: 3%;
+}
+
+.bottonBuscar:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 10px 20px 0 rgba(0,0,0,0.19);
+    background-color: #428f45;
+    color: white;
+}
+
+
+.grupoFiltrar {
+    display:flex;
+    align-items: center;
+    margin:2%;
+    justify-content: space-evenly;
+}
+
+.grupoFiltrar2 {
+    display:flex;
+    align-items: baseline;
+    margin:2%;
+}
+
+
+.grupoBottones {
+    display:flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: space-around;
+}
+
+.bottonSeleccionar{
+    font-size: 14px;
+    border-radius: 20%;
+    background-color: #027e02;
+    color: white;
+    padding: 2% 5%;
+    text-decoration: none;
+    border: none;
+    transition-duration: 0.4s;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 2px 6px 0 rgba(0,0,0,0.19);
+    margin-bottom: 10px;
+}
+
+.bottonSeleccionar:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 10px 20px 0 rgba(0,0,0,0.19);
+    background-color: #428f45;
+    color: white;
+}
+
+.bottonEditar{
+    font-size: 14px;
+    border-radius: 20%;
+    background-color: #777900;
+    color: white;
+    padding: 2% 5%;
+    text-decoration: none;
+    border: none;
+    transition-duration: 0.4s;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 2px 6px 0 rgba(0,0,0,0.19);
+    margin-bottom: 10px;
+}
+
+.bottonEditar:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 10px 20px 0 rgba(0,0,0,0.19);
+    background-color: #828336;
+    color: white;
+}
+
+.bottonEliminar{
+    font-size: 14px;
+    border-radius: 20%;
+    background-color: rgb(145, 0, 0);
+    color: white;
+    padding: 2% 5%;
+    text-decoration: none;
+    border: none;
+    transition-duration: 0.4s;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 2px 6px 0 rgba(0,0,0,0.19);
+    margin-bottom: 10px;
+}
+
+.bottonEliminar:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 10px 20px 0 rgba(0,0,0,0.19);
+    background-color: #a73c3c;
+    color: white;
+}
+
+.bottonInhabilitar{
+    font-size: 14px;
+    border-radius: 20%;
+    background-color: rgb(2, 2, 145);
+    color: white;
+    padding: 2% 5%;
+    text-decoration: none;
+    border: none;
+    transition-duration: 0.4s;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 2px 6px 0 rgba(0,0,0,0.19);
+    margin-bottom: 10px;
+}
+
+.bottonInhabilitar:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 10px 20px 0 rgba(0,0,0,0.19);
+    background-color: rgb(67, 67, 163);
+    color: white;
+}
+
+.bottonHabilitar{
+    font-size: 14px;
+    border-radius: 20%;
+    background-color: rgb(0, 150, 150);
+    color: white;
+    padding: 2% 5%;
+    text-decoration: none;
+    border: none;
+    transition-duration: 0.4s;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 2px 6px 0 rgba(0,0,0,0.19);
+    margin-bottom: 10px;
+}
+
+.bottonHabilitar:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 10px 20px 0 rgba(0,0,0,0.19);
+    background-color: rgb(0, 212, 212);
+    color: white;
+}
+
+.bottonAnulado{
+    cursor: not-allowed;
+    font-size: 14px;
+    border-radius: 20%;
+    background-color: rgb(0, 150, 150);
+    color: white;
+    padding: 2% 5%;
+    text-decoration: none;
+    border: none;
+    transition-duration: 0.4s;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 2px 6px 0 rgba(0,0,0,0.19);
+    margin-bottom: 10px;
+}

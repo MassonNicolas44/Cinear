@@ -9,6 +9,9 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+        <!-- Styles -->
+        <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+        
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
@@ -58,7 +61,7 @@
                                 Pelicula
                              </a>
                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="nav-link" href="{{ route('pelicula.registrar') }}">Agregar</a>
+                                <a class="nav-link" href="{{ route('pelicula.registrar') }}">Ingresar</a>
                                 <a class="nav-link" href="{{ route('pelicula.lista') }}">Lista</a>
                             </div>
                                 
@@ -72,7 +75,7 @@
                                 Actor
                              </a>
                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="nav-link" href="{{ route('actor.registrar') }}">Agregar</a>
+                                <a class="nav-link" href="{{ route('actor.registrar') }}">Ingresar</a>
                                 <a class="nav-link" href="{{ route('actor.lista') }}">Lista</a>
                             </div>
                                 
@@ -86,7 +89,7 @@
                                 Idioma
                              </a>
                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="nav-link" href="{{ route('idioma.registrar') }}">Agregar</a>
+                                <a class="nav-link" href="{{ route('idioma.registrar') }}">Ingresar</a>
                                 <a class="nav-link" href="{{ route('idioma.lista') }}">Lista</a>
                             </div>
                                 
@@ -100,7 +103,7 @@
                                 Nacionalidades
                              </a>
                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="nav-link" href="{{ route('nacionalidad.registrar') }}">Agregar</a>
+                                <a class="nav-link" href="{{ route('nacionalidad.registrar') }}">Ingresar</a>
                                 <a class="nav-link" href="{{ route('nacionalidad.lista') }}">Lista</a>
                             </div>
                                 
@@ -116,7 +119,7 @@
                                     Funcion
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="nav-link" href="{{ route('funcion.registrar') }}">Agregar</a>
+                                    <a class="nav-link" href="{{ route('funcion.registrar') }}">Ingresar</a>
                                     <a class="nav-link" href="{{ route('funcion.lista') }}">Lista</a>
                                 </div>
                                 
@@ -135,11 +138,11 @@
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 
                                     <a class="dropdown-item" href="{{ route('usuario.lista') }}">
-                                        {{ __('Administrar usuarios') }}
+                                        {{ __('Administrar personal') }}
                                     </a>
 
                                     <a class="dropdown-item" href="{{ route('usuario.registrar') }}">
-                                        {{ __('Registrar usuario') }}
+                                        {{ __('Ingresar personal') }}
                                     </a>
 
                                     <a class="dropdown-item" href="{{ route('usuario.editarContraseña') }}">

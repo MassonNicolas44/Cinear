@@ -1,8 +1,8 @@
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
-                <div class="card-header">{{ __('Datos Peliculas y Salas') }} </div>
+                <div class="card-header">{{ __('Reservas registradas de la sala '.$sala->nombre.' y pelicula '.$pelicula->nombre.'') }} </div>
                     <div class="card-body">   
 
                         {{-- Verificacion si hay datos para mostrar o no --}}
@@ -41,7 +41,9 @@
                                 </tbody>
                             </table>
                         @else
-                            <h1>No hay datos para mostrar</h1>
+                            <div class="mensaje">
+                                No hay reservas aun
+                            </div>
                         @endif
                     </div>
                 </div>

@@ -3,15 +3,15 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Filtrado de funcion') }} </div>
+                <div class="card-header">{{ __('Filtrar por: ') }} </div>
 
                 <form method="GET" action="{{ route('funcion.lista') }}">
                     @csrf
-                        <div class="homeFilter">
-                            <label for="id_Pelicula" class="col-md-0 col-form-label text-md-end">Pelicula</label>
-                            <div>
+                        <div class="grupoFiltrar">
+                            <label for="id_Pelicula" class="col-md-1 col-form-label text-md-end"> Pelicula &nbsp &nbsp</label>
+                    
                                 <select id="id_Pelicula" class="form-control {{ $errors->has('id_Pelicula') ? 'is-invalid' : '' }}" value="{{ old('id_Pelicula') }}" name="id_Pelicula"/>
                                     <option value="">-- Escoja una Opcion --</option>
                                     @foreach ($peliculas as $pelicula)
@@ -20,10 +20,10 @@
                                         </option>
                                     @endforeach
                                 </select>
-                            </div>
+                        
                             
-                            <label for="id_Sala" class="col-md-0 col-form-label text-md-end">Sala</label>
-                            <div>
+                            <label for="id_Sala" class="col-md-1 col-form-label text-md-end"> Sala &nbsp &nbsp</label>
+                        
                                 <select id="id_Sala" class="form-control {{ $errors->has('id_Sala') ? 'is-invalid' : '' }}" value="{{ old('id_Sala') }}" name="id_Sala"/>
                                     <option value="">-- Escoja una Opcion --</option>
                                     @foreach ($salas as $sala)
@@ -32,10 +32,9 @@
                                         </option>
                                     @endforeach
                                 </select>
-                            </div>
-                            
-                            <div class="col-md-2">
-                                <input type="submit" class="btn btn-primary" value="Buscar">
+                        
+                            <div class="col-md-2 col-form-label text-md-end">
+                                <input type="submit" class="bottonBuscar" value="Buscar">
                             </div>
                         </div>
                     </form>
@@ -44,8 +43,6 @@
         </div>
     </div>
 </div>
-
-
 
 
 @include('funcion.tablaSimple')

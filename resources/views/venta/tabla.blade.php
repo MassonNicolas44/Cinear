@@ -2,7 +2,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Datos de las ventas totales ') }} </div>
+                <div class="card-header">{{ __('Ventas registradas') }} </div>
                     <div class="card-body">       
                         {{-- Verificacion si hay datos para mostrar o no --}}
                         @if(count($arrayReserva)>0)           
@@ -49,7 +49,9 @@
 
                             </table>
                         @else
-                            <h1>No hay datos para mostrar</h1>
+                            <div class="mensaje">
+                                No hay datos para mostrar
+                            </div>
                         @endif
                     </div>
                 </div>

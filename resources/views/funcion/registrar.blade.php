@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Registrar Funcion') }} </div>
+                <div class="card-header">{{ __('Ingresar nueva funcion') }} </div>
 
                 @include('include.message')
 
@@ -251,13 +251,9 @@
 
                         <br>
 
-                        <div class="row mb-2">
-                            <div class="col-md-6 offset-md-5">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Registrar Sala') }}
-                                </button>
-                            </div>
-                        </div>
+                        <button type="submit" class="bottonIngresar">
+                            {{ __('Ingresar funcion') }}
+                        </button>
                     </form>
                 </div>
             </div>

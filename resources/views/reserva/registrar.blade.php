@@ -47,7 +47,9 @@
                                             <div class="col-md-9">
                                                 <select id="horario" type="time" class="form-control @error('horario') is-invalid @enderror" name="horario" value="{{ $horarios["0"] }}" autocomplete="horario" autofocus>
                                                     @if($horarios["0"]=="Sin Horario")
-                                                        <option value="{{ $horarios["0"] }}"> Sin Horario</option>
+                                                        <div style="cursor: not-allowed;"> 
+                                                            <option selected disabled value="{{ $horarios["0"] }}"> Sin Horario</option>
+                                                        </div>
                                                     @else
                                                         @foreach($horarios as $hora)
                                                                 <option value="{{ $hora }}"> {{ $hora }} Hs</option>
@@ -81,9 +83,9 @@
                                     <td>
                                         <div class="list">
                                             @if($horarios["0"]=="Sin Horario")
-                                                <a class="btn  btn-danger btn-sm">Inhabilitar Con CSS</a>
+                                                <a   style="font-size:16px;"  class="bottonAnulado">No hay funcion</a>
                                             @else
-                                                <button type="submit" class="btn btn-primary">
+                                                <button type="submit" style="font-size:16px;" class="bottonIngresar">
                                                     {{ __('Reservar') }}
                                                 </button>
                                             @endif

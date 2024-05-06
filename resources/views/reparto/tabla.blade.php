@@ -22,8 +22,8 @@
                                             <td>{{$actorPelicula->id}}</td>
                                             <td>{{$actorPelicula->actor->nombre}} {{$actorPelicula->actor->apellido}} [{{$actorPelicula->actor->id}}]</td>
                                             <td>
-                                                <div class="list">
-                                                    <a href="{{ route('reparto.eliminar',['id'=>$actorPelicula->id,'idPelicula'=>$pelicula->id]) }}"="sucess" class="btn  btn-danger btn-sm">Remover</a>
+                                                <div class="grupoBottones">
+                                                    <a href="{{ route('reparto.eliminar',['id'=>$actorPelicula->id,'idPelicula'=>$pelicula->id]) }}"="sucess" class="bottonEliminar">Remover</a>
                                                 </div>
                                             </td>
                                         </tr>

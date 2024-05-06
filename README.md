@@ -108,11 +108,23 @@ Registro de Actividad:
 -Se agrego boton para ver y descarga de un reporte de las reservas registradas en formato PDF
 -Se agrego boton para descarga el comprobante al finalizar la reserva
 
+2/5/24
+-Se acomodaron las tablas, incluyendo titulos de las mismas y titulos de todas las vistas
+
+3/5/24
+-Primera fase de agregar estilos a los botones y darle un mejor orden
+
+5/5/24
+-Segunda fase de agregar estilos a los botones y darle un mejor orden
+
+6/5/24
+-Ultima fase de agregar estilos a los botones y darle un mejor orden
+-Primerafase de agregar imagenes a los reportes y pestañas
 
 
 
--Centrar las filas en la aprte de registro boleto
--Centrar "No hay datos para mostrar"  en las tablas de funciones y reservas(tanto en lista como en registro)
+-Agregar header y footer
 
--Inhabilitar botor de "reserva/registrar" con CSS
--Inhabilitar botor de "reserva/lista" ANULADO con CSS
+-Agregar imagenes a las pestañas y botones de los reportes y buscar
+
+-Agregar imagen y presentacion al inicio

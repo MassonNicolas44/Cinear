@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Modificando el Idioma:') }} "{{ $idioma->descripcion }}" </div>
+                <div class="card-header">{{ __('Modificando el idioma:') }} "{{ $idioma->descripcion }}" </div>
 
                 @include('include.message')
 
@@ -31,13 +31,9 @@
                             </div>
                         </div>         
 
-                        <div class="row mb-2">
-                            <div class="col-md-6 offset-md-6">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Modificar') }}
-                                </button>
-                            </div>
-                        </div>
+                        <button type="submit" class="bottonModificar">
+                            {{ __('Guardar modificaicon') }}
+                        </button>
                     </form>
                 </div>
             </div>

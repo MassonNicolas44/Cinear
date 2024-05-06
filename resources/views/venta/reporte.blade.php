@@ -30,7 +30,7 @@
 
     <body>
 
-        <h3 class="text-center">Ventas</h3>
+        <h3 class="text-center">Ventas hasta la fecha</h3>
         <h5 class="text-right">Fecha: {{$fecha}}</h5> 
         <h5 class="text-right">Hora: {{$hora}} Hs </h5> 
         <br>

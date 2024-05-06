@@ -7,7 +7,7 @@
         <div class="col-md-12">
             <div class="card">
 
-                <div class="card-header">{{ __('Listado de usuarios') }}</div>
+                <div class="card-header">{{ __('Personal registrado') }}</div>
 
                 @include('include.message')
 
@@ -47,13 +47,13 @@
                                             <td>{{$fechaRegisto}} [{{$horaRegistro}} Hs]</td>
 
                                             <td>
-                                                <div class="list">
-                                                    <a href="{{ route('usuario.editar',['id'=>$usuario->id]) }}" ="sucess" class="btn btn-warning btn-sm"> Editar</a>
+                                                <div class="grupoBottones">
+                                                    <a href="{{ route('usuario.editar',['id'=>$usuario->id]) }}" ="sucess" class="bottonEditar"> Editar</a>
 
                                                     <?php if($usuario->estado=="Habilitada"){    ?>
-                                                        <a href="{{ route('usuario.estado',['id'=>$usuario->id,'estado'=>"Inhabilitar"]) }}" ="sucess" class="btn btn-success btn-sm"> Inhabilitar</a>
+                                                        <a href="{{ route('usuario.estado',['id'=>$usuario->id,'estado'=>"Inhabilitar"]) }}" ="sucess" class="bottonInhabilitar"> Inhabilitar</a>
                                                     <?php }else{  ?>
-                                                        <a href="{{ route('usuario.estado',['id'=>$usuario->id,'estado'=>"Habilitar"]) }}" ="sucess" class="btn btn-success btn-sm"> Habilitar</a>
+                                                        <a href="{{ route('usuario.estado',['id'=>$usuario->id,'estado'=>"Habilitar"]) }}" ="sucess" class="bottonHabilitar"> Habilitar</a>
                                                     <?php  }  ?>
 
                                                     <a href="{{ route('usuario.resetearContraseña',['id'=>$usuario->id]) }}" ="sucess" class="btn btn-danger btn-sm"> Resetear Contraseña</a>

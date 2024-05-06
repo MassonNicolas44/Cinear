@@ -8,6 +8,8 @@
                 <div class="card-header">{{ __('Bienvenido') }}</div>
                 @include('include.message')
                         <div class="card-body">
+                            {{-- Verificacion si hay datos para mostrar o no --}}
+                            @if(count($datos)>0)   
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="text-align:center;">
                                 <thead>
                                     <th>Pelicula</th>
@@ -62,7 +64,7 @@
                                         <td>
                                             <input type="hidden" name="idPelicula" value="{{$dato->pelicula->id}}"/>
                                             <input type="hidden" name="idSala" value="{{$dato->sala->id}}"/>
-                                            <button type="submit" class="btn btn-primary">
+                                            <button type="submit" class="bottonSeleccionar">
                                                 {{ __('Seleccionar') }}
                                             </button>
                                         </td>
@@ -72,6 +74,11 @@
                                 @endforeach 
                             </tbody>
                         </table>
+                        @else
+                            <div class="mensaje">
+                                Por el momento no hay peliculas
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

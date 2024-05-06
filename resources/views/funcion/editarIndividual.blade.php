@@ -453,13 +453,10 @@
 
                         <br>
 
-                        <div class="row mb-2">
-                            <div class="col-md-6 offset-md-5">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Editar Sala') }}
-                                </button>
-                            </div>
-                        </div>
+                        <button type="submit" class="bottonModificar">
+                            {{ __('Guardar modificacion') }}
+                        </button>
+
                     </form>
                 </div>
             </div>

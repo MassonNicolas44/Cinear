@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
 
-                <div class="card-header">{{ __('Listado de Actores') }}</div>
+                <div class="card-header">{{ __('Actores registrados') }}</div>
 
                 @include('include.message')
 
@@ -28,9 +28,9 @@
                                             <td>{{$actor->apellido}} {{$actor->nombre}}</td>
                                             <td>[{{$actor->nacionalidad->sigla}}] {{$actor->nacionalidad->descripcion}}</td>
                                             <td>
-                                                <div class="list">
-                                                    <a href="{{ route('actor.editar',['id'=>$actor->id]) }}" ="sucess" class="btn btn-warning btn-sm"> Editar</a>
-                                                    <a href="{{ route('actor.eliminar',['id'=>$actor->id]) }}"="sucess" class="btn  btn-danger btn-sm">Eliminar</a>
+                                                <div class="grupoBottones">
+                                                    <a href="{{ route('actor.editar',['id'=>$actor->id]) }}" ="sucess" class="bottonEditar"> Editar</a>
+                                                    <a href="{{ route('actor.eliminar',['id'=>$actor->id]) }}"="sucess" class="bottonEliminar">Eliminar</a>
                                                 </div>
                                             </td>
                                         </tr>

@@ -2,7 +2,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Datos de las reservas registradas') }} </div>
+                <div class="card-header">{{ __('Reservas registradas') }} </div>
                     <div class="card-body">       
                         {{-- Verificacion si hay datos para mostrar o no --}}
                         @if(count($arrayReserva)>0)           
@@ -41,11 +41,11 @@
                                             <td>{{$reserva->cantidad_boleto}}</td>
                                             <td>{{$reserva->precio_final}} $</td>
                                             <td>
-                                                <div class="list">
+                                                <div class="grupoBottones">
                                                     <?php if($reserva->estado=="Habilitada"){    ?>
-                                                        <a href="{{ route('reserva.estado',['id'=>$reserva->id,'estado'=>"Inhabilitar"]) }}" ="sucess" class="btn btn-success btn-sm"> Anular</a>
+                                                        <a href="{{ route('reserva.estado',['id'=>$reserva->id,'estado'=>"Inhabilitar"]) }}" ="sucess" class="bottonInhabilitar"> Anular</a>
                                                     <?php }else{  ?>
-                                                        <a class="btn btn-success btn-sm"> Anulado</a>
+                                                        <a class="bottonAnulado"> Anulado</a>
                                                     <?php  }  ?>                                                  
                                                 </div>
                                             </td>

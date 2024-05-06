@@ -1,9 +1,9 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-11">
+        <div class="col-md-9">
             <div class="card">
-                <div class="card-header">{{ __('Listado de Sala y Pelicula') }}</div>
+                <div class="card-header">{{ __('Salas y peliculas registradas') }}</div>
 
                 @include('include.message')
 
@@ -33,14 +33,14 @@
 
                                             <td>{{$fechaInicio}}  al  {{$fechaFin}}</td>
                                             <td>
-
+                                            <div class="grupoBottones">
                                                 <?php if($dato->estado=="Habilitada"){    ?>
-                                                    <a href="{{ route('funcion.lista',['id'=>$dato->id]) }}" ="sucess" class="btn btn-primary btn-sm"> Seleccionar</a>
-                                                    <a href="{{ route('funcion.estado',['id'=>$dato->id,'estado'=>"InhabilitarRango"]) }}" ="sucess" class="btn btn-success btn-sm"> Inhabilitar rango fecha</a>
+                                                    <a href="{{ route('funcion.lista',['id'=>$dato->id]) }}" ="sucess" class="bottonSeleccionar"> Seleccionar</a>
+                                                    <a href="{{ route('funcion.estado',['id'=>$dato->id,'estado'=>"InhabilitarRango"]) }}" ="sucess" class="bottonInhabilitar"> Inhabilitar rango fecha</a>
                                                 <?php }else{  ?>
-                                                    <a href="{{ route('funcion.estado',['id'=>$dato->id,'estado'=>"HabilitarRango"]) }}" ="sucess" class="btn btn-success btn-sm"> Habilitar rango fecha</a>
+                                                    <a href="{{ route('funcion.estado',['id'=>$dato->id,'estado'=>"HabilitarRango"]) }}" ="sucess" class="bottonHabilitar"> Habilitar rango fecha</a>
                                                 <?php  }  ?>
-
+                                            </div>
 
                                             </td>
                                         </tr>  
@@ -48,7 +48,9 @@
                             </tbody>
                         </table>
                     @else
-                        <h1>No hay datos para mostrar</h1>
+                        <div class="mensaje">
+                            No hay datos para mostrar
+                        </div>
                     @endif
                 </div>
             </div>

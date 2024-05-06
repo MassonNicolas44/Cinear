@@ -3,7 +3,7 @@
         <div class="col-md-8">
             <div class="card">
 
-                <div class="card-header">{{ __('Listado de Categorias') }}</div>
+                <div class="card-header">{{ __('Categorias registradas') }}</div>
 
                 @include('include.message')
 
@@ -23,9 +23,9 @@
                                             <td>{{$categoria->id}}</td>
                                             <td>{{$categoria->descripcion}}</td>
                                             <td>
-                                                <div class="list">
-                                                    <a href="{{ route('categoria.editar',['id'=>$categoria->id]) }}" ="sucess" class="btn btn-warning btn-sm"> Editar</a>
-                                                    <a href="{{ route('categoria.eliminar',['id'=>$categoria->id]) }}"="sucess" class="btn  btn-danger btn-sm">Eliminar</a>
+                                                <div class="grupoBottones">
+                                                    <a href="{{ route('categoria.editar',['id'=>$categoria->id]) }}" ="sucess" class="bottonEditar"> Editar</a>
+                                                    <a href="{{ route('categoria.eliminar',['id'=>$categoria->id]) }}"="sucess" class="bottonEliminar">Eliminar</a>
                                                 </div>
                                             </td>
                                         </tr>

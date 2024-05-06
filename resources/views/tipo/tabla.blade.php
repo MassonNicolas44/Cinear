@@ -4,7 +4,7 @@
         <div class="col-md-8">
             <div class="card">
 
-                <div class="card-header">{{ __('Listado de Nacionalidades') }}</div>
+                <div class="card-header">{{ __('Tipos de animaciones registradas') }}</div>
 
                 @include('include.message')
 
@@ -24,9 +24,9 @@
                                             <td>{{$tipo->id}}</td>
                                             <td>{{$tipo->descripcion}}</td>
                                             <td>
-                                                <div class="list">
-                                                    <a href="{{ route('tipo.editar',['id'=>$tipo->id]) }}" ="sucess" class="btn btn-warning btn-sm"> Editar</a>
-                                                    <a href="{{ route('tipo.eliminar',['id'=>$tipo->id]) }}"="sucess" class="btn  btn-danger btn-sm">Eliminar</a>
+                                                <div class="grupoBottones">
+                                                    <a href="{{ route('tipo.editar',['id'=>$tipo->id]) }}" ="sucess" class="bottonEditar"> Editar</a>
+                                                    <a href="{{ route('tipo.eliminar',['id'=>$tipo->id]) }}"="sucess" class="bottonEliminar">Eliminar</a>
                                                 </div>
                                             </td>
                                         </tr>

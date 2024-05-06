@@ -1,9 +1,9 @@
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-8">
             <div class="card">
 
-                <div class="card-header">{{ __('Listado de Salas') }}</div>
+                <div class="card-header">{{ __('Salas registradas') }}</div>
 
                 @include('include.message')
 
@@ -24,17 +24,17 @@
                                             <td>{{$sala->cantidad_asiento}}</td>
                                             <td>{{$sala->estado}}</td>
                                             <td>
-                                                <div class="list">
+                                                <div class="grupoBottones">
 
-                                                    <a href="{{ route('sala.editar',['id'=>$sala->id]) }}" ="sucess" class="btn btn-warning btn-sm"> Editar</a>
+                                                    <a href="{{ route('sala.editar',['id'=>$sala->id]) }}" ="sucess" class="bottonEditar"> Editar</a>
 
                                                     <?php if($sala->estado=="Habilitada"){    ?>
-                                                        <a href="{{ route('sala.estado',['id'=>$sala->id,'estado'=>"Inhabilitar"]) }}" ="sucess" class="btn btn-success btn-sm"> Inhabilitar</a>
+                                                        <a href="{{ route('sala.estado',['id'=>$sala->id,'estado'=>"Inhabilitar"]) }}" ="sucess" class="bottonInhabilitar"> Inhabilitar</a>
                                                     <?php }else{  ?>
-                                                        <a href="{{ route('sala.estado',['id'=>$sala->id,'estado'=>"Habilitar"]) }}" ="sucess" class="btn btn-success btn-sm"> Habilitar</a>
+                                                        <a href="{{ route('sala.estado',['id'=>$sala->id,'estado'=>"Habilitar"]) }}" ="sucess" class="bottonHabilitar"> Habilitar</a>
                                                     <?php  }  ?>
                                                                                                         
-                                                    <a href="{{ route('sala.eliminar',['id'=>$sala->id]) }}"="sucess" class="btn  btn-danger btn-sm">Eliminar</a>
+                                                    <a href="{{ route('sala.eliminar',['id'=>$sala->id]) }}"="sucess" class="bottonEliminar">Eliminar</a>
                                                 </div>
                                             </td>
                                         </tr>

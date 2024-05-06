@@ -1,10 +1,10 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-14">
+        <div class="col-md-12">
             <div class="card">
 
-                <div class="card-header">{{ __('Listado de Funciones') }}</div>
+                <div class="card-header">{{ __('Funciones registradas') }}</div>
 
                 @include('include.message')
 
@@ -37,6 +37,7 @@
                                 ?>
 
                                 <th>Estado</th>
+                                <th>Editar</th>
                                 <th>Accion</th>
                             </thead>
 
@@ -155,17 +156,20 @@
                                         <td>{{$funcion->estado}}</td>
 
                                         <td>
-                                            <div class="list">
-                                                <a href="{{ route('funcion.editarIndividual',['id'=>$funcion->id]) }}" ="sucess" class="btn btn-secondary btn-sm"> Editar Individual</a>
-                                                <a href="{{ route('funcion.editarTotal',['id'=>$funcion->id]) }}" ="sucess" class="btn btn-primary btn-sm"> Editar Total</a>
-                                                
+                                            <div class="grupoBottones">
+                                                <a href="{{ route('funcion.editarIndividual',['id'=>$funcion->id]) }}" ="sucess" class="bottonEditar"> Individual</a>
+                                                <a href="{{ route('funcion.editarTotal',['id'=>$funcion->id]) }}" ="sucess" class="bottonEditar"> Total</a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="grupoBottones">
                                                 <?php if($funcion->estado=="Habilitada"){    ?>
-                                                    <a href="{{ route('funcion.estado',['id'=>$funcion->id,'estado'=>"Inhabilitar"]) }}" ="sucess" class="btn btn-success btn-sm"> Inhabilitar</a>
+                                                    <a href="{{ route('funcion.estado',['id'=>$funcion->id,'estado'=>"Inhabilitar"]) }}" ="sucess" class="bottonInhabilitar"> Inhabilitar</a>
                                                 <?php }else{  ?>
-                                                    <a href="{{ route('funcion.estado',['id'=>$funcion->id,'estado'=>"Habilitar"]) }}" ="sucess" class="btn btn-success btn-sm"> Habilitar</a>
+                                                    <a href="{{ route('funcion.estado',['id'=>$funcion->id,'estado'=>"Habilitar"]) }}" ="sucess" class="bottonHabilitar"> Habilitar</a>
                                                 <?php  }  ?>
                                                 
-                                                <a href="{{ route('funcion.eliminar',['id'=>$funcion->id]) }}"="sucess" class="btn  btn-danger btn-sm">Eliminar</a>
+                                                <a href="{{ route('funcion.eliminar',['id'=>$funcion->id]) }}"="sucess" class="bottonEliminar">Eliminar</a>
                                             </div>
                                         </td>
                                     </tr>
