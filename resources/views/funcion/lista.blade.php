@@ -9,7 +9,7 @@
 
                 <form method="GET" action="{{ route('funcion.lista') }}">
                     @csrf
-                        <div class="grupoFiltrar">
+                        <div class="grupoFiltrarFuncion">
                             <label for="id_Pelicula" class="col-md-1 col-form-label text-md-end"> Pelicula &nbsp &nbsp</label>
                     
                                 <select id="id_Pelicula" class="form-control {{ $errors->has('id_Pelicula') ? 'is-invalid' : '' }}" value="{{ old('id_Pelicula') }}" name="id_Pelicula"/>
@@ -50,5 +50,6 @@
 <br>
 
 @include('funcion.tablaCompleta')
+
 
 @endsection

@@ -43,4 +43,5 @@
 
 @include('tipo.tabla')
 
+
 @endsection

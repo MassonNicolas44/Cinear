@@ -1,3 +1,8 @@
+body{
+    background-image: url('http://ecocine.com/storage/app/imagenes/fondo.jpg');
+    background-size: 25rem;
+}
+
 
 .mensaje{
     text-align: center;
@@ -6,6 +11,72 @@
     font-weight: bold;
     font-style: italic;
 }
+
+
+
+
+
+
+
+div.card_pub_image   div.card-body{
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+div.card-body div.imagenPelicula{
+margin-left: 2px;
+}
+
+.imagenPelicula img{
+    border-radius:10px;
+    width:375px;
+    box-shadow: 0 0 6px;
+    margin: 0 auto;
+    aspect-ratio: 8/7;
+}
+
+.trailerPelicula{
+    margin-left: 30px;
+    margin-right: -30px;
+}
+
+div.trailerPelicula iframe{
+    border-radius:10px;
+    width:375px;
+    box-shadow: 0 0 6px;
+    margin: 0 auto;
+    aspect-ratio: 8/7;
+}
+
+.detallePelicula{
+   font-size: 15px;
+   margin-left:60px;
+}
+
+.bottonInicioSeleccionar{
+    font-size: 17px;
+    border-radius: 20%;
+    background-color: #027e02;
+    color: white;
+    margin-left:15px;
+    padding: 1% 2%;
+    text-decoration: none;
+    border: none;
+    transition-duration: 0.4s;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 2px 6px 0 rgba(0,0,0,0.19);
+    margin-bottom: 10px;
+}
+
+.bottonInicioSeleccionar:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 10px 20px 0 rgba(0,0,0,0.19);
+    background-color: #428f45;
+    color: white;
+}
+
+
+
+
 
 
 .bottonIngresar{
@@ -72,6 +143,29 @@
 }
 
 
+
+.grupoReporte {
+    display:flex;
+    align-items: center;
+    margin:2%;
+    justify-content: space-evenly;
+}
+
+div.grupoReporte img{
+    margin-right:2%;
+    width:5%;
+    height:5%;
+}
+
+div.grupoReporte div.separar{
+    margin-left:-25%;
+}
+
+
+
+
+
+
 .grupoFiltrar {
     display:flex;
     align-items: center;
@@ -79,11 +173,48 @@
     justify-content: space-evenly;
 }
 
-.grupoFiltrar2 {
-    display:flex;
-    align-items: baseline;
-    margin:2%;
+div.grupoFiltrar select{
+    flex: 0 0 auto;
+    width:25%;
+    margin-right: 20%;
 }
+
+.grupoFiltrarFuncion {
+    display:flex;
+    align-items: center;
+    margin:2%;
+    justify-content: space-evenly;
+}
+
+
+
+.grupoFiltrarFecha {
+    display: flex;
+    margin: 2%;
+    margin-left:4%;
+    justify-content: flex-start;
+    align-items: baseline;
+}
+
+
+div.grupoFiltrarFecha input{
+    padding-right: 5%;
+    margin-left:2%;
+    width: 55%;
+}
+
+div.grupoFiltrarFecha div.row{
+    margin-left:5%;
+}
+
+div.grupoFiltrarFecha div.columnaFecha{
+    display: flex;
+    margin: 1%;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+
 
 
 .grupoBottones {
@@ -201,3 +332,124 @@
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 2px 6px 0 rgba(0,0,0,0.19);
     margin-bottom: 10px;
 }
+
+
+body {
+position: relative;
+padding-bottom: 300px;
+min-height: 100vh;
+}
+
+footer {
+    font-family: sans-serif;
+    font-size: 16px; 
+    width: 100%;
+    height: 300px;
+    position: absolute;
+    color: rgb(70, 70, 70);
+    background: rgb(223, 223, 223);
+    bottom: 0;
+    padding :8px; 
+}
+
+.centrarFooter{
+    display: flex;
+    align-items: stretch;
+}
+
+.footerStart{
+    overflow:hidden;
+    padding:8px;
+}
+
+
+.contact{
+    float: left;
+    margin-left:7%;
+
+}
+
+.whatsapp{
+    float: left;
+    margin-left:9%;
+}
+
+.whatsapp img{
+    width:23px;
+    height:23px;
+}
+
+ .mail{
+    float: left;
+    margin-left:9%;
+}
+
+.mail img{
+    width:28px;
+    height:25px;
+    margin-bottom:1px;
+}
+
+.address{
+    float: left;
+    margin-left:9%;
+
+}
+
+.address img{
+    width:20px;
+    height:20px;
+}
+
+
+.footerBetween{
+    border-bottom: 2px solid #000;
+    margin-left:15px;
+    margin-right:15px;
+}
+
+
+.footerEnd{
+    overflow:hidden;
+    padding-top:8px;
+    padding-left:8px;
+    padding-right:8px;
+}
+
+.footerEnd div{
+    margin-left:15%;
+    float: left;
+}
+
+
+
+
+.card{  
+    margin-bottom:20px;
+}
+
+
+.google_maps{
+    position: relative;
+    height: 200px;
+}
+
+html {
+  min-height: 100%;
+  position: relative;
+}
+
+body {
+  margin: 0;
+  margin-bottom: 40px;
+}
+
+.pagination{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding:10px;
+    padding-bottom:20px;
+}
+
+

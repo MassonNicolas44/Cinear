@@ -20,12 +20,14 @@
                         @csrf
 
                         <input type="hidden" name="id" value="{{$funcion->id}}"/>
+                        <input type="hidden" name="id_Sala" value="{{$funcion->id_Sala}}"/>
+                        <input type="hidden" name="id_Pelicula" value="{{$funcion->id_Pelicula}}"/>
 
                         <div class="row mb-4">
                             <label for="sala" class="col-md-3 col-form-label text-md-end">{{ __('Sala') }}</label>
 
                             <div class="col-md-7">
-                                <select id="id_Sala" type="text" class="form-control @error('id_Sala') is-invalid @enderror" name="id_Sala" value="{{ $funcion->id_Sala }}" required autocomplete="id_Sala" autofocus>
+                                <select id="id_Sala" disabled type="text" class="form-control @error('id_Sala') is-invalid @enderror" name="id_Sala" value="{{ $funcion->id_Sala }}" required autocomplete="id_Sala" autofocus>
 
                                     @foreach($salas as $sala)
                                         @if($funcion->id_Sala==$sala->id)
@@ -49,7 +51,7 @@
                             <label for="pelicula" class="col-md-3 col-form-label text-md-end">{{ __('Pelicula') }}</label>
 
                             <div class="col-md-7">
-                                <select id="id_Pelicula" type="text" class="form-control @error('id_Pelicula') is-invalid @enderror" name="id_Pelicula" value="{{ $funcion->id_Pelicula }}" required autocomplete="id_Pelicula" autofocus>
+                                <select id="id_Pelicula" disabled type="text" class="form-control @error('id_Pelicula') is-invalid @enderror" name="id_Pelicula" value="{{ $funcion->id_Pelicula }}" required autocomplete="id_Pelicula" autofocus>
 
                                     @foreach($peliculas as $pelicula)
                                         @if($funcion->id_Pelicula==$pelicula->id)
@@ -368,6 +370,7 @@
         </div>
     </div>
 </div>
+
 
 
 @endsection

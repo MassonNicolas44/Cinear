@@ -43,4 +43,5 @@
 
 @include('categoria.tabla')
 
+
 @endsection

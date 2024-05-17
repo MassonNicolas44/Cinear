@@ -218,6 +218,20 @@
                         </div>   
                         
                         <div class="row mb-4">
+                            <label for="url" class="col-md-3 col-form-label text-md-end">{{ __('Url') }}</label>
+
+                            <div class="col-md-7">
+                                <input id="url" type="text" class="form-control @error('url') is-invalid @enderror" name="url" value="{{ $pelicula->url }}" required autocomplete="url" autofocus>
+
+                                @error('url')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>  
+
+                        <div class="row mb-4">
                             <label for="imagen" class="col-md-3 col-form-label text-md-end">{{ __('Imagen') }}</label>
 
                             <div class="col-md-7">
@@ -234,7 +248,7 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>  
+                        </div> 
 
                         <button type="submit" class="bottonModificar">
                             {{ __('Guardar modificacion') }}
@@ -245,4 +259,5 @@
         </div>
     </div>
 </div>
+
 @endsection

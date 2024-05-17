@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Nombre de la empresa</title>
 
         <!-- Styles -->
         <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
@@ -21,10 +21,11 @@
 </head>
 <body>
     <div id="app">
+
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    Nombre de la empresa
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -52,116 +53,123 @@
 
                         @else
 
-                        <a class="nav-link" href="{{ route('home') }}">Inicio</a>
+                         <!-- Validacion del status de la Persona Logeada -->
+                        @if(Auth::user()->estado=="Habilitada")
+                            <a class="nav-link" href="{{ route('home') }}">Inicio</a>
 
 
-                        <li class="nav-item dropdown">
-
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 Pelicula
-                             </a>
-                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="nav-link" href="{{ route('pelicula.registrar') }}">Ingresar</a>
-                                <a class="nav-link" href="{{ route('pelicula.lista') }}">Lista</a>
-                            </div>
-                                
-                        </li>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="nav-link" href="{{ route('pelicula.registrar') }}">Ingresar</a>
+                                    <a class="nav-link" href="{{ route('pelicula.lista') }}">Lista</a>
+                                </div>
+                                    
+                            </li>
 
-                            <a class="nav-link" href="{{ route('categoria.registrar') }}">Categoria</a>
-                     
-                        <li class="nav-item dropdown">
+                                <a class="nav-link" href="{{ route('categoria.registrar') }}">Categoria</a>
+                        
+                            <li class="nav-item dropdown">
 
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Actor
-                             </a>
-                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="nav-link" href="{{ route('actor.registrar') }}">Ingresar</a>
-                                <a class="nav-link" href="{{ route('actor.lista') }}">Lista</a>
-                            </div>
-                                
-                        </li>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Actor
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="nav-link" href="{{ route('actor.registrar') }}">Ingresar</a>
+                                    <a class="nav-link" href="{{ route('actor.lista') }}">Lista</a>
+                                </div>
+                                    
+                            </li>
 
-                            <a class="nav-link" href="{{ route('restriccion.registrar') }}">Restriccion</a>
- 
-                        <li class="nav-item dropdown">
+                                <a class="nav-link" href="{{ route('restriccion.registrar') }}">Restriccion</a>
+    
+                            <li class="nav-item dropdown">
 
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Idioma
-                             </a>
-                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="nav-link" href="{{ route('idioma.registrar') }}">Ingresar</a>
-                                <a class="nav-link" href="{{ route('idioma.lista') }}">Lista</a>
-                            </div>
-                                
-                        </li>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Idioma
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="nav-link" href="{{ route('idioma.registrar') }}">Ingresar</a>
+                                    <a class="nav-link" href="{{ route('idioma.lista') }}">Lista</a>
+                                </div>
+                                    
+                            </li>
 
-                            <a class="nav-link" href="{{ route('tipo.registrar') }}">Tipo</a>
-
-                        <li class="nav-item dropdown">
-
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Nacionalidades
-                             </a>
-                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="nav-link" href="{{ route('nacionalidad.registrar') }}">Ingresar</a>
-                                <a class="nav-link" href="{{ route('nacionalidad.lista') }}">Lista</a>
-                            </div>
-                                
-                        </li>
-
-                            <a class="nav-link" href="{{ route('sala.registrar') }}">Sala</a>
-
-
+                                <a class="nav-link" href="{{ route('tipo.registrar') }}">Tipo</a>
 
                             <li class="nav-item dropdown">
 
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Funcion
+                                    Nacionalidades
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="nav-link" href="{{ route('funcion.registrar') }}">Ingresar</a>
-                                    <a class="nav-link" href="{{ route('funcion.lista') }}">Lista</a>
+                                    <a class="nav-link" href="{{ route('nacionalidad.registrar') }}">Ingresar</a>
+                                    <a class="nav-link" href="{{ route('nacionalidad.lista') }}">Lista</a>
                                 </div>
-                                
+                                    
                             </li>
 
+                                <a class="nav-link" href="{{ route('sala.registrar') }}">Sala</a>
 
-                            <a class="nav-link" href="{{ route('reserva.lista') }}">Reserva</a>
 
-                            <a class="nav-link" href="{{ route('venta.listado') }}">Venta</a>
 
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->nombre }}
-                                </a>
+                                <li class="nav-item dropdown">
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        Funcion
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <a class="nav-link" href="{{ route('funcion.registrar') }}">Ingresar</a>
+                                        <a class="nav-link" href="{{ route('funcion.lista') }}">Lista</a>
+                                    </div>
+                                    
+                                </li>
 
-                                    <a class="dropdown-item" href="{{ route('usuario.lista') }}">
-                                        {{ __('Administrar personal') }}
+
+                                <a class="nav-link" href="{{ route('reserva.lista') }}">Reserva</a>
+
+                                <a class="nav-link" href="{{ route('venta.listado') }}">Venta</a>
+
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ Auth::user()->nombre }} {{ Auth::user()->apellido }} ({{ Auth::user()->rol }})
                                     </a>
 
-                                    <a class="dropdown-item" href="{{ route('usuario.registrar') }}">
-                                        {{ __('Ingresar personal') }}
-                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 
-                                    <a class="dropdown-item" href="{{ route('usuario.editarContraseña') }}">
-                                        {{ __('Editar contraseña') }}
-                                    </a>
+                                        <!-- Validacion del rol de la Persona Logeada -->
+                                        @if(Auth::user()->rol=="Administrador")
 
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Salir') }}
-                                    </a>
+                                            <a class="dropdown-item" href="{{ route('usuario.lista') }}">
+                                                {{ __('Administrar personal') }}
+                                            </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
+                                            <a class="dropdown-item" href="{{ route('usuario.registrar') }}">
+                                                {{ __('Ingresar personal') }}
+                                            </a>
 
-                                </div>
-                            </li>
-                        @endguest
+                                        @endif
+
+                                        <a class="dropdown-item" href="{{ route('usuario.editarContraseña') }}">
+                                            {{ __('Editar contraseña') }}
+                                        </a>
+
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                            {{ __('Salir') }}
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+
+                                    </div>
+                                </li>
+                                @endif
+                            @endguest
                     </ul>
                 </div>
             </div>
@@ -171,5 +179,9 @@
             @yield('content')
         </main>
     </div>
+@include('include.footer')
 </body>
+
 </html>
+
+

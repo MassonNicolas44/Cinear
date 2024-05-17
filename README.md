@@ -119,12 +119,22 @@ Registro de Actividad:
 
 6/5/24
 -Ultima fase de agregar estilos a los botones y darle un mejor orden
--Primerafase de agregar imagenes a los reportes y pestañas
+-Primera fase de agregar imagenes a los reportes y pestañas
 
+7/5/24
+-Se añadio el footer (Pie de pagina) a todo el proyecto
+-Se añadio una restriccion en la parte de pestaña del personal logeado, donde solo pueda ingresar el administrador (Administrar y Ingresar personal)
+-Se agrego icono a la imagen de reporte ademas de darle una mejor organizacion
 
+9/5/24
+-Se reorganizo la vista de los filtros, tanto para reserva como para venta
 
--Agregar header y footer
+10/5/24
+-Primera fase del diseño de la vista del inicio (mostrar imagen de pelicula y datos adicionales)
 
--Agregar imagenes a las pestañas y botones de los reportes y buscar
+15/5/24
+-Se agrego fondo al proyecto
+-Se sacaron los datos personales del footer
 
--Agregar imagen y presentacion al inicio
+16/5/24
+-Se agrego la visualizacion del trailer de al pelicula (la persona a cargo de cargar la pelicula, debera cargar el URL correspondiente)

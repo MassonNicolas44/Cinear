@@ -57,6 +57,7 @@ class PeliculaController extends Controller
         'restriccion' => ['required', 'min:1' ,'string'],
         'duracion' => ['required', 'min:1' ,'int'],
         'precio' => ['required', 'min:1' ,'int'],
+        'url' => ['required', 'min:1' ,'string'],
         'imagen' => 'dimensions:min_width=800,min_height=800',
         ] );
 
@@ -72,6 +73,7 @@ class PeliculaController extends Controller
         $duracion = $request->input('duracion'); 
         $precio = $request->input('precio'); 
         $imagen = $request->file('imagen'); 
+        $url = $request->input('url'); 
 
         //Comprobacion que el nombre a registrar, existe o no en la base de datos
         $nombreExiste=Pelicula::select('nombre')->where('nombre',$nombre)->first();
@@ -97,6 +99,7 @@ class PeliculaController extends Controller
             $pelicula->precio=$precio;
             $pelicula->duracion=$duracion;
             $pelicula->image_path=$imagen;
+            $pelicula->url=$url;
             $pelicula->estado="Habilitada";
 
             //Se verifica si hay una imagen a cargar para la pelicula
@@ -166,6 +169,7 @@ class PeliculaController extends Controller
             'restriccion' => ['required', 'min:1' ,'string'],
             'duracion' => ['required', 'min:1' ,'int'],
             'precio' => ['required', 'min:1' ,'int'],
+            'url' => ['required', 'min:1' ,'string'],
             'imagen' => 'dimensions:min_width=800,min_height=800',
             ] );
     
@@ -181,6 +185,7 @@ class PeliculaController extends Controller
             $duracion = $request->input('duracion');  
             $precio = $request->input('precio'); 
             $imagen = $request->file('imagen');
+            $url = $request->input('url'); 
             
             $id = $request->input('idPelicula'); 
 
@@ -209,6 +214,7 @@ class PeliculaController extends Controller
                 $pelicula->id_Restriccion=$restriccion;
                 $pelicula->duracion=$duracion;
                 $pelicula->precio=$precio;
+                $pelicula->url=$url;
 
                 //Si la imagen cargada es igual a la imagen que esta en el sistema, no se realiza ningun cambio
                 if($imagen){

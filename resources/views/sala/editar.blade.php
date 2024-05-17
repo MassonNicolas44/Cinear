@@ -57,4 +57,5 @@
 
 @include('sala.tabla')
 
+
 @endsection

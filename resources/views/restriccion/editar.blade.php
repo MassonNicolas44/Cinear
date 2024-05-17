@@ -47,5 +47,6 @@
 
 @include('restriccion.tabla')
 
+
 @endsection
 

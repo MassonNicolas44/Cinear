@@ -40,6 +40,7 @@
                                                 <?php }else{  ?>
                                                     <a href="{{ route('funcion.estado',['id'=>$dato->id,'estado'=>"HabilitarRango"]) }}" ="sucess" class="bottonHabilitar"> Habilitar rango fecha</a>
                                                 <?php  }  ?>
+                                                
                                             </div>
 
                                             </td>
