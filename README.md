@@ -1,3 +1,138 @@
+Nombre del Proyecto: EcoCine
+
+------------------------------------------------------------------------------------------------------------
+
+Persona a cargo de la administracion y programacion del proyecto:  Masson Nicolas
+Link de la pagina de inicio: https://ecocine.lovestoblog.com/public/home
+------------------------------------------------------------------------------------------------------------
+
+Requisitos de desarrolo para la integracion:
+
+WampServer: Version 3.3.0 64 Bits
+Visual Studios: 1.89.0
+
+------------------------------------------------------------------------------------------------------------
+
+Tecnologias utilizadas:
+PHP: Version 8.2
+Apache: Version 2.4.54
+MySql: Version 8.0.31
+
+Laravel: Version 10.10
+Bootstrap: Version 5.2.3
+Jquery: Version 3.7.1
+barryvdh/laravel-dompdf (Para la gestion de los informes en PDF) : Version 2.1
+
+
+------------------------------------------------------------------------------------------------------------
+
+Descripcion general:
+La pagina web fue creada para la gestion de una boleteria de cine, la cual esta dividida de la siguiente manera:
+
+*Inicio*
+
+-Se visualiza la imagen, trailer y descripcion de la pelicula. Incluyendo un boton para reservar los boletos (antes de reservar, se debe seleccionar la fecha). Un vez seleccionada la funcion y el dia, se procede a seleccionar los horarios disponibles y la cantidad de boletos, por ultimo, se veran los detalles de la reserva (numero de ticket, fecha y hora de reserva, pelicula, sala, fecha y hora de la funcion, cantidad de boletos, precio final) y la opcion de descargar este comprobante o volver al incio.
+
+*Pelicula*
+
+-Para el registro se debera ingresar los siguientes datos (Nombre , Año , Descripcion , Categoria , Nacionalidad , Idioma , Tipo(2D o 3D) , Restriccion de Edad , Duracion , Precio , Url (para cargar el trailer de la pelicula) , Imagen).
+-Existe un listado de las peliculas existentes en el cual se podra editar informacion de la misma, Habilitar o Inhabilitar, y/o eliminar , por ultimo tambien se podra asignar/ver actores de cada pelicula.
+-Se puede descargar/ver un reporte de las peliculas.
+
+*Categoria*
+
+-Se podra ingresar una nueva categoria indicando solamente el nombre de la misma.
+-Tambien se podra editar/eliminar la misma
+
+*Actor*
+
+-Se podra ingresar un nuevo actor indicando solamente el nombre, apellido y nacionalidad del mismo.
+-Tambien se podra editar/eliminar al actor en cuestion.
+
+*Restriccion de Edad*
+
+-Se podra ingresar una nueva restriccion de edad indicando solamente la descripcion.
+-Tambien se podra editar/eliminar la restriccion de edad en cuestion.
+
+*Idioma*
+
+-Se podra ingresar un nuevo idioma indicando solamente el nombre del mismo.
+-Tambien se podra editar/eliminar el idioma.
+
+*Tipo de animacion*
+
+-Se podra ingresar un nuevo tipo de animacion indicando solamente el nombre del mismo.
+-Tambien se podra editar/eliminar.
+
+*Nacionalidad*
+
+-Se podra ingresar una nueva nacionalidad indicando el nombre de la misma.
+-Tambien se podra editar/eliminar.
+
+*Sala*
+
+-Se podra ingresar una nueva sala indicando el nombre y la cantidad de asientos disponibles.
+-Tambien se podra editar/habilitar o inhabilitar /eliminar al actor en cuestion.
+
+*Funcion*
+
+-Para ingresar una funcion, se debera elegir la pelicula, sala, fecha de inicio/finalizacion y por ultimo los horarios tanto para la semana como el finde semana.
+-Luego tenemos 2 listas, en la primera se visualiza todas las funciones (agrupadas por fecha) en la cual se podra seleccionar para ver cada cada dia individualmente o para habiltiar/inhabilitar la funcion.
+En la segunda se listan todas las funciones (dia a dia). En esta ultima, se podra editar un dia de la funcion  o editar el grupo de fechas de la funcion . Tambien esta la opcion de habilitar/inhabilitar la funcion del dia a seleccionar como eliminar la misma.
+-En ambos listados esta la posibilidad de filtrar por pelicula y/o sala.
+
+*Reserva*
+
+-Se visualizan todas las reservas registradas hasta el momento, teniendo la opcion de anular la misma.
+-Se puede descargar/ver un reporte de las reservas, ya sean totales o entre fechas en particular.
+-Esta la opcion tanto para el listado como los reportes, de filtrar por pelicula/sala/fecha de funcion (inicio y/o fin), fecha de reserva.
+
+*Venta*
+
+-Se visualizan todas las ventas registradas hasta el momento.
+-Se puede descargar/ver un reporte de las ventas, ya sean totales o entre fechas en particular.
+-Esta la opcion tanto para el listado como los reportes, de filtrar por pelicula/sala/fecha de funcion (inicio y/o fin), fecha de reserva.
+
+*Usuario Logeado*
+-Para los usuarios que no son administradores, solamente se podra deslogear o cambiar la contraseña (introduciendo primero la contraseña actual, luego la nueva contraseña y por ultima confirmando la nueva contraseña).
+-Para el administrador, tendra la opcion de editar datos del persoanl (codigo de ingreso , nombre , apellido , DNI , email , telefono , direccion , rol dentro de la empresa). Tambien podra habilitar/inhabilitar personal y resetear la contraseña del personal (la contraseña a resetear es "123").
+
+
+En la parte superior tenemos la barra de navegacion, la cual esta compuesta por los siguientes items y desplegables
+-Inicio
+-Pelicula (Ingesar,Lista)
+-Categoria
+-Actor (Ingresar,Lista)
+-Restriccion
+-Idioma (Ingresar,Lista)
+-Tipo
+-Nacionalidades (Ingresar,Lista)
+-Sala
+-Funcion (Ingresar,Lista)
+-Reserva
+-Venta
+-Personal Logeado (Editar Contraseña,Salir) o (Administrar Personal,Ingresar Personal,Editar Contraseña,Salir)
+
+------------------------------------------------------------------------------------------------------------
+
+Datos Adicionales:
+-Si una pelicula,funcion quiere ser eliminado, no debe estar relacion con ninguna funcion,venta, caso contrario, solo se podra Deshabiltiar el mismo para que no pueda ser usado en el sistema.
+
+
+Clave de ingreso del administrador: admin
+Contraseña: admin123
+
+claves de prueba:
+
+prueba - 123
+cajero - 123
+
+------------------------------------------------------------------------------------------------------------
+
+Estado del proyecto: Terminado
+
+------------------------------------------------------------------------------------------------------------
+
 Registro de Actividad:
 
 23/1/24 -Inicio de Proyecto -Creacion de Modelos y Controladores de la Base de Datos -Creacion y verificacion de un nuevo Usuario (para ingresar al sistema)
