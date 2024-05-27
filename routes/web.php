@@ -21,231 +21,237 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//Solo personal logeado
+Route::middleware(["auth"])->group(function () {
 
+    //**  Reserva  
 
-//**  Actor  
+    //Alta
+    Route::post('/reserva', [App\Http\Controllers\ReservaController::class, 'registrar'])->name('reserva.registrar');
+    Route::post('/reserva/guardarRegistro', [App\Http\Controllers\ReservaController::class, 'guardarRegistro'])->name('reserva.guardarRegistro');
 
-//Alta
-Route::get('/actor', [App\Http\Controllers\ActorController::class, 'registrar'])->name('actor.registrar');
-Route::post('/actor/guardarRegistro', [App\Http\Controllers\ActorController::class, 'guardarRegistro'])->name('actor.guardarRegistro');
+    //Finalizacion Reserva
+    Route::get('/reserva/reservaCompleta/{idReserva}', [App\Http\Controllers\ReservaController::class, 'reservaCompleta'])->name('reserva.reservaCompleta');
 
-//Editar
-Route::get('/actor/editar/{id}', [App\Http\Controllers\ActorController::class, 'editar'])->name('actor.editar');
-Route::post('/actor/guardarModificacion', [App\Http\Controllers\ActorController::class, 'guardarModificacion'])->name('actor.guardarModificacion');
+    //Lista
+    Route::get('/reserva', [App\Http\Controllers\ReservaController::class, 'lista'])->name('reserva.lista');
 
-//Eliminar
-Route::get('/actor/eliminar/{id}', [App\Http\Controllers\ActorController::class, 'eliminar'])->name('actor.eliminar');
+    //Estado
+    Route::get('/reserva/estado/{id}/{estado}', [App\Http\Controllers\ReservaController::class, 'estado'])->name('reserva.estado');
 
-//Lista
-Route::get('/actor/lista', [App\Http\Controllers\ActorController::class, 'lista'])->name('actor.lista');
+    //**  Usuario  
 
+    //Editar
+    Route::get('/usuario/editarContraseña', [App\Http\Controllers\UsuarioController::class, 'editarContraseña'])->name('usuario.editarContraseña');
+    Route::post('/usuario/guardarModificacionContraseña', [App\Http\Controllers\UsuarioController::class, 'guardarModificacionContraseña'])->name('usuario.guardarModificacionContraseña');
 
 
-//**  Categoria  
+});
 
-//Alta
-Route::get('/categoria', [App\Http\Controllers\CategoriaController::class, 'registrar'])->name('categoria.registrar');
-Route::post('/categoria/guardarRegistro', [App\Http\Controllers\CategoriaController::class, 'guardarRegistro'])->name('categoria.guardarRegistro');
 
-//Editar
-Route::get('/categoria/editar/{id}', [App\Http\Controllers\CategoriaController::class, 'editar'])->name('categoria.editar');
-Route::post('/categoria/guardarModificacion', [App\Http\Controllers\CategoriaController::class, 'guardarModificacion'])->name('categoria.guardarModificacion');
+//Solo personal logeado y tenga rol de Administrador
+Route::middleware(["auth", "solo_usuario_administrador"])->group(function () {
 
-//Eliminar
-Route::get('/categoria/eliminar/{id}', [App\Http\Controllers\CategoriaController::class, 'eliminar'])->name('categoria.eliminar');
+    //**  Actor  
 
+    //Alta
+    Route::get('/actor', [App\Http\Controllers\ActorController::class, 'registrar'])->name('actor.registrar');
+    Route::post('/actor/guardarRegistro', [App\Http\Controllers\ActorController::class, 'guardarRegistro'])->name('actor.guardarRegistro');
 
+    //Editar
+    Route::get('/actor/editar/{id}', [App\Http\Controllers\ActorController::class, 'editar'])->name('actor.editar');
+    Route::post('/actor/guardarModificacion', [App\Http\Controllers\ActorController::class, 'guardarModificacion'])->name('actor.guardarModificacion');
 
-//**  Funcion
+    //Eliminar
+    Route::get('/actor/eliminar/{id}', [App\Http\Controllers\ActorController::class, 'eliminar'])->name('actor.eliminar');
 
-//Alta
-Route::get('/funcion', [App\Http\Controllers\FuncionController::class, 'registrar'])->name('funcion.registrar');
-Route::post('/funcion/guardarRegistro', [App\Http\Controllers\FuncionController::class, 'guardarRegistro'])->name('funcion.guardarRegistro');
+    //Lista
+    Route::get('/actor/lista', [App\Http\Controllers\ActorController::class, 'lista'])->name('actor.lista');
 
-//EditarIndividual
-Route::get('/funcion/editarIndividual/{id}', [App\Http\Controllers\FuncionController::class, 'editarIndividual'])->name('funcion.editarIndividual');
-Route::post('/funcion/guardarModificacionIndividual', [App\Http\Controllers\FuncionController::class, 'guardarModificacionIndividual'])->name('funcion.guardarModificacionIndividual');
 
-//EditarTotal
-Route::get('/funcion/editarTotal/{id}', [App\Http\Controllers\FuncionController::class, 'editarTotal'])->name('funcion.editarTotal');
-Route::post('/funcion/guardarModificacionTotal', [App\Http\Controllers\FuncionController::class, 'guardarModificacionTotal'])->name('funcion.guardarModificacionTotal');
+    //**  Categoria  
 
-//Eliminar
-Route::get('/funcion/eliminar/{id}', [App\Http\Controllers\FuncionController::class, 'eliminar'])->name('funcion.eliminar');
+    //Alta
+    Route::get('/categoria', [App\Http\Controllers\CategoriaController::class, 'registrar'])->name('categoria.registrar');
+    Route::post('/categoria/guardarRegistro', [App\Http\Controllers\CategoriaController::class, 'guardarRegistro'])->name('categoria.guardarRegistro');
 
-//Estado
-Route::get('/funcion/estado/{id}/{estado}', [App\Http\Controllers\FuncionController::class, 'estado'])->name('funcion.estado');
+    //Editar
+    Route::get('/categoria/editar/{id}', [App\Http\Controllers\CategoriaController::class, 'editar'])->name('categoria.editar');
+    Route::post('/categoria/guardarModificacion', [App\Http\Controllers\CategoriaController::class, 'guardarModificacion'])->name('categoria.guardarModificacion');
 
-//Lista
-Route::get('/funcion/lista/{id?}', [App\Http\Controllers\FuncionController::class, 'lista'])->name('funcion.lista');
+    //Eliminar
+    Route::get('/categoria/eliminar/{id}', [App\Http\Controllers\CategoriaController::class, 'eliminar'])->name('categoria.eliminar');
 
 
+    //**  Funcion
 
-//**  Idioma  
+    //Alta
+    Route::get('/funcion', [App\Http\Controllers\FuncionController::class, 'registrar'])->name('funcion.registrar');
+    Route::post('/funcion/guardarRegistro', [App\Http\Controllers\FuncionController::class, 'guardarRegistro'])->name('funcion.guardarRegistro');
 
-//Alta
-Route::get('/idioma', [App\Http\Controllers\IdiomaController::class, 'registrar'])->name('idioma.registrar');
-Route::post('/idioma/guardarRegistro', [App\Http\Controllers\IdiomaController::class, 'guardarRegistro'])->name('idioma.guardarRegistro');
+    //EditarIndividual
+    Route::get('/funcion/editarIndividual/{id}', [App\Http\Controllers\FuncionController::class, 'editarIndividual'])->name('funcion.editarIndividual');
+    Route::post('/funcion/guardarModificacionIndividual', [App\Http\Controllers\FuncionController::class, 'guardarModificacionIndividual'])->name('funcion.guardarModificacionIndividual');
 
-//Editar
-Route::get('/idioma/editar/{id}', [App\Http\Controllers\IdiomaController::class, 'editar'])->name('idioma.editar');
-Route::post('/idioma/guardarModificacion', [App\Http\Controllers\IdiomaController::class, 'guardarModificacion'])->name('idioma.guardarModificacion');
+    //EditarTotal
+    Route::get('/funcion/editarTotal/{id}', [App\Http\Controllers\FuncionController::class, 'editarTotal'])->name('funcion.editarTotal');
+    Route::post('/funcion/guardarModificacionTotal', [App\Http\Controllers\FuncionController::class, 'guardarModificacionTotal'])->name('funcion.guardarModificacionTotal');
 
-//Eliminar
-Route::get('/idioma/eliminar/{id}', [App\Http\Controllers\IdiomaController::class, 'eliminar'])->name('idioma.eliminar');
+    //Eliminar
+    Route::get('/funcion/eliminar/{id}', [App\Http\Controllers\FuncionController::class, 'eliminar'])->name('funcion.eliminar');
 
-//Lista
-Route::get('/idioma/lista', [App\Http\Controllers\IdiomaController::class, 'lista'])->name('idioma.lista');
+    //Estado
+    Route::get('/funcion/estado/{id}/{estado}', [App\Http\Controllers\FuncionController::class, 'estado'])->name('funcion.estado');
 
+    //Lista
+    Route::get('/funcion/lista/{id?}', [App\Http\Controllers\FuncionController::class, 'lista'])->name('funcion.lista');
 
 
-//**  Nacionalidades  
+    //**  Idioma  
 
-//Alta
-Route::get('/nacionalidad', [App\Http\Controllers\NacionalidadController::class, 'registrar'])->name('nacionalidad.registrar');
-Route::post('/nacionalidad/guardarRegistro', [App\Http\Controllers\NacionalidadController::class, 'guardarRegistro'])->name('nacionalidad.guardarRegistro');
+    //Alta
+    Route::get('/idioma', [App\Http\Controllers\IdiomaController::class, 'registrar'])->name('idioma.registrar');
+    Route::post('/idioma/guardarRegistro', [App\Http\Controllers\IdiomaController::class, 'guardarRegistro'])->name('idioma.guardarRegistro');
 
-//Editar
-Route::get('/nacionalidad/editar/{id}', [App\Http\Controllers\NacionalidadController::class, 'editar'])->name('nacionalidad.editar');
-Route::post('/nacionalidad/guardarModificacion', [App\Http\Controllers\NacionalidadController::class, 'guardarModificacion'])->name('nacionalidad.guardarModificacion');
+    //Editar
+    Route::get('/idioma/editar/{id}', [App\Http\Controllers\IdiomaController::class, 'editar'])->name('idioma.editar');
+    Route::post('/idioma/guardarModificacion', [App\Http\Controllers\IdiomaController::class, 'guardarModificacion'])->name('idioma.guardarModificacion');
 
-//Eliminar
-Route::get('/nacionalidad/eliminar/{id}', [App\Http\Controllers\NacionalidadController::class, 'eliminar'])->name('nacionalidad.eliminar');
+    //Eliminar
+    Route::get('/idioma/eliminar/{id}', [App\Http\Controllers\IdiomaController::class, 'eliminar'])->name('idioma.eliminar');
 
-//Lista
-Route::get('/nacionalidad/lista', [App\Http\Controllers\NacionalidadController::class, 'lista'])->name('nacionalidad.lista');
+    //Lista
+    Route::get('/idioma/lista', [App\Http\Controllers\IdiomaController::class, 'lista'])->name('idioma.lista');
 
 
 
-//**  Pelicula  
+    //**  Nacionalidades  
 
-//Alta
-Route::get('/pelicula', [App\Http\Controllers\PeliculaController::class, 'registrar'])->name('pelicula.registrar');
-Route::post('/pelicula/guardarRegistro', [App\Http\Controllers\PeliculaController::class, 'guardarRegistro'])->name('pelicula.guardarRegistro');
+    //Alta
+    Route::get('/nacionalidad', [App\Http\Controllers\NacionalidadController::class, 'registrar'])->name('nacionalidad.registrar');
+    Route::post('/nacionalidad/guardarRegistro', [App\Http\Controllers\NacionalidadController::class, 'guardarRegistro'])->name('nacionalidad.guardarRegistro');
 
-//Editar
-Route::get('/pelicula/editar/{id}', [App\Http\Controllers\PeliculaController::class, 'editar'])->name('pelicula.editar');
-Route::post('/pelicula/guardarModificacion', [App\Http\Controllers\PeliculaController::class, 'guardarModificacion'])->name('pelicula.guardarModificacion');
+    //Editar
+    Route::get('/nacionalidad/editar/{id}', [App\Http\Controllers\NacionalidadController::class, 'editar'])->name('nacionalidad.editar');
+    Route::post('/nacionalidad/guardarModificacion', [App\Http\Controllers\NacionalidadController::class, 'guardarModificacion'])->name('nacionalidad.guardarModificacion');
 
-//Eliminar
-Route::get('/pelicula/eliminar/{id}', [App\Http\Controllers\PeliculaController::class, 'eliminar'])->name('pelicula.eliminar');
+    //Eliminar
+    Route::get('/nacionalidad/eliminar/{id}', [App\Http\Controllers\NacionalidadController::class, 'eliminar'])->name('nacionalidad.eliminar');
 
-//Estado
-Route::get('/pelicula/estado/{id}/{estado}', [App\Http\Controllers\PeliculaController::class, 'estado'])->name('pelicula.estado');
+    //Lista
+    Route::get('/nacionalidad/lista', [App\Http\Controllers\NacionalidadController::class, 'lista'])->name('nacionalidad.lista');
 
-//Lista
-Route::get('/pelicula/lista', [App\Http\Controllers\PeliculaController::class, 'lista'])->name('pelicula.lista');
 
-//Reporte en PDF
-Route::get('/pelicula/reporte', [App\Http\Controllers\PeliculaController::class, 'reportePelicula'])->name('pelicula.reporte');
 
+    //**  Pelicula  
 
+    //Alta
+    Route::get('/pelicula', [App\Http\Controllers\PeliculaController::class, 'registrar'])->name('pelicula.registrar');
+    Route::post('/pelicula/guardarRegistro', [App\Http\Controllers\PeliculaController::class, 'guardarRegistro'])->name('pelicula.guardarRegistro');
 
+    //Editar
+    Route::get('/pelicula/editar/{id}', [App\Http\Controllers\PeliculaController::class, 'editar'])->name('pelicula.editar');
+    Route::post('/pelicula/guardarModificacion', [App\Http\Controllers\PeliculaController::class, 'guardarModificacion'])->name('pelicula.guardarModificacion');
 
-//**  Reparto  
+    //Eliminar
+    Route::get('/pelicula/eliminar/{id}', [App\Http\Controllers\PeliculaController::class, 'eliminar'])->name('pelicula.eliminar');
 
-//Alta
-Route::get('/reparto/asignar/{id}', [App\Http\Controllers\RepartoController::class, 'asignar'])->name('reparto.asignar');
-Route::post('/reparto/guardarRegistro', [App\Http\Controllers\RepartoController::class, 'guardarRegistro'])->name('reparto.guardarRegistro');
+    //Estado
+    Route::get('/pelicula/estado/{id}/{estado}', [App\Http\Controllers\PeliculaController::class, 'estado'])->name('pelicula.estado');
 
-//Eliminar
-Route::get('/reparto/eliminar/{id}/{idPelicula}', [App\Http\Controllers\RepartoController::class, 'eliminar'])->name('reparto.eliminar');
+    //Lista
+    Route::get('/pelicula/lista', [App\Http\Controllers\PeliculaController::class, 'lista'])->name('pelicula.lista');
 
+    //Reporte en PDF
+    Route::get('/pelicula/reporte', [App\Http\Controllers\PeliculaController::class, 'reportePelicula'])->name('pelicula.reporte');
 
 
-//**  Reserva  
+    //**  Reparto  
 
-//Alta
-Route::post('/reserva', [App\Http\Controllers\ReservaController::class, 'registrar'])->name('reserva.registrar');
-Route::post('/reserva/guardarRegistro', [App\Http\Controllers\ReservaController::class, 'guardarRegistro'])->name('reserva.guardarRegistro');
+    //Alta
+    Route::get('/reparto/asignar/{id}', [App\Http\Controllers\RepartoController::class, 'asignar'])->name('reparto.asignar');
+    Route::post('/reparto/guardarRegistro', [App\Http\Controllers\RepartoController::class, 'guardarRegistro'])->name('reparto.guardarRegistro');
 
-//Finalizacion Reserva
-Route::get('/reserva/reservaCompleta/{idReserva}', [App\Http\Controllers\ReservaController::class, 'reservaCompleta'])->name('reserva.reservaCompleta');
+    //Eliminar
+    Route::get('/reparto/eliminar/{id}/{idPelicula}', [App\Http\Controllers\RepartoController::class, 'eliminar'])->name('reparto.eliminar');
 
-//Lista
-Route::get('/reserva', [App\Http\Controllers\ReservaController::class, 'lista'])->name('reserva.lista');
+    //**  Reserva  
 
-//Estado
-Route::get('/reserva/estado/{id}/{estado}', [App\Http\Controllers\ReservaController::class, 'estado'])->name('reserva.estado');
+    //Comprobante en PDF
+    Route::get('/reserva/comprobante', [App\Http\Controllers\ReservaController::class, 'comprobante'])->name('reserva.comprobante');
 
-//Comprobante en PDF
-Route::get('/reserva/comprobante', [App\Http\Controllers\ReservaController::class, 'comprobante'])->name('reserva.comprobante');
+    //**  Restriccion 
 
+    //Alta
+    Route::get('/restriccion', [App\Http\Controllers\RestriccionController::class, 'registrar'])->name('restriccion.registrar');
+    Route::post('/restriccion/guardarRegistro', [App\Http\Controllers\RestriccionController::class, 'guardarRegistro'])->name('restriccion.guardarRegistro');
 
+    //Editar
+    Route::get('/restriccion/editar/{id}', [App\Http\Controllers\RestriccionController::class, 'editar'])->name('restriccion.editar');
+    Route::post('/restriccion/guardarModificacion', [App\Http\Controllers\RestriccionController::class, 'guardarModificacion'])->name('restriccion.guardarModificacion');
 
-//**  Restriccion 
+    //Eliminar
+    Route::get('/restriccion/eliminar/{id}', [App\Http\Controllers\RestriccionController::class, 'eliminar'])->name('restriccion.eliminar');
 
-//Alta
-Route::get('/restriccion', [App\Http\Controllers\RestriccionController::class, 'registrar'])->name('restriccion.registrar');
-Route::post('/restriccion/guardarRegistro', [App\Http\Controllers\RestriccionController::class, 'guardarRegistro'])->name('restriccion.guardarRegistro');
 
-//Editar
-Route::get('/restriccion/editar/{id}', [App\Http\Controllers\RestriccionController::class, 'editar'])->name('restriccion.editar');
-Route::post('/restriccion/guardarModificacion', [App\Http\Controllers\RestriccionController::class, 'guardarModificacion'])->name('restriccion.guardarModificacion');
+    //**  Sala  
 
-//Eliminar
-Route::get('/restriccion/eliminar/{id}', [App\Http\Controllers\RestriccionController::class, 'eliminar'])->name('restriccion.eliminar');
+    //Alta
+    Route::get('/sala', [App\Http\Controllers\SalaController::class, 'registrar'])->name('sala.registrar');
+    Route::post('/sala/guardarRegistro', [App\Http\Controllers\SalaController::class, 'guardarRegistro'])->name('sala.guardarRegistro');
 
+    //Editar
+    Route::get('/sala/editar/{id}', [App\Http\Controllers\SalaController::class, 'editar'])->name('sala.editar');
+    Route::post('/sala/guardarModificacion', [App\Http\Controllers\SalaController::class, 'guardarModificacion'])->name('sala.guardarModificacion');
 
+    //Eliminar
+    Route::get('/sala/eliminar/{id}', [App\Http\Controllers\SalaController::class, 'eliminar'])->name('sala.eliminar');
 
-//**  Sala  
+    //Estado
+    Route::get('/sala/estado/{id}/{estado}', [App\Http\Controllers\SalaController::class, 'estado'])->name('sala.estado');
 
-//Alta
-Route::get('/sala', [App\Http\Controllers\SalaController::class, 'registrar'])->name('sala.registrar');
-Route::post('/sala/guardarRegistro', [App\Http\Controllers\SalaController::class, 'guardarRegistro'])->name('sala.guardarRegistro');
 
-//Editar
-Route::get('/sala/editar/{id}', [App\Http\Controllers\SalaController::class, 'editar'])->name('sala.editar');
-Route::post('/sala/guardarModificacion', [App\Http\Controllers\SalaController::class, 'guardarModificacion'])->name('sala.guardarModificacion');
+    //**  Tipo  
 
-//Eliminar
-Route::get('/sala/eliminar/{id}', [App\Http\Controllers\SalaController::class, 'eliminar'])->name('sala.eliminar');
+    //Alta
+    Route::get('/tipo', [App\Http\Controllers\TipoController::class, 'registrar'])->name('tipo.registrar');
+    Route::post('/tipo/guardarRegistro', [App\Http\Controllers\TipoController::class, 'guardarRegistro'])->name('tipo.guardarRegistro');
 
-//Estado
-Route::get('/sala/estado/{id}/{estado}', [App\Http\Controllers\SalaController::class, 'estado'])->name('sala.estado');
+    //Editar
+    Route::get('/tipo/editar/{id}', [App\Http\Controllers\TipoController::class, 'editar'])->name('tipo.editar');
+    Route::post('/tipo/guardarModificacion', [App\Http\Controllers\TipoController::class, 'guardarModificacion'])->name('tipo.guardarModificacion');
 
+    //Eliminar
+    Route::get('/tipo/eliminar/{id}', [App\Http\Controllers\TipoController::class, 'eliminar'])->name('tipo.eliminar');
 
 
-//**  Tipo  
+    //**  Usuario  
 
-//Alta
-Route::get('/tipo', [App\Http\Controllers\TipoController::class, 'registrar'])->name('tipo.registrar');
-Route::post('/tipo/guardarRegistro', [App\Http\Controllers\TipoController::class, 'guardarRegistro'])->name('tipo.guardarRegistro');
+    //Alta
+    Route::get('/usuario', [App\Http\Controllers\UsuarioController::class, 'registrar'])->name('usuario.registrar');
+    Route::post('/usuario/guardar', [App\Http\Controllers\UsuarioController::class, 'guardar'])->name('usuario.guardar');
 
-//Editar
-Route::get('/tipo/editar/{id}', [App\Http\Controllers\TipoController::class, 'editar'])->name('tipo.editar');
-Route::post('/tipo/guardarModificacion', [App\Http\Controllers\TipoController::class, 'guardarModificacion'])->name('tipo.guardarModificacion');
+    //Listado de perfiles registrados
+    Route::get('/administrador', [App\Http\Controllers\UsuarioController::class, 'lista'])->name('usuario.lista');
 
-//Eliminar
-Route::get('/tipo/eliminar/{id}', [App\Http\Controllers\TipoController::class, 'eliminar'])->name('tipo.eliminar');
+    //Editar
+    Route::get('/usuario/editar/{id}', [App\Http\Controllers\UsuarioController::class, 'editar'])->name('usuario.editar');
+    Route::post('/usuario/guardarModificacion', [App\Http\Controllers\UsuarioController::class, 'guardarModificacion'])->name('usuario.guardarModificacion');
 
+    //Resetear Contraseña
+    Route::get('/usuario/resetearContraseña/{id}', [App\Http\Controllers\UsuarioController::class, 'resetearContraseña'])->name('usuario.resetearContraseña');
 
+    //Estado
+    Route::get('/usuario/estado/{id}/{estado}', [App\Http\Controllers\UsuarioController::class, 'estado'])->name('usuario.estado');
 
-//**  Usuario  
+    //Editar
+    Route::get('/usuario/editarContraseña', [App\Http\Controllers\UsuarioController::class, 'editarContraseña'])->name('usuario.editarContraseña');
+    Route::post('/usuario/guardarModificacionContraseña', [App\Http\Controllers\UsuarioController::class, 'guardarModificacionContraseña'])->name('usuario.guardarModificacionContraseña');
 
-//Alta
-Route::get('/usuario', [App\Http\Controllers\UsuarioController::class, 'registrar'])->name('usuario.registrar');
-Route::post('/usuario/guardar', [App\Http\Controllers\UsuarioController::class, 'guardar'])->name('usuario.guardar');
 
-//Listado de perfiles registrados
-Route::get('/administrador', [App\Http\Controllers\UsuarioController::class, 'lista'])->name('usuario.lista');
+    //**  Venta  
 
-//Editar
-Route::get('/usuario/editar/{id}', [App\Http\Controllers\UsuarioController::class, 'editar'])->name('usuario.editar');
-Route::post('/usuario/guardarModificacion', [App\Http\Controllers\UsuarioController::class, 'guardarModificacion'])->name('usuario.guardarModificacion');
+    //Listado
+    Route::get('/venta', [App\Http\Controllers\VentaController::class, 'listado'])->name('venta.listado');
 
-//Resetear Contraseña
-Route::get('/usuario/resetearContraseña/{id}', [App\Http\Controllers\UsuarioController::class, 'resetearContraseña'])->name('usuario.resetearContraseña');
-
-//Estado
-Route::get('/usuario/estado/{id}/{estado}', [App\Http\Controllers\UsuarioController::class, 'estado'])->name('usuario.estado');
-
-//Editar
-Route::get('/usuario/editarContraseña', [App\Http\Controllers\UsuarioController::class, 'editarContraseña'])->name('usuario.editarContraseña');
-Route::post('/usuario/guardarModificacionContraseña', [App\Http\Controllers\UsuarioController::class, 'guardarModificacionContraseña'])->name('usuario.guardarModificacionContraseña');
-
-
-//**  Venta  
-
-//Listado
-Route::get('/venta', [App\Http\Controllers\VentaController::class, 'listado'])->name('venta.listado');
+});

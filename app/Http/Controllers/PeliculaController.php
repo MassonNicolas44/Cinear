@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\facades\Storage;
-use Illuminate\Support\facades\File;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 use Barryvdh\DomPDF\Facade\Pdf;
 

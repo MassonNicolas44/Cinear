@@ -8,12 +8,9 @@
         <div class="trailerPelicula">
 
             <?php
-            //Metodo para obtener el Id del video, para ser mostrado en la vista
-                function obtener($url){
-                    $url=explode("=",$url);
-                    return $url[1];
-                }
-                $id=obtener($dato->pelicula->url);
+                //Metodo para obtener el Id del video, para ser mostrado en la vista
+                $url=explode("=",$dato->pelicula->url);
+                $id=$url[1];
             ?>
 
             <iframe src="https://www.youtube.com/embed/<?php echo $id ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

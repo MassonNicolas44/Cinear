@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
+use Hash;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
+use App\Models\User;
 
 use Illuminate\Http\Request;
 
@@ -43,6 +47,53 @@ class LoginController extends Controller
     {
        return ('codigo');
     }
+
+    public function password()
+    {
+        return 'password';
+    }
+
+
+
+ protected function credentials(\Illuminate\Http\Request $request)
+    {
+        return ['codigo' => $request->{$this->username()}, 'password' => $request->{$this->password()}, 'estado' => "Habilitada"];
+    }
+
+
+protected function sendFailedLoginResponse(\Illuminate\Http\Request $request)
+    {
+
+
+
+        if ( !User::where('codigo', $request->{$this->username()})->first() ) {
+            return redirect()->back()
+                ->withInput($request->only($this->username(), 'remember'))
+                ->withErrors([
+                    $this->username() => 'El usuario no es correcto',
+                ]);
+        }
+
+        if ( !Hash::check($request->{$this->password()},(User::where('codigo', $request->{$this->username()})->first())->password) ||  !User::where('codigo', $request->{$this->username()})->first() ) {
+            return redirect()->back()
+                ->withInput($request->only($this->username(), 'remember'))
+                ->withErrors([
+                    'password' => 'Error de contraseña',
+                ]);
+        }
+
+
+        if ( !Hash::check($request->{$this->password()},(User::where('codigo', $request->{$this->username()})->first())->password)  ||  !User::where('codigo', $request->{$this->username()})->where('estado', "Habilitada")->first() ) {
+            return redirect()->back()
+                ->withInput($request->only($this->username(), 'remember'))
+                ->withErrors([
+                    'password' => 'Usuario desactivado',
+                ]);
+        }
+
+    }
+
+
 
     public function loggedOut(Request $request) {
         return redirect('/home');

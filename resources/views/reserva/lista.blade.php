@@ -2,34 +2,37 @@
 
 @section('content')
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-            <div class="card-header">{{ __('Reportes') }} </div>
-            <form method="GET" action="{{ route('reserva.lista') }}">
-                @csrf
-                <div class="grupoReporte">
-                    
-                    <img src="{{ env('APP_URL','').('/storage/app/public/iconoVer.png') }}" >
-                    <div class="separar"></div>
-                    <input type="submit" name="reporte" value="Ver reporte de las reservas" class="btn  btn-success">
+@if(Auth::user()->rol=="Administrador")
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                <div class="card-header">{{ __('Reportes') }} </div>
+                <form method="GET" action="{{ route('reserva.lista') }}">
+                    @csrf
+                    <div class="grupoReporte">
+                        
+                        <img src="{{ env('APP_URL','').('/storage/app/public/iconoVer.png') }}" >
+                        <div class="separar"></div>
+                        <input type="submit" name="reporte" value="Ver reporte de las reservas" class="btn  btn-success">
 
-                    <img src="{{ env('APP_URL','').('/storage/app/public/iconoDescarga.png') }}" >
-                    <div class="separar"></div>
-                    <input type="submit" name="reporte" value="Descargar reporte de las reservas" class="btn  btn-success">
-                
+                        <img src="{{ env('APP_URL','').('/storage/app/public/iconoDescarga.png') }}" >
+                        <div class="separar"></div>
+                        <input type="submit" name="reporte" value="Descargar reporte de las reservas" class="btn  btn-success">
+                    
+                    </div>
                 </div>
-            </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+@endif
 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
+            @include('include.message')
                 <div class="card-header">{{ __('Filtrar por:') }} </div>
                         <div class="grupoFiltrar">
                             <label for="id_Pelicula" class="col-md-1 col-form-label text-md-center">Pelicula</label>

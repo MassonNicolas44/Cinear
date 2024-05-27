@@ -42,7 +42,9 @@
                                             <td>{{$reserva->precio_final}} $</td>
                                             <td>
                                                 <div class="grupoBottones">
-                                                    <?php if($reserva->estado=="Habilitada"){    ?>
+                                                    <?php if($reserva->estado=="En Proceso"){    ?>
+                                                        <a href="{{ route('reserva.estado',['id'=>$reserva->id,'estado'=>"Habilitar"]) }}" ="sucess" class="bottonModificar"> Habilitar</a>
+                                                    <?php }elseif($reserva->estado=="Habilitada"){  ?>
                                                         <a href="{{ route('reserva.estado',['id'=>$reserva->id,'estado'=>"Inhabilitar"]) }}" ="sucess" class="bottonInhabilitar"> Anular</a>
                                                     <?php }else{  ?>
                                                         <a class="bottonAnulado"> Anulado</a>

@@ -9,24 +9,19 @@
                 <div class="card-header">{{ __('Reportes') }} </div>
                 <form method="GET" action="{{ route('pelicula.reporte') }}">
                     @csrf
-                        <div class="homeFilter">
-                            
-                            <br>
-                            <input type="submit" name="reporte" value="Ver reporte de las peliculas" class="btn  btn-success">
-                            <br>
-                            <br>
-                            <input type="submit" name="reporte" value="Descargar reporte de las peliculas" class="btn  btn-success">
-                            <br>
-                            <br>
-                        </div>
-                    </form>
+                    <div class="grupoReporte">
+                        <img src="{{ env('APP_URL','').('/storage/app/public/iconoVer.png') }}" >
+                        <div class="separar"></div>
+                        <input type="submit" name="reporte" value="Ver reporte de las peliculas" class="btn  btn-success">
+                        <img src="{{ env('APP_URL','').('/storage/app/public/iconoDescarga.png') }}" >
+                        <div class="separar"></div>
+                        <input type="submit" name="reporte" value="Descargar reporte de las peliculas" class="btn  btn-success">      
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<br>
 
 
 

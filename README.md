@@ -273,3 +273,17 @@ Registro de Actividad:
 
 16/5/24
 -Se agrego la visualizacion del trailer de al pelicula (la persona a cargo de cargar la pelicula, debera cargar el URL correspondiente)
+
+22/5/24
+-Se arreglo un error que no permitia cargar 2 peliculas con trailer
+
+24/5/24
+-Se agrego la comprobacion de contraseña y estado (habilitado o no) del personal a logearse
+-Se añadio la vista de reporte en las peliculas
+-Se arreglo un error en los reportes que no dejaban utilizarse en el hosting
+-Para todo personal logeado que no sea el administrador, solo podra ver el inicio y las reservas
+-Se agrego un nuevo estado al reservar un boleto. El consumidor final/cajero reserva los boletos (estado=En Proceso). Al momento de pagar el consumidor final, el cajero pasa la reserva a (estado=Habilitada) y por ultimo, de ser necesario anulara la reserva (estado=Inhabilitada).
+
+27/5/24
+-Se añadio redireccion de pagina con respecto a los modulos (depende de cual sea el rol del personal logeado)
+-Los reportes de las reservas, ahora seran vistos solo por el administrador
