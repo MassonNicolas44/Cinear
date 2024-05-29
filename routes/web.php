@@ -21,9 +21,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//Solo personal logeado
-Route::middleware(["auth"])->group(function () {
-
     //**  Reserva  
 
     //Alta
@@ -32,6 +29,12 @@ Route::middleware(["auth"])->group(function () {
 
     //Finalizacion Reserva
     Route::get('/reserva/reservaCompleta/{idReserva}', [App\Http\Controllers\ReservaController::class, 'reservaCompleta'])->name('reserva.reservaCompleta');
+
+    //Comprobante en PDF
+    Route::get('/reserva/comprobante', [App\Http\Controllers\ReservaController::class, 'comprobante'])->name('reserva.comprobante');
+
+//Solo personal logeado
+Route::middleware(["auth"])->group(function () {
 
     //Lista
     Route::get('/reserva', [App\Http\Controllers\ReservaController::class, 'lista'])->name('reserva.lista');
@@ -174,11 +177,6 @@ Route::middleware(["auth", "solo_usuario_administrador"])->group(function () {
 
     //Eliminar
     Route::get('/reparto/eliminar/{id}/{idPelicula}', [App\Http\Controllers\RepartoController::class, 'eliminar'])->name('reparto.eliminar');
-
-    //**  Reserva  
-
-    //Comprobante en PDF
-    Route::get('/reserva/comprobante', [App\Http\Controllers\ReservaController::class, 'comprobante'])->name('reserva.comprobante');
 
     //**  Restriccion 
 

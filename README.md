@@ -287,3 +287,7 @@ Registro de Actividad:
 27/5/24
 -Se añadio redireccion de pagina con respecto a los modulos (depende de cual sea el rol del personal logeado)
 -Los reportes de las reservas, ahora seran vistos solo por el administrador
+
+29/5/24
+-Se corrigio un error al cargar la imagen de la pelicula, la misma perdia el tamaño (deformaba la imagen)
+-Se acomodo las rutas, ya que habia algunas que no permitian al usuario final poder reservar un boleto
