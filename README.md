@@ -291,3 +291,6 @@ Registro de Actividad:
 29/5/24
 -Se corrigio un error al cargar la imagen de la pelicula, la misma perdia el tamaño (deformaba la imagen)
 -Se acomodo las rutas, ya que habia algunas que no permitian al usuario final poder reservar un boleto
+
+7/6/24
+-Se acomodo un error que provocaba que el texto del inicio se viera con el estilo "negrita" cuando solo deberia verse las partes principales

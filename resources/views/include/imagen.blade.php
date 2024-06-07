@@ -44,7 +44,7 @@
                 <li><b>Idioma: </b>{{$dato->pelicula->idioma->descripcion}}</li>
                 <li><b>Nacionalidad: </b>{{$dato->pelicula->nacionalidad->descripcion}}</li>
                 <li><b>Precio: </b>{{$dato->pelicula->precio}} $</li>
-                <li><b>Fecha desde {{$fechaInicio}} hasta {{$fechaFin}}</li>
+                <li><b>Fecha desde </b>{{$fechaInicio}}<b> hasta </b>{{$fechaFin}}</li>
 
                 <li>
                     <div style="display:flex;align-items: center;">
