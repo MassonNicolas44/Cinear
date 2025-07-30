@@ -3,7 +3,7 @@ Nombre del Proyecto: Cinear
 ------------------------------------------------------------------------------------------------------------
 
 Persona a cargo de la administracion y programacion del proyecto:  Masson Nicolas
-Link de la pagina de inicio: https://cinear.lovestoblog.com/public/home
+Link de la pagina de inicio: https://cinear.lovestoblog.com
 ------------------------------------------------------------------------------------------------------------
 
 Requisitos de desarrolo para la integracion:
