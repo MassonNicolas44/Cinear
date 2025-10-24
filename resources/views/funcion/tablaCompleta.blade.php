@@ -12,7 +12,7 @@
 
                     {{-- Verificacion si hay datos para mostrar o no --}}
                     @if(count($funciones)>0)
-
+<div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="text-align:center;">
                             <thead>
                                 <th>Id</th>
@@ -176,6 +176,7 @@
                                 @endforeach 
                             </tbody>
                         </table>
+                        </div>
                     @else
                         <h1>No hay datos para mostrar</h1>
                     @endif

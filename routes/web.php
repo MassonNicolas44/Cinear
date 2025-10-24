@@ -250,6 +250,6 @@ Route::middleware(["auth", "solo_usuario_administrador"])->group(function () {
     //**  Venta  
 
     //Listado
-    Route::get('/venta', [App\Http\Controllers\VentaController::class, 'listado'])->name('venta.listado');
+    Route::get('/venta', [App\Http\Controllers\VentaController::class, 'lista'])->name('venta.lista');
 
 });

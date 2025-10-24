@@ -7,7 +7,7 @@
         <div class="col-md-8">
             <div class="card">
             <div class="card-header">{{ __('Reportes') }} </div>
-            <form method="GET" action="{{ route('venta.listado') }}">
+            <form method="GET" action="{{ route('venta.lista') }}">
                 @csrf
 
                 <div class="grupoReporte">
@@ -16,13 +16,12 @@
 
                     <div class="separar"></div>
 
-                    <input type="submit" name="reporte" value="Ver reporte de las ventas" class="btn  btn-success">
-
+                    <input type="submit" class="btn btn-success" formaction="{{ route('venta.lista') }}" formmethod="GET" formtarget="_blank" name="reporte" value="Ver reporte de las ventas"> @csrf
                     <img src="{{ env('APP_URL','').('/storage/app/public/iconoDescarga.png') }}" >
 
                     <div class="separar"></div>
 
-                    <input type="submit" name="reporte" value="Descargar reporte de las ventas" class="btn  btn-success">
+                    <input type="submit" class="btn btn-success" formaction="{{ route('venta.lista') }}" formmethod="GET" formtarget="_blank" name="reporte" value="Descargar reporte de las ventas"> @csrf
                 
                 </div>
 
@@ -43,7 +42,7 @@
                                 <select id="id_Pelicula" class="form-control {{ $errors->has('id_Pelicula') ? 'is-invalid' : '' }}" value="{{ old('id_Pelicula') }}" name="id_Pelicula"/>
                                     <option value="">-- Escoja una Opcion --</option>
                                     @foreach ($peliculas as $pelicula)
-                                        <option value="{{ $pelicula['id'] }}">
+                                        <option value="{{ $pelicula['id'] }}" {{ $peliculaBuscar == $pelicula['id'] ? 'selected' : '' }} >
                                             {{$pelicula->nombre}} [{{$pelicula->duracion}} Min]
                                         </option>
                                     @endforeach
@@ -54,7 +53,7 @@
                                 <select id="id_Sala" class="form-control {{ $errors->has('id_Sala') ? 'is-invalid' : '' }}" value="{{ old('id_Sala') }}" name="id_Sala"/>
                                     <option value="">-- Escoja una Opcion --</option>
                                     @foreach ($salas as $sala)
-                                        <option value="{{ $sala['id'] }}">
+                                        <option value="{{ $sala['id'] }}" {{ $salaBuscar == $sala['id'] ? 'selected' : '' }} >
                                             {{$sala->nombre}}
                                         </option>
                                     @endforeach
@@ -68,11 +67,11 @@
                                     <div class="row">
                                         <div class="columnaFecha">
                                             <label >Desde: </label>
-                                            <input id="fechaFuncionInicio" type="date" class="form-control @error('fechaFuncionInicio') is-invalid @enderror" name="fechaFuncionInicio" value="{{ old('fechaFuncionInicio')}}"  autocomplete="fechaFuncionInicio" autofocus> 
+                                            <input id="fechaFuncionInicio" type="date" class="form-control @error('fechaFuncionInicio') is-invalid @enderror" name="fechaFuncionInicio" value="{{ old('fechaFuncionInicio',request('fechaFuncionInicio'))}}"  autocomplete="fechaFuncionInicio" autofocus> 
                                         </div>
                                         <div class="columnaFecha">
                                             <label>Hasta: </label>
-                                            <input id="fechaFuncionFin" type="date" class="form-control @error('fechaFuncionFin') is-invalid @enderror" name="fechaFuncionFin" value="{{ old('fechaFuncionFin')}}"  autocomplete="fechaFuncionFin" autofocus>
+                                            <input id="fechaFuncionFin" type="date" class="form-control @error('fechaFuncionFin') is-invalid @enderror" name="fechaFuncionFin" value="{{ old('fechaFuncionFin',request('fechaFuncionFin'))}}"  autocomplete="fechaFuncionFin" autofocus>
                                         </div>
                                     </div>
                                     @error('fechaFuncionInicio')
@@ -89,7 +88,7 @@
                                     <label>Fecha Reserva</label>
                                     <div class="row" style="margin-left:0%;">
                                         <div class="columnaFecha">
-                                            <input id="fechaReserva"  style="width:215px;"  type="date" class="form-control @error('fechaReserva') is-invalid @enderror" name="fechaReserva" value="{{ old('fechaReserva')}}"  autocomplete="fechaReserva" autofocus>
+                                            <input id="fechaReserva"  style="width:215px;"  type="date" class="form-control @error('fechaReserva') is-invalid @enderror" name="fechaReserva" value="{{ old('fechaReserva',request('fechaReserva'))}}"  autocomplete="fechaReserva" autofocus>
                                         </div>
                                     </div>
                                     @error('fechaReserva')
@@ -99,8 +98,10 @@
                                     @enderror
                             </div>
                             <br>
+                            <div class="grupoBusqueda">
                             <input type="submit" class="bottonBuscar" value="Buscar">
-                        </div>
+                            <a href="{{ route('venta.lista') }}" class="bottonLimpiar">Limpiar</a>
+                            </div>
                     </form>
                 </div>
             </div>

@@ -20,7 +20,7 @@ class VentaController extends Controller
     }
 
 
-    public function listado(Request $request)
+    public function lista(Request $request)
     {
 
         //Trae la lista de peliculas y salas habilitada
@@ -109,7 +109,7 @@ class VentaController extends Controller
 
             $pdf=PDF::loadView('venta.reporte',compact('arrayReserva','fecha','hora','totalBoletos','totalPrecio'));
 
-            return $pdf->stream('ListadoVentas.pdf');
+            return $pdf->stream('ListaVentas.pdf');
             
         }elseif($reporte=="Descargar reporte de las ventas"){
 
@@ -118,12 +118,12 @@ class VentaController extends Controller
 
             $pdf=PDF::loadView('venta.reporte',compact('arrayReserva','fecha','hora','totalBoletos','totalPrecio'));
 
-            return $pdf->download('ListadoVentas.pdf');
+            return $pdf->download('ListaVentas.pdf');
 
         }
     
-        //Retorna a la vista las reservas registradas
-        return view('venta.listado',['arrayReserva'=>$arrayReserva,'peliculas'=>$peliculas,'salas'=>$salas,'totalBoletos'=>$totalBoletos,'totalPrecio'=>$totalPrecio]);
+        //Retorna a la vista las venas registradas
+        return view('venta.lista',compact('arrayReserva','peliculas','peliculaBuscar','salas','salaBuscar','totalBoletos','totalPrecio'));
 
     }
 

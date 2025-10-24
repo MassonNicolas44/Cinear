@@ -12,7 +12,7 @@
                 @include('include.message')
 
                 <div class="card-body">
-                
+                <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="text-align:center;">
                                 <thead>
                                     <th>Codigo de ingreso</th>
@@ -63,6 +63,7 @@
                                     @endforeach 
                                 </tbody>
                             </table>
+                            </div>
                 </div>
             </div>
         </div>

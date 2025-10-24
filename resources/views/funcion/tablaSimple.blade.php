@@ -11,6 +11,7 @@
 
                     {{-- Verificacion si hay datos para mostrar o no --}}
                     @if(count($datos)>0)
+                    <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="text-align:center;">
                             <thead>
                                 <th>Sala</th>
@@ -48,6 +49,7 @@
                                     @endforeach 
                             </tbody>
                         </table>
+                        </div>
                     @else
                         <div class="mensaje">
                             No hay datos para mostrar

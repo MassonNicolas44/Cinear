@@ -131,7 +131,7 @@
 
                                 <a class="nav-link" href="{{ route('reserva.lista') }}">Reserva</a>
 
-                                <a class="nav-link" href="{{ route('venta.listado') }}">Venta</a>
+                                <a class="nav-link" href="{{ route('venta.lista') }}">Venta</a>
 
                                 @else
                                 

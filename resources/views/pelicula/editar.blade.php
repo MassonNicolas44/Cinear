@@ -218,7 +218,7 @@
                         </div>   
                         
                         <div class="row mb-4">
-                            <label for="url" class="col-md-3 col-form-label text-md-end">{{ __('Url') }}</label>
+                            <label for="url" class="col-md-3 col-form-label text-md-end">{{ __('Url del trailer') }}</label>
 
                             <div class="col-md-7">
                                 <input id="url" type="text" class="form-control @error('url') is-invalid @enderror" name="url" value="{{ $pelicula->url }}" required autocomplete="url" autofocus>

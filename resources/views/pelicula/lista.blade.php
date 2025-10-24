@@ -12,10 +12,11 @@
                     <div class="grupoReporte">
                         <img src="{{ env('APP_URL','').('/storage/app/public/iconoVer.png') }}" >
                         <div class="separar"></div>
-                        <input type="submit" name="reporte" value="Ver reporte de las peliculas" class="btn  btn-success">
+                        <input type="submit" class="btn btn-success" formaction="{{ route('reserva.lista') }}" formmethod="GET" formtarget="_blank" name="reporte" value="Ver reporte de las reservas"> @csrf
                         <img src="{{ env('APP_URL','').('/storage/app/public/iconoDescarga.png') }}" >
                         <div class="separar"></div>
-                        <input type="submit" name="reporte" value="Descargar reporte de las peliculas" class="btn  btn-success">      
+                        <input type="submit" class="btn btn-success" formaction="{{ route('reserva.lista') }}" formmethod="GET" formtarget="_blank" name="reporte" value="Descargar reporte de las reservas"> @csrf
+                    
                     </div>
                 </div>
             </div>
@@ -35,6 +36,7 @@
                 @include('include.message')
 
                 <div class="card-body">
+                    <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="text-align:center;">
                         <thead>
                             <th>Id</th>
@@ -86,6 +88,7 @@
                             @endforeach 
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>

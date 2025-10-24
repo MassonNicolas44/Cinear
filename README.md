@@ -294,3 +294,9 @@ Registro de Actividad:
 
 7/6/24
 -Se acomodo un error que provocaba que el texto del inicio se viera con el estilo "negrita" cuando solo deberia verse las partes principales
+
+23/10/25
+-Se agrego que las tablas sean Responsive
+-Al hacer click en "Ver" y "Descargar" los informes de las peliculas/reservas/ventas , abre una nueva pestaña, dejando abierta la anterior
+-Se cambio renombro "venta.listado" por "venta.lista"
+-Se agrego boton para limpiar los filtros en la pestaña de ventas

@@ -5,7 +5,8 @@
                 <div class="card-header">{{ __('Ventas registradas') }} </div>
                     <div class="card-body">       
                         {{-- Verificacion si hay datos para mostrar o no --}}
-                        @if(count($arrayReserva)>0)           
+                        @if(count($arrayReserva)>0)        
+                        <div class="table-responsive">   
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="text-align:center;">
                                 <thead>
                                     <th>Id</th>
@@ -48,6 +49,7 @@
                                 <td>{{$totalPrecio}} $</td>
 
                             </table>
+                            </div>
                         @else
                             <div class="mensaje">
                                 No hay datos para mostrar
