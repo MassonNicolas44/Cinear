@@ -3,7 +3,7 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="card">
                 <div class="card-header">{{ __('Filtrar por: ') }} </div>
 
@@ -33,8 +33,20 @@
                                     @endforeach
                                 </select>
                         
-                            <div class="col-md-2 col-form-label text-md-end">
+                                <label for="estado" class="col-md-1 col-form-label text-md-end"> Estado &nbsp &nbsp</label>
+                        
+                                <select id="estado" class="form-control {{ $errors->has('estado') ? 'is-invalid' : '' }}" value="{{ old('estado') }}" name="estado"/>
+                                    <option value="">-- Escoja una Opcion --</option>
+                                    @foreach ($estados as $estado)
+                                        <option value="{{ $estado }}" {{ $estadoBuscar == $estado ? 'selected' : '' }} >
+                                            {{$estado}}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                            <div class="grupoBusqueda" style="gap: 10px; margin-bottom: 0px;">
                                 <input type="submit" class="bottonBuscar" value="Buscar">
+                                <a href="{{ route('funcion.lista') }}" class="bottonLimpiar">Limpiar</a>
                             </div>
                         </div>
                     </form>

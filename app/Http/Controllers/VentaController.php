@@ -50,6 +50,10 @@ class VentaController extends Controller
         //Recorre las funciones recuperadas anteriormente
         foreach($funciones as $funcion){
 
+            $reservas=Reserva::where('id_Funcion','LIKE',$funcion->id)
+            ->where('estado',"Habilitada")
+            ->get();
+
             //Si busca por fecha de reserva, la consulta del Where debe ser WhereDate por el formato del created_at
             if(empty($fechaReservaBuscar)){
 
@@ -75,8 +79,7 @@ class VentaController extends Controller
                 //Trae la lista de reservas filtrando por las funciones buscadas anteriormente, agregandole el filtrado por fecha de funcion y/o fecha de reserva
                 $reservas=Reserva::where('id_Funcion','LIKE',$funcion->id)
                 ->where('estado',"Habilitada")
-                ->whereBetween('fecha_funcion', [$fechaFuncionInicio,$fechaFuncionFin])
-                ->whereDate('created_at','LIKE',$fechaReservaBuscar)
+                ->whereDate('created_at',$fechaReservaBuscar)
                 ->get();
             }
             
@@ -102,21 +105,19 @@ class VentaController extends Controller
             $totalPrecio=$totalPrecio+($contador->precio_final);
         }
 
+        //Trae los nombres de los filtros
+        $peliculaBuscarNombre=Pelicula::find($peliculaBuscar);
+        $salaBuscarNombre=Sala::find($salaBuscar);
+
         if($reporte=="Ver reporte de las ventas"){
 
-            $fecha=date('d/m/Y',strtotime(now()));
-            $hora = date("H:i");
-
-            $pdf=PDF::loadView('venta.reporte',compact('arrayReserva','fecha','hora','totalBoletos','totalPrecio'));
+            $pdf=PDF::loadView('venta.reporte',compact('arrayReserva','peliculaBuscarNombre','salaBuscarNombre','fechaReservaBuscar','fechaFuncionInicio','fechaFuncionFin','totalBoletos','totalPrecio'));
 
             return $pdf->stream('ListaVentas.pdf');
             
         }elseif($reporte=="Descargar reporte de las ventas"){
 
-            $fecha=date('d/m/Y',strtotime(now()));
-            $hora = date("H:i");
-
-            $pdf=PDF::loadView('venta.reporte',compact('arrayReserva','fecha','hora','totalBoletos','totalPrecio'));
+            $pdf=PDF::loadView('venta.reporte',compact('arrayReserva','peliculaBuscarNombre','salaBuscarNombre','fechaReservaBuscar','fechaFuncionInicio','fechaFuncionFin','totalBoletos','totalPrecio'));
 
             return $pdf->download('ListaVentas.pdf');
 

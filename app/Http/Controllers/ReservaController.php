@@ -379,8 +379,7 @@ class ReservaController extends Controller
                 }else{
                     //Trae la lista de reservas filtrando por las funciones buscadas anteriormente, agregandole el filtrado por fecha de funcion y/o fecha de reserva
                     $reservas=Reserva::where('id_Funcion','LIKE',$funcion->id)
-                    ->whereBetween('fecha_funcion', [$fechaFuncionInicio,$fechaFuncionFin])
-                    ->whereDate('created_at','LIKE',$fechaReservaBuscar)
+                    ->whereDate('created_at',$fechaReservaBuscar)
                     ->get();
                 }
                 
@@ -397,28 +396,26 @@ class ReservaController extends Controller
             //Reordeno el array por id de manera descendiente
             sort($arrayReserva);
     
+            //Trae los nombres de los filtros
+            $peliculaBuscarNombre=Pelicula::find($peliculaBuscar);
+            $salaBuscarNombre=Sala::find($salaBuscar);
+
             if($reporte=="Ver reporte de las reservas"){
 
-                $fecha=date('d/m/Y',strtotime(now()));
-                $hora = date("H:i");
-
-                $pdf=PDF::loadView('reserva.reporte',compact('arrayReserva','fecha','hora'));
+                $pdf=PDF::loadView('reserva.reporte',compact('arrayReserva','peliculaBuscarNombre','salaBuscarNombre','fechaReservaBuscar','fechaFuncionInicio','fechaFuncionFin'));
 
                 return $pdf->stream('ListadoReservas.pdf');
                 
             }elseif($reporte=="Descargar reporte de las reservas"){
 
-                $fecha=date('d/m/Y',strtotime(now()));
-                $hora = date("H:i");
-
-                $pdf=PDF::loadView('reserva.reporte',compact('arrayReserva','fecha','hora'));
+                $pdf=PDF::loadView('reserva.reporte',compact('arrayReserva','peliculaBuscarNombre','salaBuscarNombre','fechaReservaBuscar','fechaFuncionInicio','fechaFuncionFin'));
 
                 return $pdf->download('ListadoReservas.pdf');
 
             }
 
             //Retorna a la vista las reservas registradas
-            return view('reserva.lista',['arrayReserva'=>$arrayReserva,'peliculas'=>$peliculas,'salas'=>$salas]);
+            return view('reserva.lista',compact('arrayReserva','peliculas','peliculaBuscar','salas','salaBuscar'));
 
         }else{
             return redirect()->route('home');

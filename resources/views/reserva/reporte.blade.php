@@ -31,8 +31,22 @@
     <body>
 
         <h3 class="text-center">Reservas hasta la fecha</h3>
-        <h5 class="text-right">Fecha: {{$fecha}}</h5> 
-        <h5 class="text-right">Hora: {{$hora}} Hs </h5> 
+        <h5 class="text-right">Fecha: {{ now()->format('d/m/Y') }} | Hora:{{now()->format('H:i')}} Hs</h5> 
+        @if (!empty($salaBuscarNombre))
+            <h5 class="text-left">Sala:{{$salaBuscarNombre->nombre}}</h4> 
+        @endif
+        @if (!empty($peliculaBuscarNombre))
+            <h5 class="text-left">Pelicula:{{$peliculaBuscarNombre->nombre}} </h4> 
+        @endif
+        @if (!empty($fechaFuncionInicio))
+            <h5 class="text-left">Desde:{{\Carbon\Carbon::parse($fechaFuncionInicio)->format('d-m-Y')}} </h4> 
+        @endif
+        @if (!empty($fechaFuncionFin))
+            <h5 class="text-left">Hasta:{{\Carbon\Carbon::parse($fechaFuncionFin)->format('d-m-Y')}} </h4> 
+        @endif
+        @if (!empty($fechaReservaBuscar))
+            <h5 class="text-left">Fecha Reserva:{{\Carbon\Carbon::parse($fechaReservaBuscar)->format('d-m-Y')}} </h4> 
+        @endif
         <br>
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="text-align:center;">
                                 <thead>

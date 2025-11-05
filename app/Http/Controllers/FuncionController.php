@@ -549,16 +549,18 @@ class FuncionController extends Controller
     {
         $peliculaBuscar=$request->input('id_Pelicula');
         $salaBuscar=$request->input('id_Sala');
+        $estadoBuscar=$request->input('estado');
 
         //Condicion para verificar si se selecciono alguna pelicula con su sala respectiva
         if($id){
 
-            //Se buscan los datos de la pelicual y sala seleccionada
+            //Se buscan los datos de la pelicula y sala seleccionada
             $funcion=Funcion::find($id);
 
             //Trae la lista de funciones de la pelicula y sala seleccionada
             $funciones=Funcion::where('id_Sala',$funcion->id_Sala)
             ->where('id_Pelicula',$funcion->id_Pelicula)
+            ->where('estado','LIKE',$estadoBuscar)
             ->where('fechaInicio','>=',$funcion->fechaInicio)
             ->where('fechaFin','<=',$funcion->fechaFin)
             ->orderby('fecha','asc')->get();
@@ -568,6 +570,7 @@ class FuncionController extends Controller
             //Trae la lista de funciones de todas las peliculas y sala
             $funciones=Funcion::where('id_Pelicula','LIKE',$peliculaBuscar)
                                 ->where('id_Sala','LIKE',$salaBuscar)
+                                ->where('estado','LIKE',$estadoBuscar)
                                 ->orderby('fecha','asc')
                                 ->get();
         }
@@ -576,15 +579,17 @@ class FuncionController extends Controller
         $datos=Funcion::select('*')
                         ->where('id_Pelicula','LIKE',$peliculaBuscar)
                         ->where('id_Sala','LIKE',$salaBuscar)
+                        ->where('estado','LIKE',$estadoBuscar)
                         ->groupBy('id_Pelicula' , 'id_Sala', 'fechaInicio', 'fechaFin')
                         ->get();
 
         //Trae la lista de peliculas y salas habilitada
         $peliculas=Pelicula::all();
         $salas=Sala::where("estado","Habilitada")->get();
+                $estados=array('Habilitada','Inhabilitada');
 
         //Retorna a la vista las peliculas registradas
-        return view('funcion.lista',['funciones'=>$funciones,'datos'=>$datos,'peliculas'=>$peliculas,'salas'=>$salas]);
+        return view('funcion.lista',compact('funciones','datos','peliculas','peliculaBuscar','salas','salaBuscar','estados','estadoBuscar'));
 
     }
 

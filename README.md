@@ -298,5 +298,10 @@ Registro de Actividad:
 23/10/25
 -Se agrego que las tablas sean Responsive
 -Al hacer click en "Ver" y "Descargar" los informes de las peliculas/reservas/ventas , abre una nueva pestaña, dejando abierta la anterior
--Se cambio renombro "venta.listado" por "venta.lista"
+-Se cambio nombre de "venta.listado" por "venta.lista"
 -Se agrego boton para limpiar los filtros en la pestaña de ventas
+
+4/11/25
+-Se agrego boton para limpiar los filtros en la pestaña de reserva/funcion
+-Se añadieron filtros en la pestaña de ventas/reservas y en el reporte del mismo. Filtro por Pelicula-Sala-Fecha-Fecha Reserva. En el reporte de ventas se muestra la fecha,hora y en caso te haber algun filtro activo, se mostrara al cual es.
+-Se agrego un filtro en la pestaña de funcion para el estado de "Habilitada/Deshabilitada"

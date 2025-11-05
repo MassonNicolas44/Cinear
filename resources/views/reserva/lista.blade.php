@@ -35,66 +35,70 @@
             @include('include.message')
                 <div class="card-header">{{ __('Filtrar por:') }} </div>
                         <div class="grupoFiltrar">
-                            <label for="id_Pelicula" class="col-md-1 col-form-label text-md-center">Pelicula</label>
+<label for="id_Pelicula" class="col-md-1 col-form-label text-md-center">Pelicula</label>
                                 <select id="id_Pelicula" class="form-control {{ $errors->has('id_Pelicula') ? 'is-invalid' : '' }}" value="{{ old('id_Pelicula') }}" name="id_Pelicula"/>
                                     <option value="">-- Escoja una Opcion --</option>
                                     @foreach ($peliculas as $pelicula)
-                                        <option value="{{ $pelicula['id'] }}">
+                                        <option value="{{ $pelicula['id'] }}" {{ $peliculaBuscar == $pelicula['id'] ? 'selected' : '' }} >
                                             {{$pelicula->nombre}} [{{$pelicula->duracion}} Min]
                                         </option>
                                     @endforeach
                                 </select>
-  
+                            
+                            
                             <label for="id_Sala" class="col-md-1 col-form-label text-md-center">Sala</label>
                                 <select id="id_Sala" class="form-control {{ $errors->has('id_Sala') ? 'is-invalid' : '' }}" value="{{ old('id_Sala') }}" name="id_Sala"/>
                                     <option value="">-- Escoja una Opcion --</option>
                                     @foreach ($salas as $sala)
-                                        <option value="{{ $sala['id'] }}">
+                                        <option value="{{ $sala['id'] }}" {{ $salaBuscar == $sala['id'] ? 'selected' : '' }} >
                                             {{$sala->nombre}}
                                         </option>
                                     @endforeach
                                 </select>
                             </div>
 
-                            <div class="grupoFiltrarFecha">
+                         <div class="grupoFiltrarFecha">
                             
-                            <label>Fecha Funcion</label>
-                     
-                            <div class="row">
-                                <div class="columnaFecha">
-                                    <label >Desde: </label>
-                                    <input id="fechaFuncionInicio" type="date" class="form-control @error('fechaFuncionInicio') is-invalid @enderror" name="fechaFuncionInicio" value="{{ old('fechaFuncionInicio')}}"  autocomplete="fechaFuncionInicio" autofocus> 
-                                </div>
-                                <div class="columnaFecha">
-                                    <label>Hasta: </label>
-                                    <input id="fechaFuncionFin" type="date" class="form-control @error('fechaFuncionFin') is-invalid @enderror" name="fechaFuncionFin" value="{{ old('fechaFuncionFin')}}"  autocomplete="fechaFuncionFin" autofocus>
-                                </div>
-                            </div>
-                            @error('fechaFuncionInicio')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                                    <label>Fecha Funcion</label>
+                             
+                                    <div class="row">
+                                        <div class="columnaFecha">
+                                            <label >Desde: </label>
+                                            <input id="fechaFuncionInicio" type="date" class="form-control @error('fechaFuncionInicio') is-invalid @enderror" name="fechaFuncionInicio" value="{{ old('fechaFuncionInicio',request('fechaFuncionInicio'))}}"  autocomplete="fechaFuncionInicio" autofocus> 
+                                        </div>
+                                        <div class="columnaFecha">
+                                            <label>Hasta: </label>
+                                            <input id="fechaFuncionFin" type="date" class="form-control @error('fechaFuncionFin') is-invalid @enderror" name="fechaFuncionFin" value="{{ old('fechaFuncionFin',request('fechaFuncionFin'))}}"  autocomplete="fechaFuncionFin" autofocus>
+                                        </div>
+                                    </div>
+                                    @error('fechaFuncionInicio')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
 
-                            @error('fechaFuncionFin')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                            <label>Fecha Reserva</label>
-                            <div class="row" style="margin-left:0%;">
-                                <div class="columnaFecha">
-                                    <input id="fechaReserva"  style="width:215px;"  type="date" class="form-control @error('fechaReserva') is-invalid @enderror" name="fechaReserva" value="{{ old('fechaReserva')}}"  autocomplete="fechaReserva" autofocus>
-                                </div>
+                                    @error('fechaFuncionFin')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    <label>Fecha Reserva</label>
+                                    <div class="row" style="margin-left:0%;">
+                                        <div class="columnaFecha">
+                                            <input id="fechaReserva"  style="width:215px;"  type="date" class="form-control @error('fechaReserva') is-invalid @enderror" name="fechaReserva" value="{{ old('fechaReserva',request('fechaReserva'))}}"  autocomplete="fechaReserva" autofocus>
+                                        </div>
+                                    </div>
+                                    @error('fechaReserva')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                             </div>
-                            @error('fechaReserva')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                    </div>
                             <br>
-                                <input type="submit" class="bottonBuscar" value="Buscar">
+                            <div class="grupoBusqueda">
+                              <input type="submit" class="bottonBuscar" value="Buscar">
+                              <a href="{{ route('reserva.lista') }}" class="bottonLimpiar">Limpiar</a>
+                            </div>
                         </div>
                     </form>
                 </div>
