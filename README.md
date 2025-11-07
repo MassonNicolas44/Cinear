@@ -305,3 +305,8 @@ Registro de Actividad:
 -Se agrego boton para limpiar los filtros en la pestaña de reserva/funcion
 -Se añadieron filtros en la pestaña de ventas/reservas y en el reporte del mismo. Filtro por Pelicula-Sala-Fecha-Fecha Reserva. En el reporte de ventas se muestra la fecha,hora y en caso te haber algun filtro activo, se mostrara al cual es.
 -Se agrego un filtro en la pestaña de funcion para el estado de "Habilitada/Deshabilitada"
+
+6/11/25
+-Se agrego boton para limpiar los filtros en la pestaña de pelicula
+-Se agrego un filtro en la pestaña de pelicula para el estado de "Habilitada/Deshabilitada"
+-Se agregaron mensajes al no haber datos para mostrar en los reportes de pelicula-reserva-ventas ademas de las pestañas de reserva-pelicula

@@ -120,14 +120,20 @@ class PeliculaController extends Controller
 
     }
 
-    public function lista()
+    public function lista(Request $request)
     {
 
+        $estadoBuscar=$request->input('estado');
+
         //Trae la lista de peliculas registradas
-        $peliculas=Pelicula::orderby('nombre','asc')->get();
+        $peliculas=Pelicula::where('estado','LIKE',$estadoBuscar)
+        ->orderby('nombre','asc')->get();
+
+        $estados=array('Habilitada','Inhabilitada');
 
         //Retorna a la vista las peliculas registradas
-        return view('pelicula.lista',['peliculas'=>$peliculas]);
+        return view('pelicula.lista',compact('peliculas','estados','estadoBuscar'));
+   
 
     }
 
@@ -279,14 +285,14 @@ class PeliculaController extends Controller
     public function reportePelicula(Request $request){
 
         $reporte = $request->input('reporte');   
+        
+        $estadoBuscar=$request->input('estado');
 
         //Trae la lista de peliculas registradas
-        $peliculas=Pelicula::orderby('nombre','asc')->get();
+        $peliculas=Pelicula::where('estado','LIKE',$estadoBuscar)
+        ->orderby('nombre','asc')->get();
 
-        $fecha=date('d/m/Y',strtotime(now()));
-        $hora = date("H:i");
-
-        $pdf=PDF::loadView('pelicula.reporte',compact('peliculas','fecha','hora'));
+        $pdf=PDF::loadView('pelicula.reporte',compact('peliculas','estadoBuscar'));
 
         if($reporte=="Ver reporte de las peliculas"){
 

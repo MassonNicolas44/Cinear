@@ -13,6 +13,13 @@
 
     <style>  
 
+    .mensaje{
+        text-align: center;
+        font-size: 30px;
+        font-weight: bold;
+        font-style: italic;
+    }
+
     table{
         width: 100%;
         text-align:center;
@@ -62,6 +69,8 @@
                                 </thead>
 
                                 <tbody>
+                                    {{-- Verificacion si hay datos para mostrar o no --}}
+                                    @if(count($arrayReserva)>0) 
                                     @foreach($arrayReserva as $reserva)
 
                                         <?php
@@ -85,6 +94,9 @@
                                             <td>{{$reserva->estado}}</td>
                                         </tr>
                                     @endforeach 
+                                @else
+                                    <td COLSPAN=9 class="mensaje">No hay datos para mostrar</td>
+                                @endif
                                 </tbody>
                             </table>
 

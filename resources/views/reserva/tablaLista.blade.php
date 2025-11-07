@@ -58,7 +58,9 @@
                             </table>
                             </div>
                         @else
-                            <h1>No hay datos para mostrar</h1>
+                            <div class="mensaje">
+                                No hay datos para mostrar
+                            </div>
                         @endif
                     </div>
                 </div>
